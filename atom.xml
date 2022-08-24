@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>张跃的博客</title>
+  
+  <subtitle>Okeeper</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://okeeper.com/"/>
+  <updated>2022-08-24T03:51:05.113Z</updated>
+  <id>https://okeeper.com/</id>
+  
+  <author>
+    <name>张跃</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>系统架构师——软件开发方法</title>
+    <link href="https://okeeper.com/ruan-jian-kai-fa-fang-fa/"/>
+    <id>https://okeeper.com/ruan-jian-kai-fa-fang-fa/</id>
+    <published>2020-04-30T03:25:00.000Z</published>
+    <updated>2022-08-24T03:51:05.113Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;前言：软件开发方法是软件开发的方法学，旨在提供软件的质量，降低开发成本&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;1-软件生命周期&quot;&gt;&lt;a href=&quot;#1-软件生命周期&quot; class=&quot;headerlink&quot; title=&quot;1
+        
+      
+    
+    </summary>
+    
+      <category term="架构" scheme="https://okeeper.com/categories/%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="架构" scheme="https://okeeper.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>动态壁纸接口</title>
+    <link href="https://okeeper.com/2019-11-28-dong-tai-bi-zhi-jie-kou/"/>
+    <id>https://okeeper.com/2019-11-28-dong-tai-bi-zhi-jie-kou/</id>
+    <published>2019-11-28T10:25:00.000Z</published>
+    <updated>2021-08-16T13:27:38.078Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;新浪动态壁纸接口&quot;&gt;&lt;a href=&quot;#新浪动态壁纸接口&quot; class=&quot;headerlink&quot; title=&quot;新浪动态壁纸接口&quot;&gt;&lt;/a&gt;新浪动态壁纸接口&lt;/h1&gt;&lt;p&gt;说明：&lt;a href=&quot;https://www.nulltm.com/tag/随机&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="分享" scheme="https://okeeper.com/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+      <category term="分享" scheme="https://okeeper.com/tags/%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>区块链技术之比特币运作原理</title>
+    <link href="https://okeeper.com/qu-kuai-lian-ji-zhu-zhi-bi-te-bi-yun-zuo-yuan-li/"/>
+    <id>https://okeeper.com/qu-kuai-lian-ji-zhu-zhi-bi-te-bi-yun-zuo-yuan-li/</id>
+    <published>2019-08-21T01:25:00.000Z</published>
+    <updated>2022-08-24T04:14:02.814Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;什么是比特币&quot;&gt;&lt;a href=&quot;#什么是比特币&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="区块链" scheme="https://okeeper.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    
+      <category term="区块链" scheme="https://okeeper.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RokectMQ 和Kafka对比</title>
+    <link href="https://okeeper.com/rocketmq-vs-kafka/"/>
+    <id>https://okeeper.com/rocketmq-vs-kafka/</id>
+    <published>2019-07-13T03:25:00.000Z</published>
+    <updated>2021-08-16T13:27:38.079Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;RokectMQ-和Kafka对比&quot;&gt;&lt;a href=&quot;#RokectMQ-和Kafka对比&quot; class=&quot;headerlink&quot; title=&quot;RokectMQ 和Kafka对比&quot;&gt;&lt;/a&gt;RokectMQ
+        
+      
+    
+    </summary>
+    
+      <category term="RocketMQ" scheme="https://okeeper.com/categories/RocketMQ/"/>
+    
+    
+      <category term="RocketMQ" scheme="https://okeeper.com/tags/RocketMQ/"/>
+    
+      <category term="Kafka" scheme="https://okeeper.com/tags/Kafka/"/>
+    
+      <category term="MQ" scheme="https://okeeper.com/tags/MQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>博客搭建的介绍</title>
+    <link href="https://okeeper.com/blog-introduce/"/>
+    <id>https://okeeper.com/blog-introduce/</id>
+    <published>2018-01-12T01:25:00.000Z</published>
+    <updated>2021-08-16T13:27:38.079Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;这是我修改自&lt;a href=&quot;https://github.com/godweiyang/hexo-matery-modified&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="分享" scheme="https://okeeper.com/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+      <category term="Blog" scheme="https://okeeper.com/tags/Blog/"/>
+    
+      <category term="typora-vue-theme" scheme="https://okeeper.com/tags/typora-vue-theme/"/>
+    
+      <category term="hexo" scheme="https://okeeper.com/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>
