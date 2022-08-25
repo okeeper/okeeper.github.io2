@@ -502,7 +502,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,0,0,5],
+                data: [0,0,0,0,0,0,0,0,0,0,0,0,4],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -544,7 +544,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"分享","value":2},{"name":"RocketMQ","value":1},{"name":"区块链","value":1},{"name":"架构","value":1}],
+                data: [{"name":"分享","value":2},{"name":"RocketMQ","value":1},{"name":"区块链","value":2},{"name":"架构","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -568,7 +568,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
         xAxis: [
             {
                 type: 'category',
-                data: ["分享","RocketMQ","Kafka","MQ","Blog","typora-vue-theme","hexo","区块链","架构"]
+                data: ["区块链","Blog","typora-vue-theme","hexo","RocketMQ","Kafka","MQ","分享","架构"]
             }
         ],
         yAxis: [
@@ -581,7 +581,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth : 18,
-                data: [1,1,1,1,1,1,1,1,1],
+                data: [2,1,1,1,1,1,1,1,1],
                 markPoint: {
                     symbolSize: 45,
                     data: [{
@@ -720,8 +720,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
         <div class="tag-chips center-align">
             
             
-            <a href="/tags/分享/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">分享</span>
+            <a href="/tags/Blog/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">Blog</span>
+            </a>
+            
+            
+            
+            <a href="/tags/typora-vue-theme/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">typora-vue-theme</span>
+            </a>
+            
+            
+            
+            <a href="/tags/hexo/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">hexo</span>
             </a>
             
             
@@ -744,20 +756,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             
             
-            <a href="/tags/Blog/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">Blog</span>
-            </a>
-            
-            
-            
-            <a href="/tags/typora-vue-theme/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">typora-vue-theme</span>
-            </a>
-            
-            
-            
-            <a href="/tags/hexo/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">hexo</span>
+            <a href="/tags/分享/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">分享</span>
             </a>
             
             
@@ -986,8 +986,6 @@ $(function () {
     
 
     <!-- 雪花特效 -->
-    
-    <script type="text/javascript" src="/libs/others/snow.js"></script>
     
 
 </body>
