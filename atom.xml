@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://okeeper.com/"/>
-  <updated>2022-08-25T09:13:01.883Z</updated>
+  <updated>2022-08-25T10:50:03.790Z</updated>
   <id>https://okeeper.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>操作系统原理——初识操作系统</title>
-    <link href="https://okeeper.com/cao-zuo-xi-tong-yuan-li-chu-shi-cao-zuo-xi-tong/"/>
-    <id>https://okeeper.com/cao-zuo-xi-tong-yuan-li-chu-shi-cao-zuo-xi-tong/</id>
-    <published>2021-10-29T01:25:00.000Z</published>
-    <updated>2022-08-25T09:13:01.883Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/</id>
+    <published>2022-08-25T10:48:30.650Z</published>
+    <updated>2022-08-25T10:50:03.790Z</updated>
     
     <summary type="html">
     
@@ -29,25 +29,21 @@
       
         
         
-          &lt;h1 id=&quot;什么是操作系统&quot;&gt;&lt;a href=&quot;#什么是操作系统&quot; class=&quot;headerlink&quot; title=&quot;什么是操作系统&quot;&gt;&lt;/a&gt;什么是操作系统&lt;/h1&gt;&lt;p&gt; 
+          &lt;h1 id=&quot;查看当前目录磁盘使用情况&quot;&gt;&lt;a href=&quot;#查看当前目录磁盘使用情况&quot; class=&quot;headerlink&quot; title=&quot;查看当前目录磁盘使用情况&quot;&gt;&lt;/a&gt;查看当前目录磁盘使用情况&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;df
         
       
     
     </summary>
     
-      <category term="操作系统原理" scheme="https://okeeper.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"/>
-    
-    
-      <category term="操作系统原理" scheme="https://okeeper.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
-    <title>操作系统原理——内存</title>
-    <link href="https://okeeper.com/cao-zuo-xi-tong-yuan-li-nei-cun-guan-li/"/>
-    <id>https://okeeper.com/cao-zuo-xi-tong-yuan-li-nei-cun-guan-li/</id>
-    <published>2021-10-08T05:58:00.000Z</published>
-    <updated>2022-08-25T09:13:01.886Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/</id>
+    <published>2022-08-25T10:47:13.550Z</published>
+    <updated>2022-08-25T10:47:37.517Z</updated>
     
     <summary type="html">
     
@@ -55,25 +51,21 @@
       
         
         
-          &lt;h1 id=&quot;内存管理的目标&quot;&gt;&lt;a href=&quot;#内存管理的目标&quot; class=&quot;headerlink&quot; title=&quot;内存管理的目标&quot;&gt;&lt;/a&gt;内存管理的目标&lt;/h1&gt;&lt;p&gt;1) 实现内存分配、内存回收等操作&lt;br&gt;2)
+          &lt;p&gt;JDK下载地址：&lt;br&gt;&lt;a href=&quot;https://github.com/frekele/oracle-java/releases&quot; target=&quot;_blank&quot;
         
       
     
     </summary>
     
-      <category term="操作系统原理" scheme="https://okeeper.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"/>
-    
-    
-      <category term="操作系统原理" scheme="https://okeeper.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
-    <title>操作系统原理——进程调度与死锁</title>
-    <link href="https://okeeper.com/cao-zuo-xi-tong-yuan-li-jin-cheng-diao-du-yu-si-suo/"/>
-    <id>https://okeeper.com/cao-zuo-xi-tong-yuan-li-jin-cheng-diao-du-yu-si-suo/</id>
-    <published>2021-07-11T06:25:00.000Z</published>
-    <updated>2022-08-25T09:12:18.836Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/</id>
+    <published>2022-08-25T10:46:39.149Z</published>
+    <updated>2022-08-25T10:46:54.806Z</updated>
     
     <summary type="html">
     
@@ -81,26 +73,95 @@
       
         
         
-          &lt;h1 id=&quot;一、进程调度&quot;&gt;&lt;a href=&quot;#一、进程调度&quot; class=&quot;headerlink&quot; title=&quot;一、进程调度&quot;&gt;&lt;/a&gt;一、进程调度&lt;/h1&gt;&lt;p&gt;进程的调度室指按照某种策略或算法从就绪进程中为当前空闲的cpu选择在其上运行的新进程&lt;/p&gt;
+          &lt;p&gt;1.下载redis安装包&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /root/software
+wget http://download.redis.io/releases/redis-3.2.4.tar.gz
+tar -zxvf
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/</id>
+    <published>2022-08-25T10:46:17.125Z</published>
+    <updated>2022-08-25T10:46:28.805Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;参考docker安装Elasticsearch官方文档&lt;br&gt;&lt;a href=&quot;https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/</id>
+    <published>2022-08-25T10:45:52.012Z</published>
+    <updated>2022-08-25T10:45:58.981Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;Redis中有指定多个key批量删除的命令,却没有指定模糊key批量删除命令&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;批量删除多个key&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;del key1
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/hou-duan-jia-gou/xian-liu-xiang-guan/"/>
+    <id>https://okeeper.com/hou-duan-jia-gou/xian-liu-xiang-guan/</id>
+    <published>2022-08-25T10:42:31.302Z</published>
+    <updated>2022-08-25T10:42:58.726Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;在大流量场景，秒杀、抢购场景，一般会对网站做一些流量控制，牺牲一部分流量而保护系统而不至于系统直接down机。&lt;/p&gt;
 &lt;h1
         
       
     
     </summary>
     
-      <category term="操作系统原理" scheme="https://okeeper.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"/>
-    
-    
-      <category term="操作系统原理" scheme="https://okeeper.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
-    <title>操作系统原理——进程管理</title>
-    <link href="https://okeeper.com/cao-zuo-xi-tong-yuan-li-jin-cheng-guan-li/"/>
-    <id>https://okeeper.com/cao-zuo-xi-tong-yuan-li-jin-cheng-guan-li/</id>
-    <published>2021-07-10T06:25:00.000Z</published>
-    <updated>2022-08-25T09:12:12.942Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/hou-duan-jia-gou/java-xue-xi-da-gang/"/>
+    <id>https://okeeper.com/hou-duan-jia-gou/java-xue-xi-da-gang/</id>
+    <published>2022-08-25T10:41:57.938Z</published>
+    <updated>2022-08-25T10:42:08.427Z</updated>
     
     <summary type="html">
     
@@ -108,25 +169,112 @@
       
         
         
-          &lt;h1 id=&quot;一、进程的概念&quot;&gt;&lt;a href=&quot;#一、进程的概念&quot; class=&quot;headerlink&quot;
+          &lt;p&gt;任何学习都要有目标有规划，这是整个Java知识体系大纲，根据自己的知识体系认知画出来的，有很多还没有细化，也还有很多没有涉猎，比如大数据，列出这些好让自己学的有目标一些吧，也算是一个总结。&lt;/p&gt;
+&lt;p&gt;在线预览地址：&lt;a
         
       
     
     </summary>
     
-      <category term="操作系统原理" scheme="https://okeeper.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"/>
-    
-    
-      <category term="操作系统原理" scheme="https://okeeper.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"/>
     
   </entry>
   
   <entry>
-    <title>系统架构师——软件开发方法</title>
-    <link href="https://okeeper.com/ruan-jian-kai-fa-fang-fa/"/>
-    <id>https://okeeper.com/ruan-jian-kai-fa-fang-fa/</id>
-    <published>2020-04-30T03:25:00.000Z</published>
-    <updated>2022-08-24T03:51:05.113Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</id>
+    <published>2022-08-25T10:41:08.582Z</published>
+    <updated>2022-08-25T10:42:01.719Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;pre&gt;&lt;code&gt;mvn dependency:tree -Dverbose
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/"/>
+    <id>https://okeeper.com/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/</id>
+    <published>2022-08-25T10:40:29.078Z</published>
+    <updated>2022-08-25T10:40:42.344Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;问题的提出&quot;&gt;&lt;a href=&quot;#问题的提出&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</id>
+    <published>2022-08-25T10:39:33.482Z</published>
+    <updated>2022-08-25T10:39:41.333Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;1-List转Map&quot;&gt;&lt;a href=&quot;#1-List转Map&quot; class=&quot;headerlink&quot; title=&quot;1. List转Map&quot;&gt;&lt;/a&gt;1. List转Map&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;/**
+ * List -&amp;gt; Map
+ *
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/ruan-kao/qi-ye-xin-xi-hua-he-zheng-wu-xin-xi-hua/"/>
+    <id>https://okeeper.com/ruan-kao/qi-ye-xin-xi-hua-he-zheng-wu-xin-xi-hua/</id>
+    <published>2022-08-25T10:38:58.080Z</published>
+    <updated>2022-08-25T10:39:09.076Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;信息系统工程&quot;&gt;&lt;a href=&quot;#信息系统工程&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/ruan-kao/ruan-jian-kai-fa-fang-fa/"/>
+    <id>https://okeeper.com/ruan-kao/ruan-jian-kai-fa-fang-fa/</id>
+    <published>2022-08-25T10:38:31.861Z</published>
+    <updated>2022-08-25T10:39:06.825Z</updated>
     
     <summary type="html">
     
@@ -143,19 +291,15 @@
     
     </summary>
     
-      <category term="架构" scheme="https://okeeper.com/categories/%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="架构" scheme="https://okeeper.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
   </entry>
   
   <entry>
-    <title>动态壁纸接口</title>
-    <link href="https://okeeper.com/2019-11-28-dong-tai-bi-zhi-jie-kou/"/>
-    <id>https://okeeper.com/2019-11-28-dong-tai-bi-zhi-jie-kou/</id>
-    <published>2019-11-28T10:25:00.000Z</published>
-    <updated>2021-08-16T13:27:38.078Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/selenium/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/selenium/</id>
+    <published>2022-08-25T10:35:26.825Z</published>
+    <updated>2022-08-25T10:37:21.749Z</updated>
     
     <summary type="html">
     
@@ -163,25 +307,21 @@
       
         
         
-          &lt;h1 id=&quot;新浪动态壁纸接口&quot;&gt;&lt;a href=&quot;#新浪动态壁纸接口&quot; class=&quot;headerlink&quot; title=&quot;新浪动态壁纸接口&quot;&gt;&lt;/a&gt;新浪动态壁纸接口&lt;/h1&gt;&lt;p&gt;说明：&lt;a href=&quot;https://www.nulltm.com/tag/随机&quot;
+          &lt;h1 id=&quot;Selenium安装环境搭建&quot;&gt;&lt;a href=&quot;#Selenium安装环境搭建&quot; class=&quot;headerlink&quot; title=&quot;Selenium安装环境搭建&quot;&gt;&lt;/a&gt;Selenium安装环境搭建&lt;/h1&gt;&lt;p&gt;&lt;a
         
       
     
     </summary>
     
-      <category term="分享" scheme="https://okeeper.com/categories/%E5%88%86%E4%BA%AB/"/>
-    
-    
-      <category term="分享" scheme="https://okeeper.com/tags/%E5%88%86%E4%BA%AB/"/>
     
   </entry>
   
   <entry>
-    <title>从零开始使用Solidity编写以太坊智能合约并使用Nodejs SDK访问以太坊网络</title>
-    <link href="https://okeeper.com/cong-ling-kai-shi-shi-yong-solidity-bian-xie-yi-tai-fang-zhi-neng-he-yue-bing-shi-yong-nodejs-sdk-fang-wen-yi-tai-fang-wang-luo/"/>
-    <id>https://okeeper.com/cong-ling-kai-shi-shi-yong-solidity-bian-xie-yi-tai-fang-zhi-neng-he-yue-bing-shi-yong-nodejs-sdk-fang-wen-yi-tai-fang-wang-luo/</id>
-    <published>2019-08-29T01:25:00.000Z</published>
-    <updated>2022-08-25T08:55:03.736Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/</id>
+    <published>2022-08-25T10:33:15.625Z</published>
+    <updated>2022-08-25T10:35:21.798Z</updated>
     
     <summary type="html">
     
@@ -189,25 +329,21 @@
       
         
         
-          &lt;h1 id=&quot;Nodejs安装&quot;&gt;&lt;a href=&quot;#Nodejs安装&quot; class=&quot;headerlink&quot; title=&quot;Nodejs安装&quot;&gt;&lt;/a&gt;Nodejs安装&lt;/h1&gt;&lt;p&gt;Nodejs 版本建议8.0以上&lt;br&gt;官网：&lt;a
+          &lt;p&gt;解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin&lt;br&gt;找到idea.exe.vmoptions配置修改Xmx
         
       
     
     </summary>
     
-      <category term="区块链" scheme="https://okeeper.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
-    
-    
-      <category term="区块链" scheme="https://okeeper.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
     
   </entry>
   
   <entry>
-    <title>区块链技术之比特币运作原理</title>
-    <link href="https://okeeper.com/qu-kuai-lian-ji-zhu-zhi-bi-te-bi-yun-zuo-yuan-li/"/>
-    <id>https://okeeper.com/qu-kuai-lian-ji-zhu-zhi-bi-te-bi-yun-zuo-yuan-li/</id>
-    <published>2019-08-21T01:25:00.000Z</published>
-    <updated>2022-08-24T04:14:02.814Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/</id>
+    <published>2022-08-25T10:32:58.657Z</published>
+    <updated>2022-08-25T10:33:07.540Z</updated>
     
     <summary type="html">
     
@@ -215,25 +351,26 @@
       
         
         
-          &lt;h1 id=&quot;什么是比特币&quot;&gt;&lt;a href=&quot;#什么是比特币&quot; class=&quot;headerlink&quot;
+          &lt;pre&gt;&lt;code&gt;
+#阿里云maven
+&amp;lt;mirror&amp;gt;
+    &amp;lt;id&amp;gt;alimaven&amp;lt;/id&amp;gt;
+    &amp;lt;name&amp;gt;aliyun maven&amp;lt;/name&amp;gt;
+   
         
       
     
     </summary>
     
-      <category term="区块链" scheme="https://okeeper.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
-    
-    
-      <category term="区块链" scheme="https://okeeper.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
     
   </entry>
   
   <entry>
-    <title>RokectMQ 和Kafka对比</title>
-    <link href="https://okeeper.com/rocketmq-vs-kafka/"/>
-    <id>https://okeeper.com/rocketmq-vs-kafka/</id>
-    <published>2019-07-13T03:25:00.000Z</published>
-    <updated>2021-08-16T13:27:38.079Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/</id>
+    <published>2022-08-25T10:32:37.506Z</published>
+    <updated>2022-08-25T10:32:48.412Z</updated>
     
     <summary type="html">
     
@@ -241,29 +378,21 @@
       
         
         
-          &lt;h1 id=&quot;RokectMQ-和Kafka对比&quot;&gt;&lt;a href=&quot;#RokectMQ-和Kafka对比&quot; class=&quot;headerlink&quot; title=&quot;RokectMQ 和Kafka对比&quot;&gt;&lt;/a&gt;RokectMQ
+          &lt;p&gt;如果使用git命令进行仅涉及大小写的重命名,git
         
       
     
     </summary>
     
-      <category term="RocketMQ" scheme="https://okeeper.com/categories/RocketMQ/"/>
-    
-    
-      <category term="RocketMQ" scheme="https://okeeper.com/tags/RocketMQ/"/>
-    
-      <category term="Kafka" scheme="https://okeeper.com/tags/Kafka/"/>
-    
-      <category term="MQ" scheme="https://okeeper.com/tags/MQ/"/>
     
   </entry>
   
   <entry>
-    <title>博客搭建的介绍</title>
-    <link href="https://okeeper.com/blog-introduce/"/>
-    <id>https://okeeper.com/blog-introduce/</id>
-    <published>2018-01-12T01:25:00.000Z</published>
-    <updated>2021-08-16T13:27:38.079Z</updated>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/</id>
+    <published>2022-08-25T10:32:18.815Z</published>
+    <updated>2022-08-25T10:32:30.816Z</updated>
     
     <summary type="html">
     
@@ -271,20 +400,82 @@
       
         
         
-          &lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;这是我修改自&lt;a href=&quot;https://github.com/godweiyang/hexo-matery-modified&quot;
+          &lt;p&gt;我们一般在pom.xml中加入&lt;code&gt;distributionManagement&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;distributionManagement&amp;gt;
+    &amp;lt;repository&amp;gt;
+     
         
       
     
     </summary>
     
-      <category term="分享" scheme="https://okeeper.com/categories/%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/</id>
+    <published>2022-08-25T10:31:51.336Z</published>
+    <updated>2022-08-25T10:32:04.988Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
     
     
-      <category term="Blog" scheme="https://okeeper.com/tags/Blog/"/>
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</id>
+    <published>2022-08-25T10:31:00.007Z</published>
+    <updated>2022-08-25T10:31:24.183Z</updated>
     
-      <category term="typora-vue-theme" scheme="https://okeeper.com/tags/typora-vue-theme/"/>
+    <summary type="html">
     
-      <category term="hexo" scheme="https://okeeper.com/tags/hexo/"/>
+      
+      
+        
+        
+          &lt;p&gt;默认idea 是已经安装好了maven插件的，在File&amp;gt;settings&amp;gt;能搜索到maven的相关配置&lt;br&gt;但是有时候它会莫名其妙的不见了或消失&lt;br&gt;检查Plugins是否启用了maven&lt;br&gt;![](../images/Idea maven
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/</id>
+    <published>2022-08-25T10:30:17.066Z</published>
+    <updated>2022-08-25T10:30:42.335Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Charles是一款抓包必备的工具，支持Windows、Mac、手机的抓包测试，还能对https的SLL加密内容进行解密。&lt;/p&gt;
+&lt;h1 id=&quot;下载安装&quot;&gt;&lt;a href=&quot;#下载安装&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
     
   </entry>
   
