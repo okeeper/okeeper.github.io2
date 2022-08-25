@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://okeeper.com/"/>
-  <updated>2022-08-24T03:51:05.113Z</updated>
+  <updated>2022-08-25T08:06:35.031Z</updated>
   <id>https://okeeper.com/</id>
   
   <author>
@@ -15,6 +15,117 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/cao-zuo-xi-tong-yuan-li-nei-cun-guan-li/"/>
+    <id>https://okeeper.com/cao-zuo-xi-tong-yuan-li-nei-cun-guan-li/</id>
+    <published>2022-08-25T08:06:34.122Z</published>
+    <updated>2022-08-25T08:06:35.031Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;内存管理的目标&quot;&gt;&lt;a href=&quot;#内存管理的目标&quot; class=&quot;headerlink&quot; title=&quot;内存管理的目标&quot;&gt;&lt;/a&gt;内存管理的目标&lt;/h1&gt;&lt;p&gt;1) 实现内存分配、内存回收等操作&lt;br&gt;2)
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/cao-zuo-xi-tong-yuan-li-jin-cheng-diao-du-yu-si-suo/"/>
+    <id>https://okeeper.com/cao-zuo-xi-tong-yuan-li-jin-cheng-diao-du-yu-si-suo/</id>
+    <published>2022-08-25T08:06:16.898Z</published>
+    <updated>2022-08-25T08:06:17.775Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、进程调度&quot;&gt;&lt;a href=&quot;#一、进程调度&quot; class=&quot;headerlink&quot; title=&quot;一、进程调度&quot;&gt;&lt;/a&gt;一、进程调度&lt;/h1&gt;&lt;p&gt;进程的调度室指按照某种策略或算法从就绪进程中为当前空闲的cpu选择在其上运行的新进程&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/cao-zuo-xi-tong-yuan-li-jin-cheng-guan-li/"/>
+    <id>https://okeeper.com/cao-zuo-xi-tong-yuan-li-jin-cheng-guan-li/</id>
+    <published>2022-08-25T08:05:43.214Z</published>
+    <updated>2022-08-25T08:05:58.744Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、进程的概念&quot;&gt;&lt;a href=&quot;#一、进程的概念&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/cao-zuo-xi-tong-yuan-li-chu-shi-cao-zuo-xi-tong/"/>
+    <id>https://okeeper.com/cao-zuo-xi-tong-yuan-li-chu-shi-cao-zuo-xi-tong/</id>
+    <published>2022-08-25T08:01:12.637Z</published>
+    <updated>2022-08-25T08:01:13.959Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;什么是操作系统&quot;&gt;&lt;a href=&quot;#什么是操作系统&quot; class=&quot;headerlink&quot; title=&quot;什么是操作系统&quot;&gt;&lt;/a&gt;什么是操作系统&lt;/h1&gt;&lt;p&gt; 
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://okeeper.com/cong-ling-kai-shi-shi-yong-solidity-bian-xie-yi-tai-fang-zhi-neng-he-yue-bing-shi-yong-nodejs-sdk-fang-wen-yi-tai-fang-wang-luo/"/>
+    <id>https://okeeper.com/cong-ling-kai-shi-shi-yong-solidity-bian-xie-yi-tai-fang-zhi-neng-he-yue-bing-shi-yong-nodejs-sdk-fang-wen-yi-tai-fang-wang-luo/</id>
+    <published>2022-08-25T07:55:39.671Z</published>
+    <updated>2022-08-25T07:57:00.786Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Nodejs安装&quot;&gt;&lt;a href=&quot;#Nodejs安装&quot; class=&quot;headerlink&quot; title=&quot;Nodejs安装&quot;&gt;&lt;/a&gt;Nodejs安装&lt;/h1&gt;&lt;p&gt;Nodejs 版本建议8.0以上&lt;br&gt;官网：&lt;a
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>系统架构师——软件开发方法</title>

@@ -4,11 +4,12 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="留言板, 张跃 zhangyue okeeper Java Alibaba">
+    <meta name="keywords" content="张跃 zhangyue okeeper Java Alibaba">
     <meta name="baidu-site-verification" content="MWAMkewsPN">
     <meta name="google-site-verification" content>
     <meta name="360-site-verification" content>
-    <meta name="description" content="留言板 | 张跃的博客">
+    <meta name="description" content="一、进程调度进程的调度室指按照某种策略或算法从就绪进程中为当前空闲的cpu选择在其上运行的新进程
+二、进程的调度算法##1. 时间概念周转时间是指从作业开始提交给系统开始，到作业完成为止系统的平均周转时间T=N各种作业的周转时间之和除以n带">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>留言板 | 张跃的博客</title>
+    <title>张跃的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -270,73 +271,387 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                <!-- 
-                    Okeeper
-                 -->
-                
-                    留言板
-                
-            </div>
-
-            <div class="description center-align">
-                
-                    <!-- 张跃 | 软件工程 | Java老司机 -->
-                    <span id="jinrishici-sentence">正在加载今日诗词...</span>
-                
-            </div>
-        </div>
-    </div>
-</div>
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
-// 每天切换 banner 图.  Switch banner image every day.
-//(new Date().getDate() % 28)
-//parseInt(Math.random() * 28)
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.random() * 28)+ '.jpg)');
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
 </script>
-    </div>
-</div>
 
-<main class="content">
-    <div id="aboutme" class="container contact-container">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-content article-card-content">
-                    <div id="articleContent" data-aos="fade-up">
-                        <h1 id="欢迎留言"><a href="#欢迎留言" class="headerlink" title="欢迎留言"></a>欢迎留言</h1><p>大家有任何问题，都可以在评论区给我留言，或者加我联系方式：</p>
-<ul>
-<li>QQ：<strong>610998697</strong></li>
-<li>微信：<strong>zhangyue0808</strong></li>
-</ul>
-<p>我很忙啦，如果不是很麻烦的问题就直接在评论区留言啦。<br><strong>当然不介意小改改加我哦~~</strong></p>
-<h1 id="友链交换"><a href="#友链交换" class="headerlink" title="友链交换"></a>友链交换</h1><p>想要交换友链的小伙伴，欢迎在评论区留言，留言格式：</p>
-<ul>
-<li><strong>名称：</strong>你的博客名称</li>
-<li><strong>地址：</strong>你的博客地址</li>
-<li><strong>简介：</strong>一句话简介</li>
-<li><strong>头像：</strong>你的头像地址</li>
-</ul>
-<p>例如我的博客友链，大家可以加到自己博客里哦：</p>
-<ul>
-<li><strong>名称：</strong>Okeeper</li>
-<li><strong>地址：</strong><a href="https://okeeper.com">https://okeeper.com</a></li>
-<li><strong>简介：</strong>一个喜欢周杰伦，既不文艺也没有才艺，平淡无奇的程序员而已</li>
-<li><strong>头像：</strong><a href="https://okeeper.com/medias/avatars/avatar.jpg">https://okeeper.com/medias/avatars/avatar.jpg</a></li>
-</ul>
 
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card">
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        <span class="chip bg-color">无标签</span>
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-08-25
+                </div>
+
+                <div class="post-author info-break-policy">
+                    <i class="fa fa-user-o fa-fw"></i>作者:&nbsp;&nbsp;
+                    
+                    张跃
+                    
+                </div>
+
+                
+                
+                <div class="info-break-policy">
+                    <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    959
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    3 分
+                </div>
+                
+                
+
+                
+                <div id="busuanzi_container_page_pv" class="info-break-policy">
+                    <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                    <span id="busuanzi_value_page_pv"></span>
+                </div>
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="一、进程调度"><a href="#一、进程调度" class="headerlink" title="一、进程调度"></a>一、进程调度</h1><p>进程的调度室指按照某种策略或算法从就绪进程中为当前空闲的cpu选择在其上运行的新进程</p>
+<h1 id="二、进程的调度算法"><a href="#二、进程的调度算法" class="headerlink" title="二、进程的调度算法"></a>二、进程的调度算法</h1><p>##1. 时间概念<br><strong>周转时间</strong>是指从作业开始提交给系统开始，到作业完成为止系统的<br><strong>平均周转时间T</strong>=N各种作业的周转时间之和除以n<br><strong>带权周转时间</strong>=作业的周转时间/系统为它提供服务时间<br><strong>响应时间</strong>=用户从提交一个请求开始至系统首次响应的时间为止的一段时间<br><strong>截止时间</strong>=是指某个人物必须开始执行的最迟时间，或者必须完成的最迟时间</p>
+<h2 id="2-调度算法优劣的准则"><a href="#2-调度算法优劣的准则" class="headerlink" title="2. 调度算法优劣的准则"></a>2. 调度算法优劣的准则</h2><ul>
+<li>周转时间短</li>
+<li>响应时间快</li>
+<li>截止时间保证</li>
+<li>系统吞吐量高</li>
+<li>CPU利用率好</li>
+</ul>
+<h2 id="3-调度算法"><a href="#3-调度算法" class="headerlink" title="3. 调度算法"></a>3. 调度算法</h2><ol>
+<li><p>先来先服务(FCFS),从就绪队首选择最先到达就绪队列的进程<br>优缺点：FCFS适合长进程，不利于短进程，适合CPU繁忙型的进程，不适合IO繁忙型的进程</p>
+</li>
+<li><p>短进程调度优先(SPF)，短进程优先算法有效降低进程的平均等待时间，提高系统的吞吐量</p>
+</li>
+<li><p>调度算法优先(SPL),分为非抢占式优先调度算法，抢占式优先权调度；优先权的调度类型：静态优先权和动态优先权</p>
+</li>
+<li><p>时间片轮转调度算法(RR),时间片大小确认考虑的因素：</p>
+<ol>
+<li>系统对响应时间的要求，响应时间越短，时间片取值应该越小。</li>
+<li>就绪队列中的进程数</li>
+<li>系统的处理能力</li>
+</ol>
+</li>
+<li><p>多级队列调度，不同的队列优先权不同，调度算法也可能不同</p>
+</li>
+<li><p>多级反馈队列调度，队列优先权越高，时间片越短，时间片通常成倍增长。</p>
+</li>
+</ol>
+<p>##实时系统中的调度 </p>
+<ol>
+<li>提供必要的调度信息</li>
+<li>系统处理能力强</li>
+<li>采用抢占式调度机制</li>
+<li>具有快速切换机制</li>
+</ol>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>死锁是由于多个进程竞争共享资源引起的进程不能向前推进的僵死状态</p>
+<p>产生死锁的原因：竞争死锁资源且分配资源的顺序不当<br>产生死锁的必要条件：</p>
+<ol>
+<li>互斥</li>
+<li>请求保持</li>
+<li>不剥夺</li>
+<li>环路等待</li>
+</ol>
+<p>处理死锁的防范：</p>
+<ol>
+<li>预防死锁</li>
+<li>避免死锁，资源分配的状态分为安全和不安全状态，不安全状态不一定产生死锁，但是系统进入安全状态一定不会产生死锁，这样就可以避免死锁的产生，银行家算法就是一种系统避免系统死锁的一种检测算法，其基本思想是：一个进程提出资源请求后，系统进行资源的试分配。然后检测此次分配是否处于安全状态，若安全则按分配方案分配资源，否则不进行分配资源。</li>
+<li>检测并解除死锁</li>
+<li>忽略死锁</li>
+</ol>
+<p>某系统中有3个并发进程，都需要同类资源4个，试问该系统保证不会发生死锁的最少资源数是<strong>__</strong><br>如果一个进程有m个资源它就能够结束，不会使自己陷入死锁中。因此最差情况是每个进程有m-1个资源并且需要另外一个资源。如果留下有一个资源可用，那么其中某个进程就能够结束并释放它的所有资源，使其它进程也能够结束。所以避免死锁的条件是：r≥p(m-1)+1。带入上述条件公式：<strong>r≥3*(4-1)+1=10</strong>。所以答案为10个。</p>
+
+            </div>
+            <hr />
 
             
-            <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">感谢你的认可！</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+
+        </div>
+    </div>
+
+    
+    <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
 <link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
@@ -351,22 +666,22 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
         repo: 'okeeper.github.io',
         owner: 'okeeper',
         admin: "okeeper",
-        id: 'contact/index.html',
+        id: 'cao-zuo-xi-tong-yuan-li-jin-cheng-diao-du-yu-si-suo/',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
     gitalk.render('gitalk-container');
 </script>
-            
+    
 
-            
+    
 
-            
+    
 
-            
+    
 
-            
-            <style>
+    
+    <style>
     .valine-card {
         margin: 1.5rem auto;
     }
@@ -627,11 +942,190 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
     });
 </script>
 
-            
+    
 
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/cao-zuo-xi-tong-yuan-li-nei-cun-guan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            内存管理的目标1) 实现内存分配、内存回收等操作2) 提高内存的利用率和内存的访问速度即充分利用现有的内存资源，为应用程序提供方便的内存使用方式和一个快速、安全且充分大的存储器
+程序的链接和装入链接要解决的问题是将编译后的目标模块装配成一个
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-25
+                        </span>
+                        <span class="publish-author">
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/cao-zuo-xi-tong-yuan-li-jin-cheng-guan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一、进程的概念
+进程是允许并发的程序在某个数据集合上运行的过程
+进程是正文段、用户数据段和进程控制块共同组成的执行环境。
+
+二、进程与程序的区别
+程序是静态的，进程是动态的
+程序是永久的，进程是暂时存在的
+程序和进程存在的实体不同。程序是指
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-25
+                            </span>
+                        <span class="publish-author">
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
         </div>
     </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
 </main>
+
+
     <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
