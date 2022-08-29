@@ -104,61 +104,11 @@
     
     
     <entry>
-      <title>Centos 下Redis 安装以及集群搭建</title>
-      <link href="/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/"/>
-      <url>/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/</url>
-      
-        <content type="html"><![CDATA[<p>1.下载redis安装包</p><pre><code>cd /root/softwarewget http://download.redis.io/releases/redis-3.2.4.tar.gztar -zxvf redis-3.2.4.tar.gz　</code></pre><p>2.编译安装</p><pre><code>#先确保安装了make命令#make是gcc的编译器，VPS买来必定要安装#安装：yum -y install gcc automake autoconf libtool make#安装g++:yum install gcc gcc-c++cd redis-3.2.4make &amp;&amp; make install</code></pre><p>3.将 redis-trib.rb 复制到 /usr/local/bin 目录下,能在任意目录访问到此命令</p><pre><code>cd srccp redis-trib.rb /usr/local/bin/</code></pre><p>4.创建目录存放redis节点的配置文件</p><pre><code>mkdir /opt/redis-cluster/#redis集群节点至少要6个mkdir 7000 7002 7003 7004 7005#复制redis.conf到各个节点目录cp redis-3.2.4/redis.conf /opt/redis-cluster/7000</code></pre><p>5.然后编辑 redis.conf修改每个节点的配置,修改以下属性</p><pre><code>port  7000                                        //端口7000,7002,7003        bind 本机ip                                       //默认ip为127.0.0.1 需要改为其他节点机器可访问的ip 否则创建集群时无法访问对应的端口，无法创建集群daemonize    yes                               //redis后台运行pidfile  /var/run/redis_7000.pid          //pidfile文件对应7000,7001,7002cluster-enabled  yes                           //开启集群  把注释#去掉appendonly  yes                           //aof日志开启  有需要就开启，它会每次写操作都记录一条日志　</code></pre><p>6.启动节点</p><pre><code>redis-server redis_cluster/7000/redis.confredis-server redis_cluster/7001/redis.confredis-server redis_cluster/7002/redis.conf</code></pre><p>检查 redis 启动情况</p><pre><code>[root@localhost 7005]# ps -ef|grep redisroot     23002     1  0 11:41 ?        00:00:05 redis-server 192.168.10.10:7000 [cluster]root     26165     1  0 11:45 ?        00:00:05 redis-server 192.168.10.10:7001 [cluster]root     26609     1  0 12:03 ?        00:00:04 redis-server 192.168.10.10:7002 [cluster]root     27943     1  0 13:46 ?        00:00:00 redis-server 192.168.10.10:7003 [cluster]root     28008     1  0 13:47 ?        00:00:00 redis-server 192.168.10.10:7004 [cluster]root     28031     1  0 13:48 ?        00:00:00 redis-server 192.168.10.10:7005 [cluster]root     28036 18197  0 13:48 pts/0    00:00:00 grep --color=auto redis</code></pre><pre><code>#查看端口监听netstat -tnlp | grep redis</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=58b6679aab64410ab8008a0f" alt></p><p>7.将redis节点加入集群</p><pre><code>redis-trib.rb  create  --replicas  1  192.168.10.10:7000 192.168.10.10:7001  192.168.10.10:7002 192.168.10.10:7003 192.168.10.10:7004  192.168.10.10:7005</code></pre><p>运行以上命令时，必须要先安装ruby环境，因为这个命令时ruby写的<br>安装命令如下：</p><pre><code>yum -y install ruby ruby-devel rubygems rpm-buildgem install redis</code></pre><p>重新运行命令如果出现以下图片则表示集群安装成功，记得中途还需输入yes<br><img src="https://leanote.com/api/file/getImage?fileId=58b6679aab64410ab8008a0d" alt></p><p>8.集群验证<br>简单说下redis集群的原理：<br>redis cluster在设计的时候，就考虑到了去中心化，去中间件，也就是说，集群中的每个节点都是平等的关系，都是对等的，每个节点都保存各自的数据和整个集群的状态。每个节点都和其他所有节点连接，而且这些连接保持活跃，这样就保证了我们只需要连接集群中的任意一个节点，就可以获取到其他节点的数据。</p><p>Redis 集群没有并使用传统的一致性哈希来分配数据，而是采用另外一种叫做哈希槽 (hash slot)的方式来分配的。redis cluster 默认分配了 16384 个slot，当我们set一个key 时，会用CRC16算法来取模得到所属的slot，然后将这个key 分到哈希槽区间的节点上，具体算法就是：CRC16(key) % 16384。所以我们在测试的时候看到set 和 get 的时候，直接跳转到了7000端口的节点。</p><p>Redis 集群会把数据存在一个 master 节点，然后在这个 master 和其对应的salve 之间进行数据同步。当读取数据时，也根据一致性哈希算法到对应的 master 节点获取数据。只有当一个master 挂掉之后，才会启动一个对应的 salve 节点，充当 master 。</p><p>需要注意的是：必须要6个或以上的主节点，否则在创建集群时会失败，并且当存活的主节点数小于总节点数的一半时，整个集群就无法提供服务了。</p><p>所以使用redis-cli客户端命令连接redis时，随便指定集群中的任意节点都可以访问到整个集群的数据，运行命令是多加一个<code>-c</code>参数</p><pre><code>redis-cli -h 192.168.10.10 -c -p 7002</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=58b6679aab64410ab8008a10" alt></p><p><img src="https://leanote.com/api/file/getImage?fileId=58b6679aab64410ab8008a0e" alt></p><p>到此安装完成。</p><h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>遇到以下问题时：</p><pre><code>[root@localhost 7004]# /soft/redis-3.2.4/src/redis-trib.rb  create  --replicas  1  192.168.10.10:7000 192.168.10.10:7001  192.168.10.10:7002 192.168.10.10:7003 192.168.10.10:7004  192.168.10.10:7005&gt;&gt;&gt; Creating cluster[ERR] Node 192.168.10.10:7005 is not empty. Either the node already knows other nodes (check with CLUSTER NODES) or contains some key in database 0.</code></pre><p>解决方法：</p><pre><code>#查找进程并kill掉[root@localhost 7005]# ps -ef|grep redis                             root     23753     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7000 [cluster]root     23758     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7001 [cluster]root     23763     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7002 [cluster]root     23768     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7003 [cluster]root     23778     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7005 [cluster]root     23846     1  0 16:34 ?        00:00:00 /soft/redis-3.2.4/src/redis-server 192.168.10.10:7004 [cluster]kill 23846#删除/opt/redis-cluster/7004/下除redis.conf的文件rm -f appendonly.aof  dump.rdb  nodes.conf或者rm -f !(redis.conf)#然后重新启动7004cd /opt/redis-cluster/7004/soft/redis-3.2.4/src/redis-server redis.conf/soft/redis-3.2.4/src/redis-trib.rb  create  --replicas  1  192.168.10.10:7000 192.168.10.10:7001  192.168.10.10:7002 192.168.10.10:7003 192.168.10.10:7004  192.168.10.10:7005</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Idea maven 插件安装</title>
       <link href="/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
       <url>/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</url>
       
         <content type="html"><![CDATA[<p>默认idea 是已经安装好了maven插件的，在File&gt;settings&gt;能搜索到maven的相关配置<br>但是有时候它会莫名其妙的不见了或消失<br>检查Plugins是否启用了maven<br>![](../images/Idea maven 插件安装/getImage-20220825183122891.png)</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Java bean的Getter Setter 自动编译生成工具Lombok</title>
-      <link href="/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/"/>
-      <url>/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/</url>
-      
-        <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>  我们在开发过程中，通常都会定义大量的JavaBean，然后通过IDE去生成其属性的构造器、getter、setter、equals、hashcode、toString方法，当要对某个属性进行改变时，比如命名、类型等，都需要重新去生成上面提到的这些方法，那Java中有没有一种方式能够避免这种重复的劳动呢？答案是有，lombok插件  </p><h2 id="Idea插件安装lombok"><a href="#Idea插件安装lombok" class="headerlink" title="Idea插件安装lombok"></a>Idea插件安装lombok</h2><ol><li>File &gt; Settings &gt; Plugins &gt; Browse repositories… &gt; Search for “lombok” &gt; Install Plugin</li><li>在使用项目中引入lombok 的类库<pre><code>&lt;dependency&gt;     &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;     &lt;artifactId&gt;lombok&lt;/artifactId&gt;     &lt;version&gt;1.16.10&lt;/version&gt;     &lt;scope&gt;provided&lt;/scope&gt; &lt;/dependency&gt;</code></pre></li></ol><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>@Getter / @Setter</strong></p><p>  可以作用在类上和属性上，放在类上，会对所有的非静态(non-static)属性生成Getter/Setter方法，放在属性上，会对该属性生成Getter/Setter方法。并可以指定Getter/Setter方法的访问级别。</p><p><strong>@EqualsAndHashCode</strong></p><p>  默认情况下，会使用所有非瞬态(non-transient)和非静态(non-static)字段来生成equals和hascode方法，也可以指定具体使用哪些属性。</p><p><strong>@ToString</strong></p><p>  生成toString方法，默认情况下，会输出类名、所有属性，属性会按照顺序输出，以逗号分割。</p><p><strong>@NoArgsConstructor, @RequiredArgsConstructor and @AllArgsConstructor</strong></p><p>  无参构造器、部分参数构造器、全参构造器，当我们需要重载多个构造器的时候，Lombok就无能为力了。</p><p><strong>@Data</strong></p><p>  @ToString, @EqualsAndHashCode, 所有属性的@Getter, 所有non-final属性的@Setter和@RequiredArgsConstructor的组合，通常情况下，我们使用这个注解就足够了。<br>  <br>  ## 原理<br>  该插件的原理是在编码过程中屏蔽bean的getter/setter 方法，在编译成class的时候插件自动根据注解生成对应的gettter/setter 方法，我们通过发编译源码发现  </p><pre><code>@Datapublic class Test {    private String id;    private String name;    public void test(){        this.getId();    }}</code></pre><p>编译后等价于</p><pre><code>public class Test {    private String id;    private String name;    public void test() {        this.getId();    }    public Test() {    }    public String getId() {        return this.id;    }    public String getName() {        return this.name;    }    public void setId(String id) {        this.id = id;    }    public void setName(String name) {        this.name = name;    }    public boolean equals(Object o) {        if(o == this) {            return true;        } else if(!(o instanceof Test)) {            return false;        } else {            Test other = (Test)o;            if(!other.canEqual(this)) {                return false;            } else {                String this$id = this.getId();                String other$id = other.getId();                if(this$id == null) {                    if(other$id != null) {                        return false;                    }                } else if(!this$id.equals(other$id)) {                    return false;                }                String this$name = this.getName();                String other$name = other.getName();                if(this$name == null) {                    if(other$name == null) {                        return true;                    }                } else if(this$name.equals(other$name)) {                    return true;                }                return false;            }        }    }    protected boolean canEqual(Object other) {        return other instanceof Test;    }    public int hashCode() {        boolean PRIME = true;        byte result = 1;        String $id = this.getId();        int result1 = result * 59 + ($id == null?43:$id.hashCode());        String $name = this.getName();        result1 = result1 * 59 + ($name == null?43:$name.hashCode());        return result1;    }    public String toString() {        return &quot;Test(id=&quot; + this.getId() + &quot;, name=&quot; + this.getName() + &quot;)&quot;;    }}</code></pre>]]></content>
       
       
       <categories>
@@ -204,11 +154,11 @@
     
     
     <entry>
-      <title>Redis批量删除命令</title>
-      <link href="/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/"/>
-      <url>/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/</url>
+      <title>Java bean的Getter Setter 自动编译生成工具Lombok</title>
+      <link href="/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/"/>
+      <url>/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>Redis中有指定多个key批量删除的命令,却没有指定模糊key批量删除命令</p></blockquote><p>批量删除多个key</p><pre><code>del key1 key2</code></pre><p>通过通配符”*”模糊匹配删除的lua脚本命令</p><pre><code># 模糊删除eval &quot;local keys = redis.call(&#39;keys&#39;, ARGV[1]) for i=1,#keys,5000 do redis.call(&#39;del&#39;, unpack(keys, i, math.min(i+4999, #keys))) end return #keys&quot; 0 &#39;key_*&#39;</code></pre><p>其中<code>key_*</code>就是要模糊匹配的key</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>  我们在开发过程中，通常都会定义大量的JavaBean，然后通过IDE去生成其属性的构造器、getter、setter、equals、hashcode、toString方法，当要对某个属性进行改变时，比如命名、类型等，都需要重新去生成上面提到的这些方法，那Java中有没有一种方式能够避免这种重复的劳动呢？答案是有，lombok插件  </p><h2 id="Idea插件安装lombok"><a href="#Idea插件安装lombok" class="headerlink" title="Idea插件安装lombok"></a>Idea插件安装lombok</h2><ol><li>File &gt; Settings &gt; Plugins &gt; Browse repositories… &gt; Search for “lombok” &gt; Install Plugin</li><li>在使用项目中引入lombok 的类库<pre><code>&lt;dependency&gt;     &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;     &lt;artifactId&gt;lombok&lt;/artifactId&gt;     &lt;version&gt;1.16.10&lt;/version&gt;     &lt;scope&gt;provided&lt;/scope&gt; &lt;/dependency&gt;</code></pre></li></ol><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>@Getter / @Setter</strong></p><p>  可以作用在类上和属性上，放在类上，会对所有的非静态(non-static)属性生成Getter/Setter方法，放在属性上，会对该属性生成Getter/Setter方法。并可以指定Getter/Setter方法的访问级别。</p><p><strong>@EqualsAndHashCode</strong></p><p>  默认情况下，会使用所有非瞬态(non-transient)和非静态(non-static)字段来生成equals和hascode方法，也可以指定具体使用哪些属性。</p><p><strong>@ToString</strong></p><p>  生成toString方法，默认情况下，会输出类名、所有属性，属性会按照顺序输出，以逗号分割。</p><p><strong>@NoArgsConstructor, @RequiredArgsConstructor and @AllArgsConstructor</strong></p><p>  无参构造器、部分参数构造器、全参构造器，当我们需要重载多个构造器的时候，Lombok就无能为力了。</p><p><strong>@Data</strong></p><p>  @ToString, @EqualsAndHashCode, 所有属性的@Getter, 所有non-final属性的@Setter和@RequiredArgsConstructor的组合，通常情况下，我们使用这个注解就足够了。<br>  <br>  ## 原理<br>  该插件的原理是在编码过程中屏蔽bean的getter/setter 方法，在编译成class的时候插件自动根据注解生成对应的gettter/setter 方法，我们通过发编译源码发现  </p><pre><code>@Datapublic class Test {    private String id;    private String name;    public void test(){        this.getId();    }}</code></pre><p>编译后等价于</p><pre><code>public class Test {    private String id;    private String name;    public void test() {        this.getId();    }    public Test() {    }    public String getId() {        return this.id;    }    public String getName() {        return this.name;    }    public void setId(String id) {        this.id = id;    }    public void setName(String name) {        this.name = name;    }    public boolean equals(Object o) {        if(o == this) {            return true;        } else if(!(o instanceof Test)) {            return false;        } else {            Test other = (Test)o;            if(!other.canEqual(this)) {                return false;            } else {                String this$id = this.getId();                String other$id = other.getId();                if(this$id == null) {                    if(other$id != null) {                        return false;                    }                } else if(!this$id.equals(other$id)) {                    return false;                }                String this$name = this.getName();                String other$name = other.getName();                if(this$name == null) {                    if(other$name == null) {                        return true;                    }                } else if(this$name.equals(other$name)) {                    return true;                }                return false;            }        }    }    protected boolean canEqual(Object other) {        return other instanceof Test;    }    public int hashCode() {        boolean PRIME = true;        byte result = 1;        String $id = this.getId();        int result1 = result * 59 + ($id == null?43:$id.hashCode());        String $name = this.getName();        result1 = result1 * 59 + ($name == null?43:$name.hashCode());        return result1;    }    public String toString() {        return &quot;Test(id=&quot; + this.getId() + &quot;, name=&quot; + this.getName() + &quot;)&quot;;    }}</code></pre>]]></content>
       
       
       <categories>
@@ -229,11 +179,11 @@
     
     
     <entry>
-      <title>Java开发环境准备</title>
-      <link href="/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/"/>
-      <url>/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/</url>
+      <title>Centos 下Redis 安装以及集群搭建</title>
+      <link href="/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/"/>
+      <url>/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/</url>
       
-        <content type="html"><![CDATA[<p>JDK下载地址：<br><a href="https://github.com/frekele/oracle-java/releases" target="_blank" rel="noopener">https://github.com/frekele/oracle-java/releases</a></p><p>idea激活：<br><a href="https://juejin.im/post/5df8a5a5e51d4557f0460990" target="_blank" rel="noopener">https://juejin.im/post/5df8a5a5e51d4557f0460990</a></p><p>maven环境变量配置：<br><a href="https://www.cnblogs.com/tanjiyuan/p/11010998.html" target="_blank" rel="noopener">https://www.cnblogs.com/tanjiyuan/p/11010998.html</a></p>]]></content>
+        <content type="html"><![CDATA[<p>1.下载redis安装包</p><pre><code>cd /root/softwarewget http://download.redis.io/releases/redis-3.2.4.tar.gztar -zxvf redis-3.2.4.tar.gz　</code></pre><p>2.编译安装</p><pre><code>#先确保安装了make命令#make是gcc的编译器，VPS买来必定要安装#安装：yum -y install gcc automake autoconf libtool make#安装g++:yum install gcc gcc-c++cd redis-3.2.4make &amp;&amp; make install</code></pre><p>3.将 redis-trib.rb 复制到 /usr/local/bin 目录下,能在任意目录访问到此命令</p><pre><code>cd srccp redis-trib.rb /usr/local/bin/</code></pre><p>4.创建目录存放redis节点的配置文件</p><pre><code>mkdir /opt/redis-cluster/#redis集群节点至少要6个mkdir 7000 7002 7003 7004 7005#复制redis.conf到各个节点目录cp redis-3.2.4/redis.conf /opt/redis-cluster/7000</code></pre><p>5.然后编辑 redis.conf修改每个节点的配置,修改以下属性</p><pre><code>port  7000                                        //端口7000,7002,7003        bind 本机ip                                       //默认ip为127.0.0.1 需要改为其他节点机器可访问的ip 否则创建集群时无法访问对应的端口，无法创建集群daemonize    yes                               //redis后台运行pidfile  /var/run/redis_7000.pid          //pidfile文件对应7000,7001,7002cluster-enabled  yes                           //开启集群  把注释#去掉appendonly  yes                           //aof日志开启  有需要就开启，它会每次写操作都记录一条日志　</code></pre><p>6.启动节点</p><pre><code>redis-server redis_cluster/7000/redis.confredis-server redis_cluster/7001/redis.confredis-server redis_cluster/7002/redis.conf</code></pre><p>检查 redis 启动情况</p><pre><code>[root@localhost 7005]# ps -ef|grep redisroot     23002     1  0 11:41 ?        00:00:05 redis-server 192.168.10.10:7000 [cluster]root     26165     1  0 11:45 ?        00:00:05 redis-server 192.168.10.10:7001 [cluster]root     26609     1  0 12:03 ?        00:00:04 redis-server 192.168.10.10:7002 [cluster]root     27943     1  0 13:46 ?        00:00:00 redis-server 192.168.10.10:7003 [cluster]root     28008     1  0 13:47 ?        00:00:00 redis-server 192.168.10.10:7004 [cluster]root     28031     1  0 13:48 ?        00:00:00 redis-server 192.168.10.10:7005 [cluster]root     28036 18197  0 13:48 pts/0    00:00:00 grep --color=auto redis</code></pre><pre><code>#查看端口监听netstat -tnlp | grep redis</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=58b6679aab64410ab8008a0f" alt></p><p>7.将redis节点加入集群</p><pre><code>redis-trib.rb  create  --replicas  1  192.168.10.10:7000 192.168.10.10:7001  192.168.10.10:7002 192.168.10.10:7003 192.168.10.10:7004  192.168.10.10:7005</code></pre><p>运行以上命令时，必须要先安装ruby环境，因为这个命令时ruby写的<br>安装命令如下：</p><pre><code>yum -y install ruby ruby-devel rubygems rpm-buildgem install redis</code></pre><p>重新运行命令如果出现以下图片则表示集群安装成功，记得中途还需输入yes<br><img src="https://leanote.com/api/file/getImage?fileId=58b6679aab64410ab8008a0d" alt></p><p>8.集群验证<br>简单说下redis集群的原理：<br>redis cluster在设计的时候，就考虑到了去中心化，去中间件，也就是说，集群中的每个节点都是平等的关系，都是对等的，每个节点都保存各自的数据和整个集群的状态。每个节点都和其他所有节点连接，而且这些连接保持活跃，这样就保证了我们只需要连接集群中的任意一个节点，就可以获取到其他节点的数据。</p><p>Redis 集群没有并使用传统的一致性哈希来分配数据，而是采用另外一种叫做哈希槽 (hash slot)的方式来分配的。redis cluster 默认分配了 16384 个slot，当我们set一个key 时，会用CRC16算法来取模得到所属的slot，然后将这个key 分到哈希槽区间的节点上，具体算法就是：CRC16(key) % 16384。所以我们在测试的时候看到set 和 get 的时候，直接跳转到了7000端口的节点。</p><p>Redis 集群会把数据存在一个 master 节点，然后在这个 master 和其对应的salve 之间进行数据同步。当读取数据时，也根据一致性哈希算法到对应的 master 节点获取数据。只有当一个master 挂掉之后，才会启动一个对应的 salve 节点，充当 master 。</p><p>需要注意的是：必须要6个或以上的主节点，否则在创建集群时会失败，并且当存活的主节点数小于总节点数的一半时，整个集群就无法提供服务了。</p><p>所以使用redis-cli客户端命令连接redis时，随便指定集群中的任意节点都可以访问到整个集群的数据，运行命令是多加一个<code>-c</code>参数</p><pre><code>redis-cli -h 192.168.10.10 -c -p 7002</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=58b6679aab64410ab8008a10" alt></p><p><img src="https://leanote.com/api/file/getImage?fileId=58b6679aab64410ab8008a0e" alt></p><p>到此安装完成。</p><h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>遇到以下问题时：</p><pre><code>[root@localhost 7004]# /soft/redis-3.2.4/src/redis-trib.rb  create  --replicas  1  192.168.10.10:7000 192.168.10.10:7001  192.168.10.10:7002 192.168.10.10:7003 192.168.10.10:7004  192.168.10.10:7005&gt;&gt;&gt; Creating cluster[ERR] Node 192.168.10.10:7005 is not empty. Either the node already knows other nodes (check with CLUSTER NODES) or contains some key in database 0.</code></pre><p>解决方法：</p><pre><code>#查找进程并kill掉[root@localhost 7005]# ps -ef|grep redis                             root     23753     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7000 [cluster]root     23758     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7001 [cluster]root     23763     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7002 [cluster]root     23768     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7003 [cluster]root     23778     1  0 16:31 ?        00:00:00 /soft/redis-3.2.4/src//redis-server 192.168.10.10:7005 [cluster]root     23846     1  0 16:34 ?        00:00:00 /soft/redis-3.2.4/src/redis-server 192.168.10.10:7004 [cluster]kill 23846#删除/opt/redis-cluster/7004/下除redis.conf的文件rm -f appendonly.aof  dump.rdb  nodes.conf或者rm -f !(redis.conf)#然后重新启动7004cd /opt/redis-cluster/7004/soft/redis-3.2.4/src/redis-server redis.conf/soft/redis-3.2.4/src/redis-trib.rb  create  --replicas  1  192.168.10.10:7000 192.168.10.10:7001  192.168.10.10:7002 192.168.10.10:7003 192.168.10.10:7004  192.168.10.10:7005</code></pre>]]></content>
       
       
       <categories>
@@ -279,11 +229,11 @@
     
     
     <entry>
-      <title>git重命名的坑</title>
-      <link href="/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/"/>
-      <url>/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/</url>
+      <title>Java开发环境准备</title>
+      <link href="/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/"/>
+      <url>/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/</url>
       
-        <content type="html"><![CDATA[<p>如果使用git命令进行仅涉及大小写的重命名,git 默认是把你的动作忽略的，所以当你删掉本地代码，重新pull代码时，你会发现文件还是重命名之前的,神奇吧，记下这个坑，等着你们踩着坑来这看吧，坏笑/</p><p>解决方法如下：</p><ul><li><p>设置git库为大小写敏感（不建议）</p><pre><code>git config core.ignorecase false</code></pre><p>用这种方法进行重命名，用git status就可以识别出修改了，但是不推荐用这种方式，因为在更新这种修改的时候会有麻烦。</p></li><li><p>使用git mv命令（仅当core.ignorecase为true时可用）</p><pre><code>$ git mv ABC.java Abc.java</code></pre></li></ul><p>$ git status<br>……<br>renamed:<br> ABC.java -&gt; Abc.java</p><p>```</p>]]></content>
+        <content type="html"><![CDATA[<p>JDK下载地址：<br><a href="https://github.com/frekele/oracle-java/releases" target="_blank" rel="noopener">https://github.com/frekele/oracle-java/releases</a></p><p>idea激活：<br><a href="https://juejin.im/post/5df8a5a5e51d4557f0460990" target="_blank" rel="noopener">https://juejin.im/post/5df8a5a5e51d4557f0460990</a></p><p>maven环境变量配置：<br><a href="https://www.cnblogs.com/tanjiyuan/p/11010998.html" target="_blank" rel="noopener">https://www.cnblogs.com/tanjiyuan/p/11010998.html</a></p>]]></content>
       
       
       <categories>
@@ -329,31 +279,6 @@
     
     
     <entry>
-      <title>idea 突然闪退，内存溢出</title>
-      <link href="/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/"/>
-      <url>/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/</url>
-      
-        <content type="html"><![CDATA[<p>解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin<br>找到idea.exe.vmoptions配置修改Xmx 为合适大小1024/2048，然后启动此路径下的idea.exe</p><pre><code>-Xms128m-Xmx1024m-XX:MaxPermSize=350m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-Djava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow</code></pre><p>** 如果你的系统是64位的，则就需要修改idea64.exe.vmoptions这个配置，然后启动idea64.exe**</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>iterm2 rz sz 安装</title>
       <link href="/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/"/>
       <url>/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/</url>
@@ -379,11 +304,61 @@
     
     
     <entry>
-      <title>使用Jmeter进行Dubbo接口压测</title>
-      <link href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
-      <url>/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</url>
+      <title>idea 突然闪退，内存溢出</title>
+      <link href="/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/"/>
+      <url>/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/</url>
       
-        <content type="html"><![CDATA[<h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><h2 id="一、下载Jmeter3-1"><a href="#一、下载Jmeter3-1" class="headerlink" title="一、下载Jmeter3.1"></a>一、下载Jmeter3.1</h2><p>下载地址：<a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip</a><br>其他版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></p><p>更高版本的Jmeter 5+好像有点问题，建议还是用这个版本吧</p><h2 id="二、下载dubbo官方的jmeter插件"><a href="#二、下载dubbo官方的jmeter插件" class="headerlink" title="二、下载dubbo官方的jmeter插件"></a>二、下载dubbo官方的jmeter插件</h2><p>下载地址：<a href="https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar" target="_blank" rel="noopener">https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar</a><br>官方用户指南：<a href="https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97</a></p><h2 id="三、解压Jmeter"><a href="#三、解压Jmeter" class="headerlink" title="三、解压Jmeter"></a>三、解压Jmeter</h2><p>将jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar放到<code>${JMETER_HOME}\lib\ext.</code>中</p><h2 id="四、启动Jmeter"><a href="#四、启动Jmeter" class="headerlink" title="四、启动Jmeter"></a>四、启动Jmeter</h2><p> <code>${JMETER_HOME}\jmeter.bat</code></p><h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="../images/Untitled/getImage-20220825182246944.png" alt><br><img src="../images/Untitled/getImage-20220825182247846.png" alt></p><h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="../images/Untitled/getImage-20220825182248427.png" alt></p><p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="../images/Untitled/getImage-20220825182248165.png" alt></p><h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="../images/Untitled/getImage-20220825182248034.png" alt></p><h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="../images/Untitled/getImage-20220825182247230.png" alt></p><h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="../images/Untitled/getImage-20220825182248268.png" alt></p><h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="../images/Untitled/getImage-20220825182247269.png" alt></p><h1 id="六、dubbo服务器状态查看"><a href="#六、dubbo服务器状态查看" class="headerlink" title="六、dubbo服务器状态查看"></a>六、dubbo服务器状态查看</h1><ol><li>使用telnet进入dubbo的console界面<pre><code>telnet 192.168.1.131 32101后回车</code></pre><img src="../images/Untitled/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="../images/Untitled/getImage-20220825182247961.png" alt></li></ol>]]></content>
+        <content type="html"><![CDATA[<p>解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin<br>找到idea.exe.vmoptions配置修改Xmx 为合适大小1024/2048，然后启动此路径下的idea.exe</p><pre><code>-Xms128m-Xmx1024m-XX:MaxPermSize=350m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-Djava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow</code></pre><p>** 如果你的系统是64位的，则就需要修改idea64.exe.vmoptions这个配置，然后启动idea64.exe**</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Redis批量删除命令</title>
+      <link href="/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/"/>
+      <url>/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Redis中有指定多个key批量删除的命令,却没有指定模糊key批量删除命令</p></blockquote><p>批量删除多个key</p><pre><code>del key1 key2</code></pre><p>通过通配符”*”模糊匹配删除的lua脚本命令</p><pre><code># 模糊删除eval &quot;local keys = redis.call(&#39;keys&#39;, ARGV[1]) for i=1,#keys,5000 do redis.call(&#39;del&#39;, unpack(keys, i, math.min(i+4999, #keys))) end return #keys&quot; 0 &#39;key_*&#39;</code></pre><p>其中<code>key_*</code>就是要模糊匹配的key</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git重命名的坑</title>
+      <link href="/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/"/>
+      <url>/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/</url>
+      
+        <content type="html"><![CDATA[<p>如果使用git命令进行仅涉及大小写的重命名,git 默认是把你的动作忽略的，所以当你删掉本地代码，重新pull代码时，你会发现文件还是重命名之前的,神奇吧，记下这个坑，等着你们踩着坑来这看吧，坏笑/</p><p>解决方法如下：</p><ul><li><p>设置git库为大小写敏感（不建议）</p><pre><code>git config core.ignorecase false</code></pre><p>用这种方法进行重命名，用git status就可以识别出修改了，但是不推荐用这种方式，因为在更新这种修改的时候会有麻烦。</p></li><li><p>使用git mv命令（仅当core.ignorecase为true时可用）</p><pre><code>$ git mv ABC.java Abc.java</code></pre></li></ul><p>$ git status<br>……<br>renamed:<br> ABC.java -&gt; Abc.java</p><p>```</p>]]></content>
       
       
       <categories>
@@ -429,11 +404,11 @@
     
     
     <entry>
-      <title>护眼神器Dark Reader</title>
-      <link href="/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/"/>
-      <url>/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/</url>
+      <title>使用Jmeter进行Dubbo接口压测</title>
+      <link href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
+      <url>/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</url>
       
-        <content type="html"><![CDATA[<p>在google应用市场中搜索Dark Reader，可以在网页中进行反色护眼<br>![](../images/护眼神器Dark Reader/getImage-20220825182956835.png)</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><h2 id="一、下载Jmeter3-1"><a href="#一、下载Jmeter3-1" class="headerlink" title="一、下载Jmeter3.1"></a>一、下载Jmeter3.1</h2><p>下载地址：<a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip</a><br>其他版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></p><p>更高版本的Jmeter 5+好像有点问题，建议还是用这个版本吧</p><h2 id="二、下载dubbo官方的jmeter插件"><a href="#二、下载dubbo官方的jmeter插件" class="headerlink" title="二、下载dubbo官方的jmeter插件"></a>二、下载dubbo官方的jmeter插件</h2><p>下载地址：<a href="https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar" target="_blank" rel="noopener">https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar</a><br>官方用户指南：<a href="https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97</a></p><h2 id="三、解压Jmeter"><a href="#三、解压Jmeter" class="headerlink" title="三、解压Jmeter"></a>三、解压Jmeter</h2><p>将jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar放到<code>${JMETER_HOME}\lib\ext.</code>中</p><h2 id="四、启动Jmeter"><a href="#四、启动Jmeter" class="headerlink" title="四、启动Jmeter"></a>四、启动Jmeter</h2><p> <code>${JMETER_HOME}\jmeter.bat</code></p><h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="../images/Untitled/getImage-20220825182246944.png" alt><br><img src="../images/Untitled/getImage-20220825182247846.png" alt></p><h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="../images/Untitled/getImage-20220825182248427.png" alt></p><p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="../images/Untitled/getImage-20220825182248165.png" alt></p><h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="../images/Untitled/getImage-20220825182248034.png" alt></p><h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="../images/Untitled/getImage-20220825182247230.png" alt></p><h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="../images/Untitled/getImage-20220825182248268.png" alt></p><h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="../images/Untitled/getImage-20220825182247269.png" alt></p><h1 id="六、dubbo服务器状态查看"><a href="#六、dubbo服务器状态查看" class="headerlink" title="六、dubbo服务器状态查看"></a>六、dubbo服务器状态查看</h1><ol><li>使用telnet进入dubbo的console界面<pre><code>telnet 192.168.1.131 32101后回车</code></pre><img src="../images/Untitled/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="../images/Untitled/getImage-20220825182247961.png" alt></li></ol>]]></content>
       
       
       <categories>
@@ -479,6 +454,31 @@
     
     
     <entry>
+      <title>抓包工具Charles安装、破解及使用</title>
+      <link href="/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/"/>
+      <url>/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/</url>
+      
+        <content type="html"><![CDATA[<p>Charles是一款抓包必备的工具，支持Windows、Mac、手机的抓包测试，还能对https的SLL加密内容进行解密。</p><h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><ol><li>进入官网下载地址：<a href="http://www.charlesproxy.com/，点击链接下载30天免费试用版本。" target="_blank" rel="noopener">http://www.charlesproxy.com/，点击链接下载30天免费试用版本。</a><br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037795.png" alt></li><li>在线破解：<br><a href="https://www.zzzmode.com/mytools/charles/" target="_blank" rel="noopener">https://www.zzzmode.com/mytools/charles/</a></li></ol><h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><h2 id="电脑抓包"><a href="#电脑抓包" class="headerlink" title="电脑抓包"></a>电脑抓包</h2><ol><li><p>打开Charles，默认是开启抓包代理的，可以看到电脑http请求的内容,你也可以将电脑的抓包代理给关掉，在Proxy&gt;enable MacOs proxy 勾选去掉<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037940.png" alt></p></li><li><p>设置https证书代理抓包，<br>安装证书：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038586.png" alt><br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037648.png" alt><br>打开百度<a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> 测试，发现全是乱码：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038645.png" alt><br>鼠标点击右键添加Enable SLL Proxy,从新刷新页面，Google Chrome 默认把这个当成不安全证书了，使用FireFox浏览器可以添加例外强制打开：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038204.png" alt><br>可以看到Charles已经将https的内容通过Charles 证书加代理的方式能够看到明文请求信息了。<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038795.png" alt></p></li></ol><h1 id="手机抓包"><a href="#手机抓包" class="headerlink" title="手机抓包"></a>手机抓包</h1><ol><li><p>设置网络代理<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038117.png" alt><br>通过上面菜单找到Charles的代理服务器IP和端口<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038169.png" alt><br>保证你的手机和你的电脑是在同一个局域网内，打开手机的WLAN配置，ip为上图的30.117.52.174，端口为：12345<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038566.png" alt></p></li><li><p>如果想看到https的请求内容，还是得和电脑一样安装Charles证书，通过safari打开<a href="https://chls.pro/ssl" target="_blank" rel="noopener">https://chls.pro/ssl</a> 下载证书<br>手机–setting–&gt;General—&gt;Profiles &amp; Device Management —&gt;Charles Proxy CA…<br>将设置为信任。如图：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038687.png" alt></p></li><li><p>接着就可以查看到手机上的网络请求数据了，如果是https点击右键Enable SLL Proxy，在重新刷新下就可以看到了。</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>磁盘空间满处理</title>
       <link href="/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/"/>
       <url>/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/</url>
@@ -504,11 +504,11 @@
     
     
     <entry>
-      <title>抓包工具Charles安装、破解及使用</title>
-      <link href="/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/"/>
-      <url>/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/</url>
+      <title>护眼神器Dark Reader</title>
+      <link href="/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/"/>
+      <url>/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/</url>
       
-        <content type="html"><![CDATA[<p>Charles是一款抓包必备的工具，支持Windows、Mac、手机的抓包测试，还能对https的SLL加密内容进行解密。</p><h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><ol><li>进入官网下载地址：<a href="http://www.charlesproxy.com/，点击链接下载30天免费试用版本。" target="_blank" rel="noopener">http://www.charlesproxy.com/，点击链接下载30天免费试用版本。</a><br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037795.png" alt></li><li>在线破解：<br><a href="https://www.zzzmode.com/mytools/charles/" target="_blank" rel="noopener">https://www.zzzmode.com/mytools/charles/</a></li></ol><h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><h2 id="电脑抓包"><a href="#电脑抓包" class="headerlink" title="电脑抓包"></a>电脑抓包</h2><ol><li><p>打开Charles，默认是开启抓包代理的，可以看到电脑http请求的内容,你也可以将电脑的抓包代理给关掉，在Proxy&gt;enable MacOs proxy 勾选去掉<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037940.png" alt></p></li><li><p>设置https证书代理抓包，<br>安装证书：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038586.png" alt><br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037648.png" alt><br>打开百度<a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> 测试，发现全是乱码：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038645.png" alt><br>鼠标点击右键添加Enable SLL Proxy,从新刷新页面，Google Chrome 默认把这个当成不安全证书了，使用FireFox浏览器可以添加例外强制打开：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038204.png" alt><br>可以看到Charles已经将https的内容通过Charles 证书加代理的方式能够看到明文请求信息了。<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038795.png" alt></p></li></ol><h1 id="手机抓包"><a href="#手机抓包" class="headerlink" title="手机抓包"></a>手机抓包</h1><ol><li><p>设置网络代理<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038117.png" alt><br>通过上面菜单找到Charles的代理服务器IP和端口<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038169.png" alt><br>保证你的手机和你的电脑是在同一个局域网内，打开手机的WLAN配置，ip为上图的30.117.52.174，端口为：12345<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038566.png" alt></p></li><li><p>如果想看到https的请求内容，还是得和电脑一样安装Charles证书，通过safari打开<a href="https://chls.pro/ssl" target="_blank" rel="noopener">https://chls.pro/ssl</a> 下载证书<br>手机–setting–&gt;General—&gt;Profiles &amp; Device Management —&gt;Charles Proxy CA…<br>将设置为信任。如图：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038687.png" alt></p></li><li><p>接着就可以查看到手机上的网络请求数据了，如果是https点击右键Enable SLL Proxy，在重新刷新下就可以看到了。</p></li></ol>]]></content>
+        <content type="html"><![CDATA[<p>在google应用市场中搜索Dark Reader，可以在网页中进行反色护眼<br>![](../images/护眼神器Dark Reader/getImage-20220825182956835.png)</p>]]></content>
       
       
       <categories>
@@ -756,35 +756,6 @@
     
     
     <entry>
-      <title>关于Unicode  UTF-8 、UTF-16字符集编码的理解</title>
-      <link href="/xue-xi/guan-yu-unicode-utf-8-utf-16-zi-fu-ji-bian-ma-de-li-jie/"/>
-      <url>/xue-xi/guan-yu-unicode-utf-8-utf-16-zi-fu-ji-bian-ma-de-li-jie/</url>
-      
-        <content type="html"><![CDATA[<h1 id="最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如："><a href="#最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如：" class="headerlink" title="最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如："></a>最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如：</h1><pre><code>中文 | utf-8二进制编码人   | 11100100 10111010 10111010 </code></pre><p>程序怎么知道通过这是一个通过3个字节编码的<code>人</code>字呢，于是查询了相关资料：</p><p>要解释这个问题，我们先来了解下ASCII码、GB2312、GBK、Unicode编码的关系和定义</p><h1 id="1-ASSCII码-见ASCII码对照表"><a href="#1-ASSCII码-见ASCII码对照表" class="headerlink" title="1. ASSCII码,见ASCII码对照表"></a>1. ASSCII码,见<a href="http://tool.oschina.net/commons?type=4" target="_blank" rel="noopener">ASCII码对照表</a></h1><p>是一种使用一个字节(8位二进制)表示字母、数字和字符的一种编码，如字母<code>A</code>表示为使用十进制值为<code>65</code>的表示，转换为二进制就是<code>1000001</code>,我们知道，在计算机内部，所有的信息最终都表示为一个二进制的字符串。每一个二进制位（bit）有0和1两种状态，因此八个二进制位就可以组合出256种状态，这被称为一个字节（byte）。也就是说，一个字节一共可以用来表示256种不同的状态，每一个状态对应一个符号，就是256个符号，从0000000到11111111。<br>上个世纪60年代，美国制定了一套字符编码，对英语字符与二进制位之间的关系，做了统一规定。这被称为ASCII码，一直沿用至今。<br>ASCII码一共规定了128个字符的编码，比如空格”SPACE”是32（二进制00100000），大写的字母A是65（二进制01000001）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的1位统一规定为0。</p><h1 id="2-GB2312-，全称是GB2312-80《信息交换用汉字编码字符集-基本集》，是中国标准化组织发布的，见GB2312编码规则"><a href="#2-GB2312-，全称是GB2312-80《信息交换用汉字编码字符集-基本集》，是中国标准化组织发布的，见GB2312编码规则" class="headerlink" title="2. GB2312 ，全称是GB2312-80《信息交换用汉字编码字符集 基本集》，是中国标准化组织发布的，见GB2312编码规则"></a>2. <code>GB2312</code> ，全称是GB2312-80《信息交换用汉字编码字符集 基本集》，是中国标准化组织发布的，见<a href="http://www.qqxiuzi.cn/zh/hanzi-gb2312-bianma.php" target="_blank" rel="noopener">GB2312编码规则</a></h1><p>   在计算机只有英文的时代，可能使用<code>ASCII</code>码就已经够了，但是随着计算机的普及和全球化，别国的语言肯定也是要计算机编码化的，所以就出现了<code>GB2312</code>编码规则。<code>GB2312</code>是使用固定两个字节来表示简体中文和英文、数字、中文符号、英文符号的一种编码规则。所以如果使用<code>GB2312</code>编码时，英文也是使用两个字节来编码的，这无疑是一种浪费</p><p>   而<code>GBK</code>则是在<code>GB23312</code>的基础上添加了繁体中文的扩展</p><h1 id="3-Unicode"><a href="#3-Unicode" class="headerlink" title="3. Unicode"></a>3. <code>Unicode</code></h1><p>正如上一节所说，世界上存在着多种编码方式，同一个二进制数字可以被解释成不同的符号。因此，要想打开一个文本文件，就必须知道它的编码方式，否则用错误的编码方式解读，就会出现乱码。为什么电子邮件常常出现乱码？就是因为发信人和收信人使用的编码方式不一样。<br>可以想象，如果有一种编码，将世界上所有的符号都纳入其中。每一个符号都给予一个独一无二的编码，那么乱码问题就会消失。这就是Unicode，就像它的名字都表示的，这是一种所有符号的编码。</p><p>再次强调一下,Unicode只是为全世界的每一个文字符号都定义了一个数值对照</p><h1 id="4-UTF-8"><a href="#4-UTF-8" class="headerlink" title="4. UTF-8"></a>4. <code>UTF-8</code></h1><p>为什么会有<code>UTF-8</code>编码，我们来看下<code>Unicode</code>编码的定义和存在的问题：</p><p>需要注意的是，Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。<br>比如，汉字”严”的unicode是十六进制数4E25，转换成二进制数足足有15位（100111000100101），也就是说这个符号的表示至少需要2个字节。表示其他更大的符号，可能需要3个字节或者4个字节，甚至更多。<br>那么第一个问题：怎么样使用二进制的表示来存储我们的编码呢，是和GBK一样使用固定的字节来存？如果这样的话就必须以最长的字节表示为单位，那么应为字母、数字都得使用3个字节或者4个字节来存储，这显然是不能够接受的，这对存储空间是极大的浪费。<br>根据第一个问题，我们是否能够使用变长的存储方式来存unicode编码呢，如果可以，怎么在读取的时候区分一个字符是使用一个字节表示（比如字母、数字），还是使用3个字节表示的中文呢？</p><p>所以最初期，由于存在Unicode存在这些问题的存在<br>它们造成的结果是：1）出现了Unicode的多种存储方式，也就是说有许多种不同的二进制格式，可以用来表示Unicode。<br>2）Unicode在很长一段时间内无法推广，直到互联网的出现。</p><p>我们来看下<code>UTF-8</code>是怎么实现unicode编码的。<br>UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。<br>UTF-8的编码规则很简单，只有二条：<br>1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。<br>2）对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。</p><pre><code>Unicode符号范围 | UTF-8编码方式(十六进制) | （二进制）--------------------+---------------------------------------------0000 0000 ~ 0000 007F | 0xxxxxxx0000 0080 ~ 0000 07FF | 110xxxxx 10xxxxxx0000 0800 ~ 0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx0001 0000 ~ 0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></pre><p>跟据上表，解读UTF-8编码非常简单。如果一个字节的第一位是0，则这个字节单独就是一个字符；如果第一位是1，则连续有多少个1，就表示当前字符占用多少个字节。<br>下面，还是以汉字”严”为例，演示如何实现UTF-8编码。<br>已知”漲”的unicode是<code>\u6f32</code>,6f32二进制为<code>110111100110010</code>，根据上表，可以发现4E25处在第三行的范围内（0000 0800 ~ 0000 FFFF），因此”漲”的UTF-8编码需要三个字节，即格式是<code>1110xxxx 10xxxxxx 10xxxxxx</code>。然后，从<code>漲</code>的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，”漲”的UTF-8编码是1110<code>0110</code> 101<code>11100</code> 10<code>110010</code>，转换成十六进制就是<code>e6bcb2</code>。<br>所以理论上讲UTF-8 可以表示2^31个字符，所以还有很多符号表情可以开发编入unicode中。</p><p><em>其他实现方式还包括UTF-16（字符用两个字节或四个字节表示）和UTF-32（字符用四个字节表示），不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8是Unicode的实现方式之一。</em></p><p>#5. 使用java打印出所有中文代码</p><pre><code>   下标         中文    unicode          unicode十进制值           unicode二进制      utf-8编码二进制            utf-8十六进制      长度字节数    0          葦     \u6f32                28466                110111100110010    11101000 10010001 10100110           e891a6          3    1          葧     \u6f33                28467                110111100110011    11101000 10010001 10100111           e891a7          3    2          葨     \u6f34                28468                110111100110100    11101000 10010001 10101000           e891a8          3    3          葩     \u6f35                28469                110111100110101    11101000 10010001 10101001           e891a9          3    4          葰     \u6f36                28470                110111100110110    11101000 10010001 10110000           e891b0          3    5          葱     \u6f37                28471                110111100110111    11101000 10010001 10110001           e891b1          3    6          葲     \u6f38                28472                110111100111000    11101000 10010001 10110010           e891b2          3    7          葳     \u6f39                28473                110111100111001    11101000 10010001 10110011           e891b3          3    8          葴     \u6f3a                28474                110111100111010    11101000 10010001 10110100           e891b4          3    9          葵     \u6f3b                28475                110111100111011    11101000 10010001 10110101           e891b5          3</code></pre><p>java代码如下：</p><pre><code>  @Test    public void writeAllChinese() {        int start = 0x6f32;        int index = 0;        System.out.printf(&quot;%5s %10s %10s %20s %20s %15s %20s %10s\n&quot;,&quot;下标&quot;,&quot;中文&quot; ,&quot;unicode&quot; ,&quot;unicode十进制值&quot; ,&quot;unicode二进制&quot; , &quot;utf-8编码二进制&quot;, &quot;utf-8十六进制&quot; ,&quot;长度字节数&quot;);        while (start &lt; 0x6f32 + 10) {            String unicode = &quot;\\u&quot; + Integer.toHexString(start);            char c = (char) Integer.parseInt((start+&quot;&quot;),16);            String chinese = String.valueOf(c);            byte[] bytes = chinese.getBytes();            System.out.printf(&quot;%5s %10s %10s %20s %30s %30s %15s %10s\n&quot;,index,chinese ,unicode ,start ,Integer.toBinaryString(start) , getBinaryString(bytes), Integer.toHexString(Integer.valueOf(getBinaryString(bytes).replace(&quot; &quot;,&quot;&quot;),2)) ,bytes.length);            start++;            index++;        }    }    public static String getBinaryString(byte bytes[]) {        String s = &quot;&quot;;        for(byte b : bytes) {            /**             * 由于java 虚拟机为了方便整数的加减，使用了补码(反码+1)来表示,方便数值的符号直接参与二进制的加减，这样省去了很多计算步骤             * 所以在java中使用String#getBytes()返回的字节数值是反码的表示方法；             * 又由于Int 在java中表示是4个字节32位的，在控制台进行输出的时候，jvm把11001111之前进行了补补全然后再取补码，等到的就是11111111111111111111111110111110             * 所以需要在使用 与 运算将取 反码  0xff = 11111111             */            s = s + Integer.toBinaryString(b &amp; 0xff) +  &quot; &quot;;            //s = s + Integer.toBinaryString(b) +  &quot; &quot;;        }        return s;    }</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 学习 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 学习 </tag>
-            
-            <tag> Unicode </tag>
-            
-            <tag> 字符集 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>HTTP及HTTPS的理解</title>
       <link href="/xue-xi/http-ji-https-de-li-jie/"/>
       <url>/xue-xi/http-ji-https-de-li-jie/</url>
@@ -833,6 +804,35 @@
             <tag> 学习 </tag>
             
             <tag> Dubbo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于Unicode  UTF-8 、UTF-16字符集编码的理解</title>
+      <link href="/xue-xi/guan-yu-unicode-utf-8-utf-16-zi-fu-ji-bian-ma-de-li-jie/"/>
+      <url>/xue-xi/guan-yu-unicode-utf-8-utf-16-zi-fu-ji-bian-ma-de-li-jie/</url>
+      
+        <content type="html"><![CDATA[<h1 id="最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如："><a href="#最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如：" class="headerlink" title="最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如："></a>最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如：</h1><pre><code>中文 | utf-8二进制编码人   | 11100100 10111010 10111010 </code></pre><p>程序怎么知道通过这是一个通过3个字节编码的<code>人</code>字呢，于是查询了相关资料：</p><p>要解释这个问题，我们先来了解下ASCII码、GB2312、GBK、Unicode编码的关系和定义</p><h1 id="1-ASSCII码-见ASCII码对照表"><a href="#1-ASSCII码-见ASCII码对照表" class="headerlink" title="1. ASSCII码,见ASCII码对照表"></a>1. ASSCII码,见<a href="http://tool.oschina.net/commons?type=4" target="_blank" rel="noopener">ASCII码对照表</a></h1><p>是一种使用一个字节(8位二进制)表示字母、数字和字符的一种编码，如字母<code>A</code>表示为使用十进制值为<code>65</code>的表示，转换为二进制就是<code>1000001</code>,我们知道，在计算机内部，所有的信息最终都表示为一个二进制的字符串。每一个二进制位（bit）有0和1两种状态，因此八个二进制位就可以组合出256种状态，这被称为一个字节（byte）。也就是说，一个字节一共可以用来表示256种不同的状态，每一个状态对应一个符号，就是256个符号，从0000000到11111111。<br>上个世纪60年代，美国制定了一套字符编码，对英语字符与二进制位之间的关系，做了统一规定。这被称为ASCII码，一直沿用至今。<br>ASCII码一共规定了128个字符的编码，比如空格”SPACE”是32（二进制00100000），大写的字母A是65（二进制01000001）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的1位统一规定为0。</p><h1 id="2-GB2312-，全称是GB2312-80《信息交换用汉字编码字符集-基本集》，是中国标准化组织发布的，见GB2312编码规则"><a href="#2-GB2312-，全称是GB2312-80《信息交换用汉字编码字符集-基本集》，是中国标准化组织发布的，见GB2312编码规则" class="headerlink" title="2. GB2312 ，全称是GB2312-80《信息交换用汉字编码字符集 基本集》，是中国标准化组织发布的，见GB2312编码规则"></a>2. <code>GB2312</code> ，全称是GB2312-80《信息交换用汉字编码字符集 基本集》，是中国标准化组织发布的，见<a href="http://www.qqxiuzi.cn/zh/hanzi-gb2312-bianma.php" target="_blank" rel="noopener">GB2312编码规则</a></h1><p>   在计算机只有英文的时代，可能使用<code>ASCII</code>码就已经够了，但是随着计算机的普及和全球化，别国的语言肯定也是要计算机编码化的，所以就出现了<code>GB2312</code>编码规则。<code>GB2312</code>是使用固定两个字节来表示简体中文和英文、数字、中文符号、英文符号的一种编码规则。所以如果使用<code>GB2312</code>编码时，英文也是使用两个字节来编码的，这无疑是一种浪费</p><p>   而<code>GBK</code>则是在<code>GB23312</code>的基础上添加了繁体中文的扩展</p><h1 id="3-Unicode"><a href="#3-Unicode" class="headerlink" title="3. Unicode"></a>3. <code>Unicode</code></h1><p>正如上一节所说，世界上存在着多种编码方式，同一个二进制数字可以被解释成不同的符号。因此，要想打开一个文本文件，就必须知道它的编码方式，否则用错误的编码方式解读，就会出现乱码。为什么电子邮件常常出现乱码？就是因为发信人和收信人使用的编码方式不一样。<br>可以想象，如果有一种编码，将世界上所有的符号都纳入其中。每一个符号都给予一个独一无二的编码，那么乱码问题就会消失。这就是Unicode，就像它的名字都表示的，这是一种所有符号的编码。</p><p>再次强调一下,Unicode只是为全世界的每一个文字符号都定义了一个数值对照</p><h1 id="4-UTF-8"><a href="#4-UTF-8" class="headerlink" title="4. UTF-8"></a>4. <code>UTF-8</code></h1><p>为什么会有<code>UTF-8</code>编码，我们来看下<code>Unicode</code>编码的定义和存在的问题：</p><p>需要注意的是，Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。<br>比如，汉字”严”的unicode是十六进制数4E25，转换成二进制数足足有15位（100111000100101），也就是说这个符号的表示至少需要2个字节。表示其他更大的符号，可能需要3个字节或者4个字节，甚至更多。<br>那么第一个问题：怎么样使用二进制的表示来存储我们的编码呢，是和GBK一样使用固定的字节来存？如果这样的话就必须以最长的字节表示为单位，那么应为字母、数字都得使用3个字节或者4个字节来存储，这显然是不能够接受的，这对存储空间是极大的浪费。<br>根据第一个问题，我们是否能够使用变长的存储方式来存unicode编码呢，如果可以，怎么在读取的时候区分一个字符是使用一个字节表示（比如字母、数字），还是使用3个字节表示的中文呢？</p><p>所以最初期，由于存在Unicode存在这些问题的存在<br>它们造成的结果是：1）出现了Unicode的多种存储方式，也就是说有许多种不同的二进制格式，可以用来表示Unicode。<br>2）Unicode在很长一段时间内无法推广，直到互联网的出现。</p><p>我们来看下<code>UTF-8</code>是怎么实现unicode编码的。<br>UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。<br>UTF-8的编码规则很简单，只有二条：<br>1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。<br>2）对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。</p><pre><code>Unicode符号范围 | UTF-8编码方式(十六进制) | （二进制）--------------------+---------------------------------------------0000 0000 ~ 0000 007F | 0xxxxxxx0000 0080 ~ 0000 07FF | 110xxxxx 10xxxxxx0000 0800 ~ 0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx0001 0000 ~ 0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></pre><p>跟据上表，解读UTF-8编码非常简单。如果一个字节的第一位是0，则这个字节单独就是一个字符；如果第一位是1，则连续有多少个1，就表示当前字符占用多少个字节。<br>下面，还是以汉字”严”为例，演示如何实现UTF-8编码。<br>已知”漲”的unicode是<code>\u6f32</code>,6f32二进制为<code>110111100110010</code>，根据上表，可以发现4E25处在第三行的范围内（0000 0800 ~ 0000 FFFF），因此”漲”的UTF-8编码需要三个字节，即格式是<code>1110xxxx 10xxxxxx 10xxxxxx</code>。然后，从<code>漲</code>的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，”漲”的UTF-8编码是1110<code>0110</code> 101<code>11100</code> 10<code>110010</code>，转换成十六进制就是<code>e6bcb2</code>。<br>所以理论上讲UTF-8 可以表示2^31个字符，所以还有很多符号表情可以开发编入unicode中。</p><p><em>其他实现方式还包括UTF-16（字符用两个字节或四个字节表示）和UTF-32（字符用四个字节表示），不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8是Unicode的实现方式之一。</em></p><p>#5. 使用java打印出所有中文代码</p><pre><code>   下标         中文    unicode          unicode十进制值           unicode二进制      utf-8编码二进制            utf-8十六进制      长度字节数    0          葦     \u6f32                28466                110111100110010    11101000 10010001 10100110           e891a6          3    1          葧     \u6f33                28467                110111100110011    11101000 10010001 10100111           e891a7          3    2          葨     \u6f34                28468                110111100110100    11101000 10010001 10101000           e891a8          3    3          葩     \u6f35                28469                110111100110101    11101000 10010001 10101001           e891a9          3    4          葰     \u6f36                28470                110111100110110    11101000 10010001 10110000           e891b0          3    5          葱     \u6f37                28471                110111100110111    11101000 10010001 10110001           e891b1          3    6          葲     \u6f38                28472                110111100111000    11101000 10010001 10110010           e891b2          3    7          葳     \u6f39                28473                110111100111001    11101000 10010001 10110011           e891b3          3    8          葴     \u6f3a                28474                110111100111010    11101000 10010001 10110100           e891b4          3    9          葵     \u6f3b                28475                110111100111011    11101000 10010001 10110101           e891b5          3</code></pre><p>java代码如下：</p><pre><code>  @Test    public void writeAllChinese() {        int start = 0x6f32;        int index = 0;        System.out.printf(&quot;%5s %10s %10s %20s %20s %15s %20s %10s\n&quot;,&quot;下标&quot;,&quot;中文&quot; ,&quot;unicode&quot; ,&quot;unicode十进制值&quot; ,&quot;unicode二进制&quot; , &quot;utf-8编码二进制&quot;, &quot;utf-8十六进制&quot; ,&quot;长度字节数&quot;);        while (start &lt; 0x6f32 + 10) {            String unicode = &quot;\\u&quot; + Integer.toHexString(start);            char c = (char) Integer.parseInt((start+&quot;&quot;),16);            String chinese = String.valueOf(c);            byte[] bytes = chinese.getBytes();            System.out.printf(&quot;%5s %10s %10s %20s %30s %30s %15s %10s\n&quot;,index,chinese ,unicode ,start ,Integer.toBinaryString(start) , getBinaryString(bytes), Integer.toHexString(Integer.valueOf(getBinaryString(bytes).replace(&quot; &quot;,&quot;&quot;),2)) ,bytes.length);            start++;            index++;        }    }    public static String getBinaryString(byte bytes[]) {        String s = &quot;&quot;;        for(byte b : bytes) {            /**             * 由于java 虚拟机为了方便整数的加减，使用了补码(反码+1)来表示,方便数值的符号直接参与二进制的加减，这样省去了很多计算步骤             * 所以在java中使用String#getBytes()返回的字节数值是反码的表示方法；             * 又由于Int 在java中表示是4个字节32位的，在控制台进行输出的时候，jvm把11001111之前进行了补补全然后再取补码，等到的就是11111111111111111111111110111110             * 所以需要在使用 与 运算将取 反码  0xff = 11111111             */            s = s + Integer.toBinaryString(b &amp; 0xff) +  &quot; &quot;;            //s = s + Integer.toBinaryString(b) +  &quot; &quot;;        }        return s;    }</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> Unicode </tag>
+            
+            <tag> 字符集 </tag>
             
         </tags>
       
