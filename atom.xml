@@ -123,60 +123,6 @@
   </entry>
   
   <entry>
-    <title>Idea maven 插件安装</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.578Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;默认idea 是已经安装好了maven插件的，在File&amp;gt;settings&amp;gt;能搜索到maven的相关配置&lt;br&gt;但是有时候它会莫名其妙的不见了或消失&lt;br&gt;检查Plugins是否启用了maven&lt;br&gt;![](../images/Idea maven
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java 8常用转换</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.564Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;1-List转Map&quot;&gt;&lt;a href=&quot;#1-List转Map&quot; class=&quot;headerlink&quot; title=&quot;1. List转Map&quot;&gt;&lt;/a&gt;1. List转Map&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;/**
- * List -&amp;gt; Map
- *
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Centos 下Redis 安装以及集群搭建</title>
     <link href="https://okeeper.com/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/"/>
     <id>https://okeeper.com/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/</id>
@@ -206,11 +152,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>Java开发环境准备</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/</id>
+    <title>Idea maven 插件安装</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.563Z</updated>
+    <updated>2022-08-26T11:58:13.578Z</updated>
     
     <summary type="html">
     
@@ -218,7 +164,7 @@ tar -zxvf
       
         
         
-          &lt;p&gt;JDK下载地址：&lt;br&gt;&lt;a href=&quot;https://github.com/frekele/oracle-java/releases&quot; target=&quot;_blank&quot;
+          &lt;p&gt;默认idea 是已经安装好了maven插件的，在File&amp;gt;settings&amp;gt;能搜索到maven的相关配置&lt;br&gt;但是有时候它会莫名其妙的不见了或消失&lt;br&gt;检查Plugins是否启用了maven&lt;br&gt;![](../images/Idea maven
         
       
     
@@ -258,11 +204,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>Selenium</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/selenium/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/selenium/</id>
+    <title>Java 8常用转换</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.580Z</updated>
+    <updated>2022-08-26T11:58:13.564Z</updated>
     
     <summary type="html">
     
@@ -270,7 +216,9 @@ tar -zxvf
       
         
         
-          &lt;h1 id=&quot;Selenium安装环境搭建&quot;&gt;&lt;a href=&quot;#Selenium安装环境搭建&quot; class=&quot;headerlink&quot; title=&quot;Selenium安装环境搭建&quot;&gt;&lt;/a&gt;Selenium安装环境搭建&lt;/h1&gt;&lt;p&gt;&lt;a
+          &lt;h1 id=&quot;1-List转Map&quot;&gt;&lt;a href=&quot;#1-List转Map&quot; class=&quot;headerlink&quot; title=&quot;1. List转Map&quot;&gt;&lt;/a&gt;1. List转Map&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;/**
+ * List -&amp;gt; Map
+ *
         
       
     
@@ -314,11 +262,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>iterm2 rz sz 安装</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/</id>
+    <title>Java开发环境准备</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.571Z</updated>
+    <updated>2022-08-26T11:58:13.563Z</updated>
     
     <summary type="html">
     
@@ -326,7 +274,7 @@ tar -zxvf
       
         
         
-          &lt;p&gt;一、本地rz sz安装&lt;br&gt;&lt;a href=&quot;https://github.com/aikuyun/iterm2-zmodem&quot; target=&quot;_blank&quot;
+          &lt;p&gt;JDK下载地址：&lt;br&gt;&lt;a href=&quot;https://github.com/frekele/oracle-java/releases&quot; target=&quot;_blank&quot;
         
       
     
@@ -340,11 +288,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>docker ES安装</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/</id>
+    <title>Selenium</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/selenium/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/selenium/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.583Z</updated>
+    <updated>2022-08-26T11:58:13.580Z</updated>
     
     <summary type="html">
     
@@ -352,85 +300,7 @@ tar -zxvf
       
         
         
-          &lt;p&gt;参考docker安装Elasticsearch官方文档&lt;br&gt;&lt;a href=&quot;https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html&quot; target=&quot;_blank&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Jmeter进行Dubbo接口压测</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.575Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;软件准备&quot;&gt;&lt;a href=&quot;#软件准备&quot; class=&quot;headerlink&quot; title=&quot;软件准备&quot;&gt;&lt;/a&gt;软件准备&lt;/h1&gt;&lt;h2 id=&quot;一、下载Jmeter3-1&quot;&gt;&lt;a href=&quot;#一、下载Jmeter3-1&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>idea 突然闪退，内存溢出</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.579Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin&lt;br&gt;找到idea.exe.vmoptions配置修改Xmx
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>maven 包冲突 解决</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.567Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;pre&gt;&lt;code&gt;mvn dependency:tree -Dverbose
+          &lt;h1 id=&quot;Selenium安装环境搭建&quot;&gt;&lt;a href=&quot;#Selenium安装环境搭建&quot; class=&quot;headerlink&quot; title=&quot;Selenium安装环境搭建&quot;&gt;&lt;/a&gt;Selenium安装环境搭建&lt;/h1&gt;&lt;p&gt;&lt;a
         
       
     
@@ -470,11 +340,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>护眼神器Dark Reader</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/</id>
+    <title>docker ES安装</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.577Z</updated>
+    <updated>2022-08-26T11:58:13.583Z</updated>
     
     <summary type="html">
     
@@ -482,7 +352,7 @@ tar -zxvf
       
         
         
-          &lt;p&gt;在google应用市场中搜索Dark Reader，可以在网页中进行反色护眼&lt;br&gt;![](../images/护眼神器Dark
+          &lt;p&gt;参考docker安装Elasticsearch官方文档&lt;br&gt;&lt;a href=&quot;https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html&quot; target=&quot;_blank&quot;
         
       
     
@@ -496,11 +366,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>靠谱的maven仓库地址</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/</id>
+    <title>idea 突然闪退，内存溢出</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.582Z</updated>
+    <updated>2022-08-26T11:58:13.579Z</updated>
     
     <summary type="html">
     
@@ -508,12 +378,111 @@ tar -zxvf
       
         
         
-          &lt;pre&gt;&lt;code&gt;
-#阿里云maven
-&amp;lt;mirror&amp;gt;
-    &amp;lt;id&amp;gt;alimaven&amp;lt;/id&amp;gt;
-    &amp;lt;name&amp;gt;aliyun maven&amp;lt;/name&amp;gt;
-   
+          &lt;p&gt;解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin&lt;br&gt;找到idea.exe.vmoptions配置修改Xmx
+        
+      
+    
+    </summary>
+    
+      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iterm2 rz sz 安装</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2022-08-26T11:58:13.571Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;一、本地rz sz安装&lt;br&gt;&lt;a href=&quot;https://github.com/aikuyun/iterm2-zmodem&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Jmeter进行Dubbo接口压测</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2022-08-26T11:58:13.575Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;软件准备&quot;&gt;&lt;a href=&quot;#软件准备&quot; class=&quot;headerlink&quot; title=&quot;软件准备&quot;&gt;&lt;/a&gt;软件准备&lt;/h1&gt;&lt;h2 id=&quot;一、下载Jmeter3-1&quot;&gt;&lt;a href=&quot;#一、下载Jmeter3-1&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>maven 包冲突 解决</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2022-08-26T11:58:13.567Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;pre&gt;&lt;code&gt;mvn dependency:tree -Dverbose
+        
+      
+    
+    </summary>
+    
+      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>护眼神器Dark Reader</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2022-08-26T11:58:13.577Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在google应用市场中搜索Dark Reader，可以在网页中进行反色护眼&lt;br&gt;![](../images/护眼神器Dark
         
       
     
@@ -543,6 +512,32 @@ tar -zxvf
 &lt;pre&gt;&lt;code&gt;&amp;lt;distributionManagement&amp;gt;
     &amp;lt;repository&amp;gt;
      
+        
+      
+    
+    </summary>
+    
+      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>磁盘空间满处理</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2022-08-26T11:58:13.569Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;查看当前目录磁盘使用情况&quot;&gt;&lt;a href=&quot;#查看当前目录磁盘使用情况&quot; class=&quot;headerlink&quot; title=&quot;查看当前目录磁盘使用情况&quot;&gt;&lt;/a&gt;查看当前目录磁盘使用情况&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;df
         
       
     

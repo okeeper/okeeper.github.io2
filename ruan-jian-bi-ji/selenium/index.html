@@ -289,7 +289,7 @@ sudo npm install --unsafe-perm -g polymer-cliadb找">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/24.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -903,8 +903,8 @@ adb devices</code></pre><h1 id="元素定位"><a href="#元素定位" class="hea
 <script>
     new Valine({
         el: '#vcomments',
-        appId: 'STBldAQJtVSJkhjqcYgjtmPL-gzGzoHsz',
-        appKey: 'FnIMnsXhTkXVXQuzykLukEgQ',
+        appId: 'GjiqQwhojXYm2W20KjDDlk19-9Nh9j0Va',
+        appKey: 'w8fOuluBKT5D5LiCnhlLRRpY',
         notify: 'false' === 'true',
         verify: 'false' === 'true',
         visitor: 'false' === 'true',
@@ -926,19 +926,21 @@ adb devices</code></pre><h1 id="元素定位"><a href="#元素定位" class="hea
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/">
+                <a href="/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java bean的Getter Setter 自动编译生成工具Lombok">
+                        <img src="http://api.btstu.cn/sjbz/?lx=suiji" class="responsive-img" alt="Java开发环境准备">
                         
-                        <span class="card-title">Java bean的Getter Setter 自动编译生成工具Lombok</span>
+                        <span class="card-title">Java开发环境准备</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            背景  我们在开发过程中，通常都会定义大量的JavaBean，然后通过IDE去生成其属性的构造器、getter、setter、equals、hashcode、toString方法，当要对某个属性进行改变时，比如命名、类型等，都需要重新去生成
+                            JDK下载地址：https://github.com/frekele/oracle-java/releases
+idea激活：https://juejin.im/post/5df8a5a5e51d4557f0460990
+maven环境变量
                         
                     </div>
                     <div class="publish-info">
@@ -975,25 +977,22 @@ adb devices</code></pre><h1 id="元素定位"><a href="#元素定位" class="hea
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/">
+                <a href="/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Redis批量删除命令">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="git重命名的坑">
                         
-                        <span class="card-title">Redis批量删除命令</span>
+                        <span class="card-title">git重命名的坑</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-Redis中有指定多个key批量删除的命令,却没有指定模糊key批量删除命令
+                            如果使用git命令进行仅涉及大小写的重命名,git 默认是把你的动作忽略的，所以当你删掉本地代码，重新pull代码时，你会发现文件还是重命名之前的,神奇吧，记下这个坑，等着你们踩着坑来这看吧，坏笑/
+解决方法如下：
 
-批量删除多个key
-del key1 key2通过通配符”*”模糊匹配删除的lua脚本命令
-# 模糊删除
-eval &quot;local keys = re
+设置git库为大小写敏
                         
                     </div>
                     <div class="publish-info">
@@ -1192,26 +1191,6 @@ eval &quot;local keys = re
 
 <div class="progress-bar"></div>
 
-<!-- 不蒜子计数初始值纠正 -->
-<script>
-    $(document).ready(function () {
-
-        var int = setInterval(fixCount, 50);
-        var pvcountOffset = 80000;
-        var uvcountOffset = 20000;
-
-        function fixCount() {
-            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
-                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
-                clearInterval(int);
-            }
-            if ($("#busuanzi_container_site_pv").css("display") != "none") {
-                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
-                clearInterval(int);
-            }
-        }
-    });
-</script>
 
 <script language=javascript>
     function siteTime() {
@@ -1301,7 +1280,7 @@ $(function () {
     
 
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
 
     <!-- 雪花特效 -->

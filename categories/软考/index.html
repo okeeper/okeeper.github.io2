@@ -352,29 +352,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                 </a>
                 
                 
-                <a href="/categories/学习/" title="学习: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FEF9E7;">学习
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/操作系统原理/" title="操作系统原理: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8F9F9;">操作系统原理
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/categories/后端-架构/" title="后端&架构: 3">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #82E0AA;">后端&架构
+                            style="background-color: #FEF9E7;">后端&架构
                         <span class="tag-length">3</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/学习/" title="学习: 4">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F8F9F9;">学习
+                        <span class="tag-length">4</span>
                     </span>
                 </a>
                 
@@ -382,8 +373,17 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                 <a href="/categories/软件笔记/" title="软件笔记: 19">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D7BDE2;">软件笔记
+                            style="background-color: #82E0AA;">软件笔记
                         <span class="tag-length">19</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/操作系统原理/" title="操作系统原理: 4">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #D7BDE2;">操作系统原理
+                        <span class="tag-length">4</span>
                     </span>
                 </a>
                 
@@ -413,7 +413,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="企业信息化和政务信息化">
+                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="企业信息化和政务信息化">
                             
                             <span class="card-title">企业信息化和政务信息化</span>
                         </div>
@@ -460,7 +460,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="软件开发方法">
+                            <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="软件开发方法">
                             
                             <span class="card-title">软件开发方法</span>
                         </div>
@@ -575,26 +575,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
 
 <div class="progress-bar"></div>
 
-<!-- 不蒜子计数初始值纠正 -->
-<script>
-    $(document).ready(function () {
-
-        var int = setInterval(fixCount, 50);
-        var pvcountOffset = 80000;
-        var uvcountOffset = 20000;
-
-        function fixCount() {
-            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
-                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
-                clearInterval(int);
-            }
-            if ($("#busuanzi_container_site_pv").css("display") != "none") {
-                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
-                clearInterval(int);
-            }
-        }
-    });
-</script>
 
 <script language=javascript>
     function siteTime() {
@@ -684,7 +664,7 @@ $(function () {
     
 
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
 
     <!-- 雪花特效 -->

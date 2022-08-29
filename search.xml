@@ -104,56 +104,6 @@
     
     
     <entry>
-      <title>Idea maven 插件安装</title>
-      <link href="/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
-      <url>/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</url>
-      
-        <content type="html"><![CDATA[<p>默认idea 是已经安装好了maven插件的，在File&gt;settings&gt;能搜索到maven的相关配置<br>但是有时候它会莫名其妙的不见了或消失<br>检查Plugins是否启用了maven<br>![](../images/Idea maven 插件安装/getImage-20220825183122891.png)</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Java 8常用转换</title>
-      <link href="/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
-      <url>/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</url>
-      
-        <content type="html"><![CDATA[<h1 id="1-List转Map"><a href="#1-List转Map" class="headerlink" title="1. List转Map"></a>1. List转Map</h1><pre><code>/** * List -&gt; Map * 需要注意的是： * toMap 如果集合对象有重复的key，会报错Duplicate key .... *  apple1,apple12的id都为1。 *  可以用 (k1,k2)-&gt;k1 来设置，如果有重复的key,则保留key1,舍弃key2 */Map&lt;Integer, Apple&gt; appleMap = appleList.stream().collect(Collectors.toMap(Apple::getId, a -&gt; a,(k1,k2)-&gt;k1));</code></pre><h1 id="List分组成Map"><a href="#List分组成Map" class="headerlink" title="List分组成Map"></a>List分组成Map</h1><pre><code>//List 以ID分组 Map&lt;Integer,List&lt;Apple&gt;&gt;Map&lt;Integer, List&lt;Apple&gt;&gt; groupBy = appleList.stream().collect(Collectors.groupingBy(Apple::getId));System.err.println(&quot;groupBy:&quot;+groupBy);{1=[Apple{id=1, name=&#39;苹果1&#39;, money=3.25, num=10}, Apple{id=1, name=&#39;苹果2&#39;, money=1.35, num=20}], 2=[Apple{id=2, name=&#39;香蕉&#39;, money=2.89, num=30}], 3=[Apple{id=3, name=&#39;荔枝&#39;, money=9.99, num=40}]}</code></pre><h1 id="3-Map转List"><a href="#3-Map转List" class="headerlink" title="3. Map转List"></a>3. Map转List</h1><pre><code>List&lt;Long&gt; skuIdList = order.getItemList().stream().map(OrderItemDTO::getSkuId).collect(Collectors.toList());</code></pre><h1 id="4-统计求和"><a href="#4-统计求和" class="headerlink" title="4. 统计求和"></a>4. 统计求和</h1><pre><code>//计算 总金额BigDecimal totalMoney = appleList.stream().map(Apple::getMoney).reduce(BigDecimal.ZERO, BigDecimal::add);System.err.println(&quot;totalMoney:&quot;+totalMoney);  //totalMoney:17.48</code></pre><h1 id="5-最大值、最小值"><a href="#5-最大值、最小值" class="headerlink" title="5. 最大值、最小值"></a>5. 最大值、最小值</h1><pre><code>Optional&lt;Dish&gt; maxDish = Dish.menu.stream().      collect(Collectors.maxBy(Comparator.comparing(Dish::getCalories)));maxDish.ifPresent(System.out::println);Optional&lt;Dish&gt; minDish = Dish.menu.stream().      collect(Collectors.minBy(Comparator.comparing(Dish::getCalories)));</code></pre><h1 id="6-过滤Map"><a href="#6-过滤Map" class="headerlink" title="6. 过滤Map"></a>6. 过滤Map</h1><pre><code>//Map -&gt; Stream -&gt; Filter -&gt; MAP    Map&lt;Integer, String&gt; collect = map.entrySet().stream()        .filter(x -&gt; x.getKey() == 2)        .collect(Collectors.toMap(x -&gt; x.getKey(), x -&gt; x.getValue()));</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Centos 下Redis 安装以及集群搭建</title>
       <link href="/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/"/>
       <url>/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/</url>
@@ -179,11 +129,11 @@
     
     
     <entry>
-      <title>Java开发环境准备</title>
-      <link href="/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/"/>
-      <url>/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/</url>
+      <title>Idea maven 插件安装</title>
+      <link href="/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
+      <url>/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</url>
       
-        <content type="html"><![CDATA[<p>JDK下载地址：<br><a href="https://github.com/frekele/oracle-java/releases" target="_blank" rel="noopener">https://github.com/frekele/oracle-java/releases</a></p><p>idea激活：<br><a href="https://juejin.im/post/5df8a5a5e51d4557f0460990" target="_blank" rel="noopener">https://juejin.im/post/5df8a5a5e51d4557f0460990</a></p><p>maven环境变量配置：<br><a href="https://www.cnblogs.com/tanjiyuan/p/11010998.html" target="_blank" rel="noopener">https://www.cnblogs.com/tanjiyuan/p/11010998.html</a></p>]]></content>
+        <content type="html"><![CDATA[<p>默认idea 是已经安装好了maven插件的，在File&gt;settings&gt;能搜索到maven的相关配置<br>但是有时候它会莫名其妙的不见了或消失<br>检查Plugins是否启用了maven<br>![](../images/Idea maven 插件安装/getImage-20220825183122891.png)</p>]]></content>
       
       
       <categories>
@@ -229,11 +179,11 @@
     
     
     <entry>
-      <title>Selenium</title>
-      <link href="/ruan-jian-bi-ji/selenium/"/>
-      <url>/ruan-jian-bi-ji/selenium/</url>
+      <title>Java 8常用转换</title>
+      <link href="/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
+      <url>/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</url>
       
-        <content type="html"><![CDATA[<h1 id="Selenium安装环境搭建"><a href="#Selenium安装环境搭建" class="headerlink" title="Selenium安装环境搭建"></a>Selenium安装环境搭建</h1><p><a href="https://www.zybuluo.com/mwumli/note/222253" target="_blank" rel="noopener">https://www.zybuluo.com/mwumli/note/222253</a></p><h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>报-13权限问题时</p><pre><code>sudo npm install --unsafe-perm -g polymer-cli</code></pre><p>adb找不到设备时</p><pre><code>adb kill-serveradb start-serveradb devices</code></pre><h1 id="元素定位"><a href="#元素定位" class="headerlink" title="元素定位"></a>元素定位</h1><p>find_element_by_android_uiautomator<br><a href="https://blog.csdn.net/weixin_30824277/article/details/95229071" target="_blank" rel="noopener">https://blog.csdn.net/weixin_30824277/article/details/95229071</a></p><h1 id="三种等待方式详解"><a href="#三种等待方式详解" class="headerlink" title="三种等待方式详解"></a>三种等待方式详解</h1><p><a href="http://blog.csdn.net/ping523/article/details/53419622" target="_blank" rel="noopener">http://blog.csdn.net/ping523/article/details/53419622</a></p><p><a href="http://www.cnblogs.com/BigFishFly/p/6380024.html" target="_blank" rel="noopener">http://www.cnblogs.com/BigFishFly/p/6380024.html</a></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="1-List转Map"><a href="#1-List转Map" class="headerlink" title="1. List转Map"></a>1. List转Map</h1><pre><code>/** * List -&gt; Map * 需要注意的是： * toMap 如果集合对象有重复的key，会报错Duplicate key .... *  apple1,apple12的id都为1。 *  可以用 (k1,k2)-&gt;k1 来设置，如果有重复的key,则保留key1,舍弃key2 */Map&lt;Integer, Apple&gt; appleMap = appleList.stream().collect(Collectors.toMap(Apple::getId, a -&gt; a,(k1,k2)-&gt;k1));</code></pre><h1 id="List分组成Map"><a href="#List分组成Map" class="headerlink" title="List分组成Map"></a>List分组成Map</h1><pre><code>//List 以ID分组 Map&lt;Integer,List&lt;Apple&gt;&gt;Map&lt;Integer, List&lt;Apple&gt;&gt; groupBy = appleList.stream().collect(Collectors.groupingBy(Apple::getId));System.err.println(&quot;groupBy:&quot;+groupBy);{1=[Apple{id=1, name=&#39;苹果1&#39;, money=3.25, num=10}, Apple{id=1, name=&#39;苹果2&#39;, money=1.35, num=20}], 2=[Apple{id=2, name=&#39;香蕉&#39;, money=2.89, num=30}], 3=[Apple{id=3, name=&#39;荔枝&#39;, money=9.99, num=40}]}</code></pre><h1 id="3-Map转List"><a href="#3-Map转List" class="headerlink" title="3. Map转List"></a>3. Map转List</h1><pre><code>List&lt;Long&gt; skuIdList = order.getItemList().stream().map(OrderItemDTO::getSkuId).collect(Collectors.toList());</code></pre><h1 id="4-统计求和"><a href="#4-统计求和" class="headerlink" title="4. 统计求和"></a>4. 统计求和</h1><pre><code>//计算 总金额BigDecimal totalMoney = appleList.stream().map(Apple::getMoney).reduce(BigDecimal.ZERO, BigDecimal::add);System.err.println(&quot;totalMoney:&quot;+totalMoney);  //totalMoney:17.48</code></pre><h1 id="5-最大值、最小值"><a href="#5-最大值、最小值" class="headerlink" title="5. 最大值、最小值"></a>5. 最大值、最小值</h1><pre><code>Optional&lt;Dish&gt; maxDish = Dish.menu.stream().      collect(Collectors.maxBy(Comparator.comparing(Dish::getCalories)));maxDish.ifPresent(System.out::println);Optional&lt;Dish&gt; minDish = Dish.menu.stream().      collect(Collectors.minBy(Comparator.comparing(Dish::getCalories)));</code></pre><h1 id="6-过滤Map"><a href="#6-过滤Map" class="headerlink" title="6. 过滤Map"></a>6. 过滤Map</h1><pre><code>//Map -&gt; Stream -&gt; Filter -&gt; MAP    Map&lt;Integer, String&gt; collect = map.entrySet().stream()        .filter(x -&gt; x.getKey() == 2)        .collect(Collectors.toMap(x -&gt; x.getKey(), x -&gt; x.getValue()));</code></pre>]]></content>
       
       
       <categories>
@@ -279,36 +229,11 @@
     
     
     <entry>
-      <title>iterm2 rz sz 安装</title>
-      <link href="/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/"/>
-      <url>/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/</url>
+      <title>Java开发环境准备</title>
+      <link href="/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/"/>
+      <url>/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/</url>
       
-        <content type="html"><![CDATA[<p>一、本地rz sz安装<br><a href="https://github.com/aikuyun/iterm2-zmodem" target="_blank" rel="noopener">https://github.com/aikuyun/iterm2-zmodem</a></p><p>二、服务器端rz sz安装<br>yum install lrzsz</p><p>rz：从本地上传文件至服务器<br>sz filename：从服务器下载文件至本地</p><p>三、iTrm2配置<br>参考这里：<a href="https://github.com/aikuyun/iterm2-zmodem" target="_blank" rel="noopener">https://github.com/aikuyun/iterm2-zmodem</a></p><p>二、使用#<br>2.1 sz 命令发送文件到本地#<br>sz filename<br>2.2 rz 命令本地上传文件到服务器#<br>rz</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>docker ES安装</title>
-      <link href="/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
-      <url>/ruan-jian-bi-ji/docker-es-an-zhuang/</url>
-      
-        <content type="html"><![CDATA[<p>参考docker安装Elasticsearch官方文档<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html</a></p><h1 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h1><pre><code>docker pull docker.elastic.co/kibana/kibana:7.16.0</code></pre><h1 id="docker-compose启动"><a href="#docker-compose启动" class="headerlink" title="docker-compose启动"></a>docker-compose启动</h1><h2 id="新建docker-compose-yml文件"><a href="#新建docker-compose-yml文件" class="headerlink" title="新建docker-compose.yml文件"></a>新建docker-compose.yml文件</h2><pre><code>version: &#39;2.2&#39;services:  es01:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es01    environment:      - node.name=es01      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es02,es03      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9200#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es01/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es01/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es01/logs:/usr/share/elasticsearch/logs#      - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9200:9200    networks:      - elastic  es02:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es02    environment:      - node.name=es02      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es01,es03      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9201#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es02/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es02/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es02/logs:/usr/share/elasticsearch/logs #     - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9201:9200    networks:      - elastic  es03:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es03    environment:      - node.name=es03      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es01,es02      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9202#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es03/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es03/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es03/logs:/usr/share/elasticsearch/logs#      - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9202:9200    networks:      - elastic  kib01:    image: docker.elastic.co/kibana/kibana:7.16.0    container_name: kib01    ports:      - 5601:5601    environment:      ELASTICSEARCH_URL: http://es01:9200      ELASTICSEARCH_HOSTS: &#39;[&quot;http://es01:9200&quot;,&quot;http://es02:9200&quot;,&quot;http://es03:9200&quot;]&#39;    networks:      - elastic  cerebro:    image: lmenezes/cerebro:latest    container_name: cerebro    ports:      - &quot;9000:9000&quot;    command:      - -Dhosts.0.host=http://es01:9200      - -Dhosts.1.host=http://es02:9200      - -Dhosts.2.host=http://es03:9200    networks:      - elasticvolumes:  data01:    driver: local  data02:    driver: local  data03:    driver: localnetworks:  elastic:    driver: bridge</code></pre><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><pre><code>docker-compose -f ./docker-compose.yml up d</code></pre><blockquote><p>有可能报错’failed to resolve host [es01] ‘<br>This sample docker-compose.yml file uses the ES_JAVA_OPTS environment variable to manually set the heap size to 512MB. We do not recommend using ES_JAVA_OPTS in production. See Manually set the heap size.<br>解决办法，如果你用的市Mac左面版的docker,docker虚拟机内存默认是2G是不够的，调整到4G以上这个问题解决<br>![](../images/docker ES安装/getImage-20220825184627503.png)</p></blockquote><h1 id="elasticsearch运维常用api"><a href="#elasticsearch运维常用api" class="headerlink" title="elasticsearch运维常用api"></a>elasticsearch运维常用api</h1><h2 id="查看实例健康状态"><a href="#查看实例健康状态" class="headerlink" title="查看实例健康状态"></a>查看实例健康状态</h2><pre><code>http://localhost:9200/_cat/health?v</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=61d832d4ab644142b460789c" alt></p><h2 id="查看集群健康状态"><a href="#查看集群健康状态" class="headerlink" title="查看集群健康状态"></a>查看集群健康状态</h2><pre><code>http://localhost:9200/_cluster/health?pretty</code></pre><p>![](../images/docker ES安装/getImage-20220825184627531.png)</p><h2 id="查询分片状态"><a href="#查询分片状态" class="headerlink" title="查询分片状态"></a>查询分片状态</h2><pre><code>http://localhost:9200/_cat/shards/test*?v</code></pre><h1 id="Elasticsearch的console常用api"><a href="#Elasticsearch的console常用api" class="headerlink" title="Elasticsearch的console常用api"></a>Elasticsearch的console常用api</h1><pre><code></code></pre><h1 id="安装cerebro"><a href="#安装cerebro" class="headerlink" title="安装cerebro"></a>安装cerebro</h1><p>cerebro是Elasticsearch的可视化运维工具</p><p>docker 镜像获取</p><pre><code> docker pull lmenezes/cerebro</code></pre><p>启动</p><pre><code> docker run -d --name cerebro -p 9000:9000 045d7f40bf06</code></pre><p>cerebro可以看到每index的分片分布情况</p><p>浏览器打开：<a href="http://localhost:9000/" target="_blank" rel="noopener">http://localhost:9000/</a></p><h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><h2 id="问题一：如果出现docker-容器假死需要强制stop时"><a href="#问题一：如果出现docker-容器假死需要强制stop时" class="headerlink" title="问题一：如果出现docker 容器假死需要强制stop时"></a>问题一：如果出现docker 容器假死需要强制stop时</h2><pre><code>停止所有的容器 docker stop $(docker ps -q)强制移除此容器 docker rm -f mysql1最后一招，强制重启docker服务service 方式重启docker服务sudo service docker restart关闭dockersudo service docker stop</code></pre><p>如果是Docker-Destop左面版，可以在设置中重启</p><h2 id="问题二：ELK出现unassigned-shards查看及删除"><a href="#问题二：ELK出现unassigned-shards查看及删除" class="headerlink" title="问题二：ELK出现unassigned_shards查看及删除"></a>问题二：ELK出现unassigned_shards查看及删除</h2><p>ES的data节点异常关闭，会导致副本出现unassigned shard，致使索引状态变为yellow，甚至是red。</p><h3 id="解决办法1："><a href="#解决办法1：" class="headerlink" title="解决办法1："></a>解决办法1：</h3><pre><code># 查询所有分片数据GET _cat/shards# 或者查询集群健康状态GET _cluster/health出现unassigned_shards大于0时表示有异常分片数据</code></pre><p>如果运气不好，遇到了主分片异常，上面的方法不管用，可以先用重试的方法尝试恢复</p><pre><code>/_cluster/reroute?retry_failed=true</code></pre><p>一般data节点异常退出，该方法都能解决。</p><h3 id="解决办法2："><a href="#解决办法2：" class="headerlink" title="解决办法2："></a>解决办法2：</h3><p>若不起作用，可以尝试重新分配主分片，不过可能会有部分数据丢失。</p><pre><code>POST /_cluster/reroute?pretty{    &quot;commands&quot; : [ {        &quot;allocate_stale_primary&quot; :            {              &quot;index&quot; : &quot;test&quot;,               &quot;shard&quot; : 3,              &quot;node&quot; : &quot;192.168.1.1_9200&quot;,              &quot;accept_data_loss&quot; : true            }        }    ]}</code></pre><h3 id="解决办法3："><a href="#解决办法3：" class="headerlink" title="解决办法3："></a>解决办法3：</h3><p>删除问题索引</p><pre><code>curl -XDELETE localhost:9200/索引名称</code></pre><p>解决办法4：出现以上问题的原因除了同步异常外，还有一个原因可能是磁盘空间使用率大于85%。<br>es中有个配置<code>cluster.routing.allocation.disk.watermark.low</code>默认是85%，系统磁盘空间使用率大于85%将出现此问题</p><p>解决办法要么调整这个配置，要么清理磁盘</p><pre><code>PUT /_cluster/settings{    &quot;transient&quot; : {        &quot;cluster.routing.allocation.disk.watermark.low&quot; : &quot;90%&quot;    }}</code></pre>]]></content>
+        <content type="html"><![CDATA[<p>JDK下载地址：<br><a href="https://github.com/frekele/oracle-java/releases" target="_blank" rel="noopener">https://github.com/frekele/oracle-java/releases</a></p><p>idea激活：<br><a href="https://juejin.im/post/5df8a5a5e51d4557f0460990" target="_blank" rel="noopener">https://juejin.im/post/5df8a5a5e51d4557f0460990</a></p><p>maven环境变量配置：<br><a href="https://www.cnblogs.com/tanjiyuan/p/11010998.html" target="_blank" rel="noopener">https://www.cnblogs.com/tanjiyuan/p/11010998.html</a></p>]]></content>
       
       
       <categories>
@@ -329,61 +254,11 @@
     
     
     <entry>
-      <title>使用Jmeter进行Dubbo接口压测</title>
-      <link href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
-      <url>/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</url>
+      <title>Selenium</title>
+      <link href="/ruan-jian-bi-ji/selenium/"/>
+      <url>/ruan-jian-bi-ji/selenium/</url>
       
-        <content type="html"><![CDATA[<h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><h2 id="一、下载Jmeter3-1"><a href="#一、下载Jmeter3-1" class="headerlink" title="一、下载Jmeter3.1"></a>一、下载Jmeter3.1</h2><p>下载地址：<a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip</a><br>其他版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></p><p>更高版本的Jmeter 5+好像有点问题，建议还是用这个版本吧</p><h2 id="二、下载dubbo官方的jmeter插件"><a href="#二、下载dubbo官方的jmeter插件" class="headerlink" title="二、下载dubbo官方的jmeter插件"></a>二、下载dubbo官方的jmeter插件</h2><p>下载地址：<a href="https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar" target="_blank" rel="noopener">https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar</a><br>官方用户指南：<a href="https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97</a></p><h2 id="三、解压Jmeter"><a href="#三、解压Jmeter" class="headerlink" title="三、解压Jmeter"></a>三、解压Jmeter</h2><p>将jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar放到<code>${JMETER_HOME}\lib\ext.</code>中</p><h2 id="四、启动Jmeter"><a href="#四、启动Jmeter" class="headerlink" title="四、启动Jmeter"></a>四、启动Jmeter</h2><p> <code>${JMETER_HOME}\jmeter.bat</code></p><h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="../images/Untitled/getImage-20220825182246944.png" alt><br><img src="../images/Untitled/getImage-20220825182247846.png" alt></p><h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="../images/Untitled/getImage-20220825182248427.png" alt></p><p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="../images/Untitled/getImage-20220825182248165.png" alt></p><h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="../images/Untitled/getImage-20220825182248034.png" alt></p><h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="../images/Untitled/getImage-20220825182247230.png" alt></p><h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="../images/Untitled/getImage-20220825182248268.png" alt></p><h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="../images/Untitled/getImage-20220825182247269.png" alt></p><h1 id="六、dubbo服务器状态查看"><a href="#六、dubbo服务器状态查看" class="headerlink" title="六、dubbo服务器状态查看"></a>六、dubbo服务器状态查看</h1><ol><li>使用telnet进入dubbo的console界面<pre><code>telnet 192.168.1.131 32101后回车</code></pre><img src="../images/Untitled/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="../images/Untitled/getImage-20220825182247961.png" alt></li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>idea 突然闪退，内存溢出</title>
-      <link href="/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/"/>
-      <url>/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/</url>
-      
-        <content type="html"><![CDATA[<p>解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin<br>找到idea.exe.vmoptions配置修改Xmx 为合适大小1024/2048，然后启动此路径下的idea.exe</p><pre><code>-Xms128m-Xmx1024m-XX:MaxPermSize=350m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-Djava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow</code></pre><p>** 如果你的系统是64位的，则就需要修改idea64.exe.vmoptions这个配置，然后启动idea64.exe**</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>maven 包冲突 解决</title>
-      <link href="/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
-      <url>/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</url>
-      
-        <content type="html"><![CDATA[<pre><code>mvn dependency:tree -Dverbose -Dincludes=org.slf4j</code></pre>]]></content>
+        <content type="html"><![CDATA[<h1 id="Selenium安装环境搭建"><a href="#Selenium安装环境搭建" class="headerlink" title="Selenium安装环境搭建"></a>Selenium安装环境搭建</h1><p><a href="https://www.zybuluo.com/mwumli/note/222253" target="_blank" rel="noopener">https://www.zybuluo.com/mwumli/note/222253</a></p><h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>报-13权限问题时</p><pre><code>sudo npm install --unsafe-perm -g polymer-cli</code></pre><p>adb找不到设备时</p><pre><code>adb kill-serveradb start-serveradb devices</code></pre><h1 id="元素定位"><a href="#元素定位" class="headerlink" title="元素定位"></a>元素定位</h1><p>find_element_by_android_uiautomator<br><a href="https://blog.csdn.net/weixin_30824277/article/details/95229071" target="_blank" rel="noopener">https://blog.csdn.net/weixin_30824277/article/details/95229071</a></p><h1 id="三种等待方式详解"><a href="#三种等待方式详解" class="headerlink" title="三种等待方式详解"></a>三种等待方式详解</h1><p><a href="http://blog.csdn.net/ping523/article/details/53419622" target="_blank" rel="noopener">http://blog.csdn.net/ping523/article/details/53419622</a></p><p><a href="http://www.cnblogs.com/BigFishFly/p/6380024.html" target="_blank" rel="noopener">http://www.cnblogs.com/BigFishFly/p/6380024.html</a></p>]]></content>
       
       
       <categories>
@@ -429,11 +304,11 @@
     
     
     <entry>
-      <title>护眼神器Dark Reader</title>
-      <link href="/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/"/>
-      <url>/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/</url>
+      <title>docker ES安装</title>
+      <link href="/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
+      <url>/ruan-jian-bi-ji/docker-es-an-zhuang/</url>
       
-        <content type="html"><![CDATA[<p>在google应用市场中搜索Dark Reader，可以在网页中进行反色护眼<br>![](../images/护眼神器Dark Reader/getImage-20220825182956835.png)</p>]]></content>
+        <content type="html"><![CDATA[<p>参考docker安装Elasticsearch官方文档<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html</a></p><h1 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h1><pre><code>docker pull docker.elastic.co/kibana/kibana:7.16.0</code></pre><h1 id="docker-compose启动"><a href="#docker-compose启动" class="headerlink" title="docker-compose启动"></a>docker-compose启动</h1><h2 id="新建docker-compose-yml文件"><a href="#新建docker-compose-yml文件" class="headerlink" title="新建docker-compose.yml文件"></a>新建docker-compose.yml文件</h2><pre><code>version: &#39;2.2&#39;services:  es01:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es01    environment:      - node.name=es01      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es02,es03      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9200#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es01/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es01/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es01/logs:/usr/share/elasticsearch/logs#      - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9200:9200    networks:      - elastic  es02:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es02    environment:      - node.name=es02      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es01,es03      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9201#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es02/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es02/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es02/logs:/usr/share/elasticsearch/logs #     - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9201:9200    networks:      - elastic  es03:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es03    environment:      - node.name=es03      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es01,es02      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9202#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es03/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es03/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es03/logs:/usr/share/elasticsearch/logs#      - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9202:9200    networks:      - elastic  kib01:    image: docker.elastic.co/kibana/kibana:7.16.0    container_name: kib01    ports:      - 5601:5601    environment:      ELASTICSEARCH_URL: http://es01:9200      ELASTICSEARCH_HOSTS: &#39;[&quot;http://es01:9200&quot;,&quot;http://es02:9200&quot;,&quot;http://es03:9200&quot;]&#39;    networks:      - elastic  cerebro:    image: lmenezes/cerebro:latest    container_name: cerebro    ports:      - &quot;9000:9000&quot;    command:      - -Dhosts.0.host=http://es01:9200      - -Dhosts.1.host=http://es02:9200      - -Dhosts.2.host=http://es03:9200    networks:      - elasticvolumes:  data01:    driver: local  data02:    driver: local  data03:    driver: localnetworks:  elastic:    driver: bridge</code></pre><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><pre><code>docker-compose -f ./docker-compose.yml up d</code></pre><blockquote><p>有可能报错’failed to resolve host [es01] ‘<br>This sample docker-compose.yml file uses the ES_JAVA_OPTS environment variable to manually set the heap size to 512MB. We do not recommend using ES_JAVA_OPTS in production. See Manually set the heap size.<br>解决办法，如果你用的市Mac左面版的docker,docker虚拟机内存默认是2G是不够的，调整到4G以上这个问题解决<br>![](../images/docker ES安装/getImage-20220825184627503.png)</p></blockquote><h1 id="elasticsearch运维常用api"><a href="#elasticsearch运维常用api" class="headerlink" title="elasticsearch运维常用api"></a>elasticsearch运维常用api</h1><h2 id="查看实例健康状态"><a href="#查看实例健康状态" class="headerlink" title="查看实例健康状态"></a>查看实例健康状态</h2><pre><code>http://localhost:9200/_cat/health?v</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=61d832d4ab644142b460789c" alt></p><h2 id="查看集群健康状态"><a href="#查看集群健康状态" class="headerlink" title="查看集群健康状态"></a>查看集群健康状态</h2><pre><code>http://localhost:9200/_cluster/health?pretty</code></pre><p>![](../images/docker ES安装/getImage-20220825184627531.png)</p><h2 id="查询分片状态"><a href="#查询分片状态" class="headerlink" title="查询分片状态"></a>查询分片状态</h2><pre><code>http://localhost:9200/_cat/shards/test*?v</code></pre><h1 id="Elasticsearch的console常用api"><a href="#Elasticsearch的console常用api" class="headerlink" title="Elasticsearch的console常用api"></a>Elasticsearch的console常用api</h1><pre><code></code></pre><h1 id="安装cerebro"><a href="#安装cerebro" class="headerlink" title="安装cerebro"></a>安装cerebro</h1><p>cerebro是Elasticsearch的可视化运维工具</p><p>docker 镜像获取</p><pre><code> docker pull lmenezes/cerebro</code></pre><p>启动</p><pre><code> docker run -d --name cerebro -p 9000:9000 045d7f40bf06</code></pre><p>cerebro可以看到每index的分片分布情况</p><p>浏览器打开：<a href="http://localhost:9000/" target="_blank" rel="noopener">http://localhost:9000/</a></p><h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><h2 id="问题一：如果出现docker-容器假死需要强制stop时"><a href="#问题一：如果出现docker-容器假死需要强制stop时" class="headerlink" title="问题一：如果出现docker 容器假死需要强制stop时"></a>问题一：如果出现docker 容器假死需要强制stop时</h2><pre><code>停止所有的容器 docker stop $(docker ps -q)强制移除此容器 docker rm -f mysql1最后一招，强制重启docker服务service 方式重启docker服务sudo service docker restart关闭dockersudo service docker stop</code></pre><p>如果是Docker-Destop左面版，可以在设置中重启</p><h2 id="问题二：ELK出现unassigned-shards查看及删除"><a href="#问题二：ELK出现unassigned-shards查看及删除" class="headerlink" title="问题二：ELK出现unassigned_shards查看及删除"></a>问题二：ELK出现unassigned_shards查看及删除</h2><p>ES的data节点异常关闭，会导致副本出现unassigned shard，致使索引状态变为yellow，甚至是red。</p><h3 id="解决办法1："><a href="#解决办法1：" class="headerlink" title="解决办法1："></a>解决办法1：</h3><pre><code># 查询所有分片数据GET _cat/shards# 或者查询集群健康状态GET _cluster/health出现unassigned_shards大于0时表示有异常分片数据</code></pre><p>如果运气不好，遇到了主分片异常，上面的方法不管用，可以先用重试的方法尝试恢复</p><pre><code>/_cluster/reroute?retry_failed=true</code></pre><p>一般data节点异常退出，该方法都能解决。</p><h3 id="解决办法2："><a href="#解决办法2：" class="headerlink" title="解决办法2："></a>解决办法2：</h3><p>若不起作用，可以尝试重新分配主分片，不过可能会有部分数据丢失。</p><pre><code>POST /_cluster/reroute?pretty{    &quot;commands&quot; : [ {        &quot;allocate_stale_primary&quot; :            {              &quot;index&quot; : &quot;test&quot;,               &quot;shard&quot; : 3,              &quot;node&quot; : &quot;192.168.1.1_9200&quot;,              &quot;accept_data_loss&quot; : true            }        }    ]}</code></pre><h3 id="解决办法3："><a href="#解决办法3：" class="headerlink" title="解决办法3："></a>解决办法3：</h3><p>删除问题索引</p><pre><code>curl -XDELETE localhost:9200/索引名称</code></pre><p>解决办法4：出现以上问题的原因除了同步异常外，还有一个原因可能是磁盘空间使用率大于85%。<br>es中有个配置<code>cluster.routing.allocation.disk.watermark.low</code>默认是85%，系统磁盘空间使用率大于85%将出现此问题</p><p>解决办法要么调整这个配置，要么清理磁盘</p><pre><code>PUT /_cluster/settings{    &quot;transient&quot; : {        &quot;cluster.routing.allocation.disk.watermark.low&quot; : &quot;90%&quot;    }}</code></pre>]]></content>
       
       
       <categories>
@@ -454,11 +329,111 @@
     
     
     <entry>
-      <title>靠谱的maven仓库地址</title>
-      <link href="/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/"/>
-      <url>/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/</url>
+      <title>idea 突然闪退，内存溢出</title>
+      <link href="/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/"/>
+      <url>/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/</url>
       
-        <content type="html"><![CDATA[<pre><code>#阿里云maven&lt;mirror&gt;    &lt;id&gt;alimaven&lt;/id&gt;    &lt;name&gt;aliyun maven&lt;/name&gt;    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;/mirror&gt;#开源中国maven&lt;mirror&gt;      &lt;id&gt;nexus-osc&lt;/id&gt;      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;      &lt;name&gt;Nexus osc&lt;/name&gt;      &lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;  &lt;/mirror&gt;</code></pre><blockquote><p>简单点来说，repository就是个仓库。maven里有两种仓库，本地仓库和远程仓库。远程仓库相当于公共的仓库，大家都能看到。本地仓库是你本地的一个山寨版，只有你看的到，主要起缓存作用。当你向仓库请求插件或依赖的时候，会先检查本地仓库里是否有。如果有则直接返回，否则会向远程仓库请求，并做缓存。你也可以把你做的东西上传到本地仓库给你本地自己用，或上传到远程仓库，供大家使用。<br>远程仓库可以在工程的pom.xml文件里指定，楼上两位已经列的很清楚了。如果没指定，默认就会把下面这地方做远程仓库，即默认会到<a href="http://repo1.maven.org/maven2这个地方去请求插件和依赖包。" target="_blank" rel="noopener">http://repo1.maven.org/maven2这个地方去请求插件和依赖包。</a> </p></blockquote><p>Xml代码 </p><pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>repository</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>snapshots</span><span class="token punctuation">></span></span>          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>enabled</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>enabled</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>snapshots</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>Maven Repository Switchboard<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>http://repo1.maven.org/maven2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>repository</span><span class="token punctuation">></span></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>本地仓库默认在你本地的用户目录下的.m2/repository目录下。 </p><p>mirror就是镜像，主要提供一个方便地切换远程仓库地址的途径。比如，上班的时候在公司，用电信的网络，连的是电信的仓库。回到家后，是网通的网络，我想连网通的仓库，就可以通过mirror配置，统一把我工程里的仓库地址都改成联通的，而不用到具体工程配置文件里一个一个地改地址。<br>mirror的配置在.m2/settings.xml里。如： </p><pre><code>&lt;mirrors&gt;    &lt;mirror&gt;      &lt;id&gt;UK&lt;/id&gt;      &lt;name&gt;UK Central&lt;/name&gt;      &lt;url&gt;http://uk.maven.org/maven2&lt;/url&gt;      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;    &lt;/mirror&gt;  &lt;/mirrors&gt;  </code></pre><p>这样的话，就会给上面id为central的远程仓库做了个镜像。以后向<code>central</code>这个仓库发的请求都会发到<code>http://uk.maven.org/maven2</code>而不是<code>http://repo1.maven.org/maven2</code>了。<br><code>&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</code>里是要替代的仓库的id。如果填*，就会替代所有仓库。 </p><p>参考资料：<br><a href="http://maven.apache.org/guides/introduction/introduction-to-repositories.html" target="_blank" rel="noopener">http://maven.apache.org/guides/introduction/introduction-to-repositories.html</a><br><a href="http://maven.apache.org/guides/mini/guide-mirror-settings.html" target="_blank" rel="noopener">http://maven.apache.org/guides/mini/guide-mirror-settings.html</a></p>]]></content>
+        <content type="html"><![CDATA[<p>解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin<br>找到idea.exe.vmoptions配置修改Xmx 为合适大小1024/2048，然后启动此路径下的idea.exe</p><pre><code>-Xms128m-Xmx1024m-XX:MaxPermSize=350m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-Djava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow</code></pre><p>** 如果你的系统是64位的，则就需要修改idea64.exe.vmoptions这个配置，然后启动idea64.exe**</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>iterm2 rz sz 安装</title>
+      <link href="/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/"/>
+      <url>/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/</url>
+      
+        <content type="html"><![CDATA[<p>一、本地rz sz安装<br><a href="https://github.com/aikuyun/iterm2-zmodem" target="_blank" rel="noopener">https://github.com/aikuyun/iterm2-zmodem</a></p><p>二、服务器端rz sz安装<br>yum install lrzsz</p><p>rz：从本地上传文件至服务器<br>sz filename：从服务器下载文件至本地</p><p>三、iTrm2配置<br>参考这里：<a href="https://github.com/aikuyun/iterm2-zmodem" target="_blank" rel="noopener">https://github.com/aikuyun/iterm2-zmodem</a></p><p>二、使用#<br>2.1 sz 命令发送文件到本地#<br>sz filename<br>2.2 rz 命令本地上传文件到服务器#<br>rz</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用Jmeter进行Dubbo接口压测</title>
+      <link href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
+      <url>/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</url>
+      
+        <content type="html"><![CDATA[<h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><h2 id="一、下载Jmeter3-1"><a href="#一、下载Jmeter3-1" class="headerlink" title="一、下载Jmeter3.1"></a>一、下载Jmeter3.1</h2><p>下载地址：<a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip</a><br>其他版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></p><p>更高版本的Jmeter 5+好像有点问题，建议还是用这个版本吧</p><h2 id="二、下载dubbo官方的jmeter插件"><a href="#二、下载dubbo官方的jmeter插件" class="headerlink" title="二、下载dubbo官方的jmeter插件"></a>二、下载dubbo官方的jmeter插件</h2><p>下载地址：<a href="https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar" target="_blank" rel="noopener">https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar</a><br>官方用户指南：<a href="https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97</a></p><h2 id="三、解压Jmeter"><a href="#三、解压Jmeter" class="headerlink" title="三、解压Jmeter"></a>三、解压Jmeter</h2><p>将jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar放到<code>${JMETER_HOME}\lib\ext.</code>中</p><h2 id="四、启动Jmeter"><a href="#四、启动Jmeter" class="headerlink" title="四、启动Jmeter"></a>四、启动Jmeter</h2><p> <code>${JMETER_HOME}\jmeter.bat</code></p><h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="../images/Untitled/getImage-20220825182246944.png" alt><br><img src="../images/Untitled/getImage-20220825182247846.png" alt></p><h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="../images/Untitled/getImage-20220825182248427.png" alt></p><p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="../images/Untitled/getImage-20220825182248165.png" alt></p><h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="../images/Untitled/getImage-20220825182248034.png" alt></p><h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="../images/Untitled/getImage-20220825182247230.png" alt></p><h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="../images/Untitled/getImage-20220825182248268.png" alt></p><h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="../images/Untitled/getImage-20220825182247269.png" alt></p><h1 id="六、dubbo服务器状态查看"><a href="#六、dubbo服务器状态查看" class="headerlink" title="六、dubbo服务器状态查看"></a>六、dubbo服务器状态查看</h1><ol><li>使用telnet进入dubbo的console界面<pre><code>telnet 192.168.1.131 32101后回车</code></pre><img src="../images/Untitled/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="../images/Untitled/getImage-20220825182247961.png" alt></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>maven 包冲突 解决</title>
+      <link href="/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
+      <url>/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</url>
+      
+        <content type="html"><![CDATA[<pre><code>mvn dependency:tree -Dverbose -Dincludes=org.slf4j</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>护眼神器Dark Reader</title>
+      <link href="/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/"/>
+      <url>/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/</url>
+      
+        <content type="html"><![CDATA[<p>在google应用市场中搜索Dark Reader，可以在网页中进行反色护眼<br>![](../images/护眼神器Dark Reader/getImage-20220825182956835.png)</p>]]></content>
       
       
       <categories>
@@ -504,6 +479,56 @@
     
     
     <entry>
+      <title>磁盘空间满处理</title>
+      <link href="/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/"/>
+      <url>/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/</url>
+      
+        <content type="html"><![CDATA[<h1 id="查看当前目录磁盘使用情况"><a href="#查看当前目录磁盘使用情况" class="headerlink" title="查看当前目录磁盘使用情况"></a>查看当前目录磁盘使用情况</h1><pre><code>df -lh</code></pre><h1 id="统计当前目录下的目录及文件磁盘使用从大到小排序"><a href="#统计当前目录下的目录及文件磁盘使用从大到小排序" class="headerlink" title="统计当前目录下的目录及文件磁盘使用从大到小排序"></a>统计当前目录下的目录及文件磁盘使用从大到小排序</h1><pre><code>du -h --max-depth=1</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>抓包工具Charles安装、破解及使用</title>
+      <link href="/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/"/>
+      <url>/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/</url>
+      
+        <content type="html"><![CDATA[<p>Charles是一款抓包必备的工具，支持Windows、Mac、手机的抓包测试，还能对https的SLL加密内容进行解密。</p><h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><ol><li>进入官网下载地址：<a href="http://www.charlesproxy.com/，点击链接下载30天免费试用版本。" target="_blank" rel="noopener">http://www.charlesproxy.com/，点击链接下载30天免费试用版本。</a><br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037795.png" alt></li><li>在线破解：<br><a href="https://www.zzzmode.com/mytools/charles/" target="_blank" rel="noopener">https://www.zzzmode.com/mytools/charles/</a></li></ol><h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><h2 id="电脑抓包"><a href="#电脑抓包" class="headerlink" title="电脑抓包"></a>电脑抓包</h2><ol><li><p>打开Charles，默认是开启抓包代理的，可以看到电脑http请求的内容,你也可以将电脑的抓包代理给关掉，在Proxy&gt;enable MacOs proxy 勾选去掉<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037940.png" alt></p></li><li><p>设置https证书代理抓包，<br>安装证书：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038586.png" alt><br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037648.png" alt><br>打开百度<a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> 测试，发现全是乱码：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038645.png" alt><br>鼠标点击右键添加Enable SLL Proxy,从新刷新页面，Google Chrome 默认把这个当成不安全证书了，使用FireFox浏览器可以添加例外强制打开：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038204.png" alt><br>可以看到Charles已经将https的内容通过Charles 证书加代理的方式能够看到明文请求信息了。<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038795.png" alt></p></li></ol><h1 id="手机抓包"><a href="#手机抓包" class="headerlink" title="手机抓包"></a>手机抓包</h1><ol><li><p>设置网络代理<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038117.png" alt><br>通过上面菜单找到Charles的代理服务器IP和端口<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038169.png" alt><br>保证你的手机和你的电脑是在同一个局域网内，打开手机的WLAN配置，ip为上图的30.117.52.174，端口为：12345<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038566.png" alt></p></li><li><p>如果想看到https的请求内容，还是得和电脑一样安装Charles证书，通过safari打开<a href="https://chls.pro/ssl" target="_blank" rel="noopener">https://chls.pro/ssl</a> 下载证书<br>手机–setting–&gt;General—&gt;Profiles &amp; Device Management —&gt;Charles Proxy CA…<br>将设置为信任。如图：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038687.png" alt></p></li><li><p>接着就可以查看到手机上的网络请求数据了，如果是https点击右键Enable SLL Proxy，在重新刷新下就可以看到了。</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>科学上网神器,熊猫VPN, 亲测很舒服</title>
       <link href="/ruan-jian-bi-ji/ke-xue-shang-wang-shen-qi-xiong-mao-vpn-qin-ce-hen-shu-fu/"/>
       <url>/ruan-jian-bi-ji/ke-xue-shang-wang-shen-qi-xiong-mao-vpn-qin-ce-hen-shu-fu/</url>
@@ -529,11 +554,11 @@
     
     
     <entry>
-      <title>磁盘空间满处理</title>
-      <link href="/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/"/>
-      <url>/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/</url>
+      <title>靠谱的maven仓库地址</title>
+      <link href="/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/"/>
+      <url>/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/</url>
       
-        <content type="html"><![CDATA[<h1 id="查看当前目录磁盘使用情况"><a href="#查看当前目录磁盘使用情况" class="headerlink" title="查看当前目录磁盘使用情况"></a>查看当前目录磁盘使用情况</h1><pre><code>df -lh</code></pre><h1 id="统计当前目录下的目录及文件磁盘使用从大到小排序"><a href="#统计当前目录下的目录及文件磁盘使用从大到小排序" class="headerlink" title="统计当前目录下的目录及文件磁盘使用从大到小排序"></a>统计当前目录下的目录及文件磁盘使用从大到小排序</h1><pre><code>du -h --max-depth=1</code></pre>]]></content>
+        <content type="html"><![CDATA[<pre><code>#阿里云maven&lt;mirror&gt;    &lt;id&gt;alimaven&lt;/id&gt;    &lt;name&gt;aliyun maven&lt;/name&gt;    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;/mirror&gt;#开源中国maven&lt;mirror&gt;      &lt;id&gt;nexus-osc&lt;/id&gt;      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;      &lt;name&gt;Nexus osc&lt;/name&gt;      &lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;  &lt;/mirror&gt;</code></pre><blockquote><p>简单点来说，repository就是个仓库。maven里有两种仓库，本地仓库和远程仓库。远程仓库相当于公共的仓库，大家都能看到。本地仓库是你本地的一个山寨版，只有你看的到，主要起缓存作用。当你向仓库请求插件或依赖的时候，会先检查本地仓库里是否有。如果有则直接返回，否则会向远程仓库请求，并做缓存。你也可以把你做的东西上传到本地仓库给你本地自己用，或上传到远程仓库，供大家使用。<br>远程仓库可以在工程的pom.xml文件里指定，楼上两位已经列的很清楚了。如果没指定，默认就会把下面这地方做远程仓库，即默认会到<a href="http://repo1.maven.org/maven2这个地方去请求插件和依赖包。" target="_blank" rel="noopener">http://repo1.maven.org/maven2这个地方去请求插件和依赖包。</a> </p></blockquote><p>Xml代码 </p><pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>repository</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>snapshots</span><span class="token punctuation">></span></span>          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>enabled</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>enabled</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>snapshots</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>Maven Repository Switchboard<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>http://repo1.maven.org/maven2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>repository</span><span class="token punctuation">></span></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>本地仓库默认在你本地的用户目录下的.m2/repository目录下。 </p><p>mirror就是镜像，主要提供一个方便地切换远程仓库地址的途径。比如，上班的时候在公司，用电信的网络，连的是电信的仓库。回到家后，是网通的网络，我想连网通的仓库，就可以通过mirror配置，统一把我工程里的仓库地址都改成联通的，而不用到具体工程配置文件里一个一个地改地址。<br>mirror的配置在.m2/settings.xml里。如： </p><pre><code>&lt;mirrors&gt;    &lt;mirror&gt;      &lt;id&gt;UK&lt;/id&gt;      &lt;name&gt;UK Central&lt;/name&gt;      &lt;url&gt;http://uk.maven.org/maven2&lt;/url&gt;      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;    &lt;/mirror&gt;  &lt;/mirrors&gt;  </code></pre><p>这样的话，就会给上面id为central的远程仓库做了个镜像。以后向<code>central</code>这个仓库发的请求都会发到<code>http://uk.maven.org/maven2</code>而不是<code>http://repo1.maven.org/maven2</code>了。<br><code>&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</code>里是要替代的仓库的id。如果填*，就会替代所有仓库。 </p><p>参考资料：<br><a href="http://maven.apache.org/guides/introduction/introduction-to-repositories.html" target="_blank" rel="noopener">http://maven.apache.org/guides/introduction/introduction-to-repositories.html</a><br><a href="http://maven.apache.org/guides/mini/guide-mirror-settings.html" target="_blank" rel="noopener">http://maven.apache.org/guides/mini/guide-mirror-settings.html</a></p>]]></content>
       
       
       <categories>
@@ -571,31 +596,6 @@
         <tags>
             
             <tag> 软考 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>抓包工具Charles安装、破解及使用</title>
-      <link href="/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/"/>
-      <url>/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/</url>
-      
-        <content type="html"><![CDATA[<p>Charles是一款抓包必备的工具，支持Windows、Mac、手机的抓包测试，还能对https的SLL加密内容进行解密。</p><h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><ol><li>进入官网下载地址：<a href="http://www.charlesproxy.com/，点击链接下载30天免费试用版本。" target="_blank" rel="noopener">http://www.charlesproxy.com/，点击链接下载30天免费试用版本。</a><br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037795.png" alt></li><li>在线破解：<br><a href="https://www.zzzmode.com/mytools/charles/" target="_blank" rel="noopener">https://www.zzzmode.com/mytools/charles/</a></li></ol><h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><h2 id="电脑抓包"><a href="#电脑抓包" class="headerlink" title="电脑抓包"></a>电脑抓包</h2><ol><li><p>打开Charles，默认是开启抓包代理的，可以看到电脑http请求的内容,你也可以将电脑的抓包代理给关掉，在Proxy&gt;enable MacOs proxy 勾选去掉<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037940.png" alt></p></li><li><p>设置https证书代理抓包，<br>安装证书：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038586.png" alt><br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183037648.png" alt><br>打开百度<a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> 测试，发现全是乱码：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038645.png" alt><br>鼠标点击右键添加Enable SLL Proxy,从新刷新页面，Google Chrome 默认把这个当成不安全证书了，使用FireFox浏览器可以添加例外强制打开：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038204.png" alt><br>可以看到Charles已经将https的内容通过Charles 证书加代理的方式能够看到明文请求信息了。<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038795.png" alt></p></li></ol><h1 id="手机抓包"><a href="#手机抓包" class="headerlink" title="手机抓包"></a>手机抓包</h1><ol><li><p>设置网络代理<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038117.png" alt><br>通过上面菜单找到Charles的代理服务器IP和端口<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038169.png" alt><br>保证你的手机和你的电脑是在同一个局域网内，打开手机的WLAN配置，ip为上图的30.117.52.174，端口为：12345<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038566.png" alt></p></li><li><p>如果想看到https的请求内容，还是得和电脑一样安装Charles证书，通过safari打开<a href="https://chls.pro/ssl" target="_blank" rel="noopener">https://chls.pro/ssl</a> 下载证书<br>手机–setting–&gt;General—&gt;Profiles &amp; Device Management —&gt;Charles Proxy CA…<br>将设置为信任。如图：<br><img src="../images/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7Charles%E5%AE%89%E8%A3%85%E3%80%81%E7%A0%B4%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8/getImage-20220825183038687.png" alt></p></li><li><p>接着就可以查看到手机上的网络请求数据了，如果是https点击右键Enable SLL Proxy，在重新刷新下就可以看到了。</p></li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
             
         </tags>
       
@@ -720,9 +720,9 @@
       
         <tags>
             
-            <tag> 学习 </tag>
-            
             <tag> Disruptor </tag>
+            
+            <tag> 学习 </tag>
             
         </tags>
       
@@ -756,11 +756,11 @@
     
     
     <entry>
-      <title>Dubbo源码学习</title>
-      <link href="/xue-xi/dubbo-yuan-ma-xue-xi/"/>
-      <url>/xue-xi/dubbo-yuan-ma-xue-xi/</url>
+      <title>关于Unicode  UTF-8 、UTF-16字符集编码的理解</title>
+      <link href="/xue-xi/guan-yu-unicode-utf-8-utf-16-zi-fu-ji-bian-ma-de-li-jie/"/>
+      <url>/xue-xi/guan-yu-unicode-utf-8-utf-16-zi-fu-ji-bian-ma-de-li-jie/</url>
       
-        <content type="html"><![CDATA[<h1 id="Dubbo-Provider暴露源码分析"><a href="#Dubbo-Provider暴露源码分析" class="headerlink" title="Dubbo Provider暴露源码分析"></a>Dubbo Provider暴露源码分析</h1><p>Dubbo服务端的服务暴露及初始化</p><ol><li><code>org.apache.dubbo.config.spring.ServiceBean#afterPropertiesSet</code> 开始spring 容器初始化好属性后，回调这个方法开始初始化Provider</li><li>前面一堆是初始化<code>ApplicationConfig</code>、<code>Module</code>、<code>Registry</code>(注册中心)、<code>ConfigCenter</code>(配置中心)、<code>Monitor</code>（监控中心）、<code>Metrics</code>(监控项)、<code>Service</code>(服务bean)</li><li>接着找到<code>org.apache.dubbo.config.ServiceConfig#doExportUrls;</code><ol><li>主要看 <code>org.apache.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></li><li>这个方法主要是构建Invoker代理，然后用<code>Exporter&lt;?&gt; exporter = protocol.export(wrapperInvoker);</code> 通过SPI加载默认<code>DubboProtocol</code>.</li><li>进入<code>org.apache.dubbo.rpc.DubboProtocol#export</code>之后我们看到一个<code>openServer</code>调用,初始化一个Server</li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#openServer</code>，主要调用<code>createServer</code></li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#createServer</code>,调用了一个静态方法<code>Exchangers#bind()</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.Exchangers#bind</code>,入参是当前要暴露服务的URL和一个<code>requestHandler</code>, requestHandler实现在 <code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>里<ol><li>进入<code>Exchangers#bind</code>,调用了 <code>org.apache.dubbo.remoting.exchange.Exchangers#getExchanger(org.apache.dubbo.common.URL)</code>获取当前暴露服务URL的个性化<code>Exchanger</code>配置，默认加载<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger</code></li><li>进入<code>HeaderExchanger</code>,有两个方法实现分别为<code>bind</code>和 <code>connect</code>,看样子一个事用于Server端暴露服务，一个事用于Client来请求服务</li><li>主要看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger#bind</code>,调用了<code>Transporters#bind()</code>，这里吧requestHandler进行包装成了一个<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.Transporters#bind()</code>，看到默认加载的是nett4的<code>org.apache.dubbo.remoting.transport.netty4.NettyTransporter#bind()</code>,而这个实现主要是new了一个<code>org.apache.dubbo.remoting.transport.netty4.NettyServer#NettyServer</code>,到此一个Provider的Invoker代理就绑定到NettyServer里可以对外提供服务了</li><li>在<code>NettyServer</code>的构造方法中，调用了<code>org.apache.dubbo.remoting.transport.dispatcher.ChannelHandlers#wrap</code>,将HeaderExchangeHandler进行一个<code>Dispatcher</code>的分发，默认实现是<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllDispatcher</code>,除此之外还有<code>ConnectionOrderedDispatcher</code>、<code>DirectDispatcher</code>、<code>ExecutionDispatcher</code>、<code>MessageOnlyDispatcher</code>，这里不做展开</li><li>在AllDispatcher中的dispatch实现是<code>AllChannelHandler</code>,所有类型的请求都可以接受处理</li><li>进入<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllChannelHandler#received</code>,我们看到它将接收到的请求丢到一个<code>ExecutorService</code>线程池中异步处理，这里就是Dubbo线程处理的核心了</li></ol></li><li>我们回到第6步，这里说到默认的handler是<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>, 这个requestHandler被6.3包装成了<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code>,这是NIO请求的处理handler,我们了解NIO的Channel是双向通信的，所以当接收到请求时和响应时都会进入到<code>received</code>,当出现异常时进入<code>caught</code><ol><li>我们先来看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#received</code>,主要判断是请求还是响应，如果是请求判断是否是否有响应，如果是<code>towWay</code>通信，即有响应结果的请求，进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#handleRequest</code></li><li>在这里调用了一开始传入的requestHandler#reply,实在在<code>org.apache.dubbo.remoting.exchange.support.ExchangeHandlerAdapter</code>，这里就是具体调用找到具体要请求的Provider的Invoker，异步请求并返回一个Feature，然后在当前received方法中进行异步等待，等待响应结果完成send进channel进行响应</li></ol></li></ol></li><li>发布到注册中心</li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如："><a href="#最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如：" class="headerlink" title="最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如："></a>最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如：</h1><pre><code>中文 | utf-8二进制编码人   | 11100100 10111010 10111010 </code></pre><p>程序怎么知道通过这是一个通过3个字节编码的<code>人</code>字呢，于是查询了相关资料：</p><p>要解释这个问题，我们先来了解下ASCII码、GB2312、GBK、Unicode编码的关系和定义</p><h1 id="1-ASSCII码-见ASCII码对照表"><a href="#1-ASSCII码-见ASCII码对照表" class="headerlink" title="1. ASSCII码,见ASCII码对照表"></a>1. ASSCII码,见<a href="http://tool.oschina.net/commons?type=4" target="_blank" rel="noopener">ASCII码对照表</a></h1><p>是一种使用一个字节(8位二进制)表示字母、数字和字符的一种编码，如字母<code>A</code>表示为使用十进制值为<code>65</code>的表示，转换为二进制就是<code>1000001</code>,我们知道，在计算机内部，所有的信息最终都表示为一个二进制的字符串。每一个二进制位（bit）有0和1两种状态，因此八个二进制位就可以组合出256种状态，这被称为一个字节（byte）。也就是说，一个字节一共可以用来表示256种不同的状态，每一个状态对应一个符号，就是256个符号，从0000000到11111111。<br>上个世纪60年代，美国制定了一套字符编码，对英语字符与二进制位之间的关系，做了统一规定。这被称为ASCII码，一直沿用至今。<br>ASCII码一共规定了128个字符的编码，比如空格”SPACE”是32（二进制00100000），大写的字母A是65（二进制01000001）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的1位统一规定为0。</p><h1 id="2-GB2312-，全称是GB2312-80《信息交换用汉字编码字符集-基本集》，是中国标准化组织发布的，见GB2312编码规则"><a href="#2-GB2312-，全称是GB2312-80《信息交换用汉字编码字符集-基本集》，是中国标准化组织发布的，见GB2312编码规则" class="headerlink" title="2. GB2312 ，全称是GB2312-80《信息交换用汉字编码字符集 基本集》，是中国标准化组织发布的，见GB2312编码规则"></a>2. <code>GB2312</code> ，全称是GB2312-80《信息交换用汉字编码字符集 基本集》，是中国标准化组织发布的，见<a href="http://www.qqxiuzi.cn/zh/hanzi-gb2312-bianma.php" target="_blank" rel="noopener">GB2312编码规则</a></h1><p>   在计算机只有英文的时代，可能使用<code>ASCII</code>码就已经够了，但是随着计算机的普及和全球化，别国的语言肯定也是要计算机编码化的，所以就出现了<code>GB2312</code>编码规则。<code>GB2312</code>是使用固定两个字节来表示简体中文和英文、数字、中文符号、英文符号的一种编码规则。所以如果使用<code>GB2312</code>编码时，英文也是使用两个字节来编码的，这无疑是一种浪费</p><p>   而<code>GBK</code>则是在<code>GB23312</code>的基础上添加了繁体中文的扩展</p><h1 id="3-Unicode"><a href="#3-Unicode" class="headerlink" title="3. Unicode"></a>3. <code>Unicode</code></h1><p>正如上一节所说，世界上存在着多种编码方式，同一个二进制数字可以被解释成不同的符号。因此，要想打开一个文本文件，就必须知道它的编码方式，否则用错误的编码方式解读，就会出现乱码。为什么电子邮件常常出现乱码？就是因为发信人和收信人使用的编码方式不一样。<br>可以想象，如果有一种编码，将世界上所有的符号都纳入其中。每一个符号都给予一个独一无二的编码，那么乱码问题就会消失。这就是Unicode，就像它的名字都表示的，这是一种所有符号的编码。</p><p>再次强调一下,Unicode只是为全世界的每一个文字符号都定义了一个数值对照</p><h1 id="4-UTF-8"><a href="#4-UTF-8" class="headerlink" title="4. UTF-8"></a>4. <code>UTF-8</code></h1><p>为什么会有<code>UTF-8</code>编码，我们来看下<code>Unicode</code>编码的定义和存在的问题：</p><p>需要注意的是，Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。<br>比如，汉字”严”的unicode是十六进制数4E25，转换成二进制数足足有15位（100111000100101），也就是说这个符号的表示至少需要2个字节。表示其他更大的符号，可能需要3个字节或者4个字节，甚至更多。<br>那么第一个问题：怎么样使用二进制的表示来存储我们的编码呢，是和GBK一样使用固定的字节来存？如果这样的话就必须以最长的字节表示为单位，那么应为字母、数字都得使用3个字节或者4个字节来存储，这显然是不能够接受的，这对存储空间是极大的浪费。<br>根据第一个问题，我们是否能够使用变长的存储方式来存unicode编码呢，如果可以，怎么在读取的时候区分一个字符是使用一个字节表示（比如字母、数字），还是使用3个字节表示的中文呢？</p><p>所以最初期，由于存在Unicode存在这些问题的存在<br>它们造成的结果是：1）出现了Unicode的多种存储方式，也就是说有许多种不同的二进制格式，可以用来表示Unicode。<br>2）Unicode在很长一段时间内无法推广，直到互联网的出现。</p><p>我们来看下<code>UTF-8</code>是怎么实现unicode编码的。<br>UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。<br>UTF-8的编码规则很简单，只有二条：<br>1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。<br>2）对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。</p><pre><code>Unicode符号范围 | UTF-8编码方式(十六进制) | （二进制）--------------------+---------------------------------------------0000 0000 ~ 0000 007F | 0xxxxxxx0000 0080 ~ 0000 07FF | 110xxxxx 10xxxxxx0000 0800 ~ 0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx0001 0000 ~ 0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></pre><p>跟据上表，解读UTF-8编码非常简单。如果一个字节的第一位是0，则这个字节单独就是一个字符；如果第一位是1，则连续有多少个1，就表示当前字符占用多少个字节。<br>下面，还是以汉字”严”为例，演示如何实现UTF-8编码。<br>已知”漲”的unicode是<code>\u6f32</code>,6f32二进制为<code>110111100110010</code>，根据上表，可以发现4E25处在第三行的范围内（0000 0800 ~ 0000 FFFF），因此”漲”的UTF-8编码需要三个字节，即格式是<code>1110xxxx 10xxxxxx 10xxxxxx</code>。然后，从<code>漲</code>的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，”漲”的UTF-8编码是1110<code>0110</code> 101<code>11100</code> 10<code>110010</code>，转换成十六进制就是<code>e6bcb2</code>。<br>所以理论上讲UTF-8 可以表示2^31个字符，所以还有很多符号表情可以开发编入unicode中。</p><p><em>其他实现方式还包括UTF-16（字符用两个字节或四个字节表示）和UTF-32（字符用四个字节表示），不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8是Unicode的实现方式之一。</em></p><p>#5. 使用java打印出所有中文代码</p><pre><code>   下标         中文    unicode          unicode十进制值           unicode二进制      utf-8编码二进制            utf-8十六进制      长度字节数    0          葦     \u6f32                28466                110111100110010    11101000 10010001 10100110           e891a6          3    1          葧     \u6f33                28467                110111100110011    11101000 10010001 10100111           e891a7          3    2          葨     \u6f34                28468                110111100110100    11101000 10010001 10101000           e891a8          3    3          葩     \u6f35                28469                110111100110101    11101000 10010001 10101001           e891a9          3    4          葰     \u6f36                28470                110111100110110    11101000 10010001 10110000           e891b0          3    5          葱     \u6f37                28471                110111100110111    11101000 10010001 10110001           e891b1          3    6          葲     \u6f38                28472                110111100111000    11101000 10010001 10110010           e891b2          3    7          葳     \u6f39                28473                110111100111001    11101000 10010001 10110011           e891b3          3    8          葴     \u6f3a                28474                110111100111010    11101000 10010001 10110100           e891b4          3    9          葵     \u6f3b                28475                110111100111011    11101000 10010001 10110101           e891b5          3</code></pre><p>java代码如下：</p><pre><code>  @Test    public void writeAllChinese() {        int start = 0x6f32;        int index = 0;        System.out.printf(&quot;%5s %10s %10s %20s %20s %15s %20s %10s\n&quot;,&quot;下标&quot;,&quot;中文&quot; ,&quot;unicode&quot; ,&quot;unicode十进制值&quot; ,&quot;unicode二进制&quot; , &quot;utf-8编码二进制&quot;, &quot;utf-8十六进制&quot; ,&quot;长度字节数&quot;);        while (start &lt; 0x6f32 + 10) {            String unicode = &quot;\\u&quot; + Integer.toHexString(start);            char c = (char) Integer.parseInt((start+&quot;&quot;),16);            String chinese = String.valueOf(c);            byte[] bytes = chinese.getBytes();            System.out.printf(&quot;%5s %10s %10s %20s %30s %30s %15s %10s\n&quot;,index,chinese ,unicode ,start ,Integer.toBinaryString(start) , getBinaryString(bytes), Integer.toHexString(Integer.valueOf(getBinaryString(bytes).replace(&quot; &quot;,&quot;&quot;),2)) ,bytes.length);            start++;            index++;        }    }    public static String getBinaryString(byte bytes[]) {        String s = &quot;&quot;;        for(byte b : bytes) {            /**             * 由于java 虚拟机为了方便整数的加减，使用了补码(反码+1)来表示,方便数值的符号直接参与二进制的加减，这样省去了很多计算步骤             * 所以在java中使用String#getBytes()返回的字节数值是反码的表示方法；             * 又由于Int 在java中表示是4个字节32位的，在控制台进行输出的时候，jvm把11001111之前进行了补补全然后再取补码，等到的就是11111111111111111111111110111110             * 所以需要在使用 与 运算将取 反码  0xff = 11111111             */            s = s + Integer.toBinaryString(b &amp; 0xff) +  &quot; &quot;;            //s = s + Integer.toBinaryString(b) +  &quot; &quot;;        }        return s;    }</code></pre>]]></content>
       
       
       <categories>
@@ -772,9 +772,11 @@
       
         <tags>
             
-            <tag> Dubbo </tag>
-            
             <tag> 学习 </tag>
+            
+            <tag> Unicode </tag>
+            
+            <tag> 字符集 </tag>
             
         </tags>
       
@@ -812,11 +814,11 @@
     
     
     <entry>
-      <title>关于Unicode  UTF-8 、UTF-16字符集编码的理解</title>
-      <link href="/xue-xi/guan-yu-unicode-utf-8-utf-16-zi-fu-ji-bian-ma-de-li-jie/"/>
-      <url>/xue-xi/guan-yu-unicode-utf-8-utf-16-zi-fu-ji-bian-ma-de-li-jie/</url>
+      <title>Dubbo源码学习</title>
+      <link href="/xue-xi/dubbo-yuan-ma-xue-xi/"/>
+      <url>/xue-xi/dubbo-yuan-ma-xue-xi/</url>
       
-        <content type="html"><![CDATA[<h1 id="最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如："><a href="#最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如：" class="headerlink" title="最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如："></a>最近学习NIO文件读写的时候，就生成了一个疑问，程序怎么知道文件使用了什么编码，因为底层程序看到的都是二进制的字节码如：</h1><pre><code>中文 | utf-8二进制编码人   | 11100100 10111010 10111010 </code></pre><p>程序怎么知道通过这是一个通过3个字节编码的<code>人</code>字呢，于是查询了相关资料：</p><p>要解释这个问题，我们先来了解下ASCII码、GB2312、GBK、Unicode编码的关系和定义</p><h1 id="1-ASSCII码-见ASCII码对照表"><a href="#1-ASSCII码-见ASCII码对照表" class="headerlink" title="1. ASSCII码,见ASCII码对照表"></a>1. ASSCII码,见<a href="http://tool.oschina.net/commons?type=4" target="_blank" rel="noopener">ASCII码对照表</a></h1><p>是一种使用一个字节(8位二进制)表示字母、数字和字符的一种编码，如字母<code>A</code>表示为使用十进制值为<code>65</code>的表示，转换为二进制就是<code>1000001</code>,我们知道，在计算机内部，所有的信息最终都表示为一个二进制的字符串。每一个二进制位（bit）有0和1两种状态，因此八个二进制位就可以组合出256种状态，这被称为一个字节（byte）。也就是说，一个字节一共可以用来表示256种不同的状态，每一个状态对应一个符号，就是256个符号，从0000000到11111111。<br>上个世纪60年代，美国制定了一套字符编码，对英语字符与二进制位之间的关系，做了统一规定。这被称为ASCII码，一直沿用至今。<br>ASCII码一共规定了128个字符的编码，比如空格”SPACE”是32（二进制00100000），大写的字母A是65（二进制01000001）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的1位统一规定为0。</p><h1 id="2-GB2312-，全称是GB2312-80《信息交换用汉字编码字符集-基本集》，是中国标准化组织发布的，见GB2312编码规则"><a href="#2-GB2312-，全称是GB2312-80《信息交换用汉字编码字符集-基本集》，是中国标准化组织发布的，见GB2312编码规则" class="headerlink" title="2. GB2312 ，全称是GB2312-80《信息交换用汉字编码字符集 基本集》，是中国标准化组织发布的，见GB2312编码规则"></a>2. <code>GB2312</code> ，全称是GB2312-80《信息交换用汉字编码字符集 基本集》，是中国标准化组织发布的，见<a href="http://www.qqxiuzi.cn/zh/hanzi-gb2312-bianma.php" target="_blank" rel="noopener">GB2312编码规则</a></h1><p>   在计算机只有英文的时代，可能使用<code>ASCII</code>码就已经够了，但是随着计算机的普及和全球化，别国的语言肯定也是要计算机编码化的，所以就出现了<code>GB2312</code>编码规则。<code>GB2312</code>是使用固定两个字节来表示简体中文和英文、数字、中文符号、英文符号的一种编码规则。所以如果使用<code>GB2312</code>编码时，英文也是使用两个字节来编码的，这无疑是一种浪费</p><p>   而<code>GBK</code>则是在<code>GB23312</code>的基础上添加了繁体中文的扩展</p><h1 id="3-Unicode"><a href="#3-Unicode" class="headerlink" title="3. Unicode"></a>3. <code>Unicode</code></h1><p>正如上一节所说，世界上存在着多种编码方式，同一个二进制数字可以被解释成不同的符号。因此，要想打开一个文本文件，就必须知道它的编码方式，否则用错误的编码方式解读，就会出现乱码。为什么电子邮件常常出现乱码？就是因为发信人和收信人使用的编码方式不一样。<br>可以想象，如果有一种编码，将世界上所有的符号都纳入其中。每一个符号都给予一个独一无二的编码，那么乱码问题就会消失。这就是Unicode，就像它的名字都表示的，这是一种所有符号的编码。</p><p>再次强调一下,Unicode只是为全世界的每一个文字符号都定义了一个数值对照</p><h1 id="4-UTF-8"><a href="#4-UTF-8" class="headerlink" title="4. UTF-8"></a>4. <code>UTF-8</code></h1><p>为什么会有<code>UTF-8</code>编码，我们来看下<code>Unicode</code>编码的定义和存在的问题：</p><p>需要注意的是，Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。<br>比如，汉字”严”的unicode是十六进制数4E25，转换成二进制数足足有15位（100111000100101），也就是说这个符号的表示至少需要2个字节。表示其他更大的符号，可能需要3个字节或者4个字节，甚至更多。<br>那么第一个问题：怎么样使用二进制的表示来存储我们的编码呢，是和GBK一样使用固定的字节来存？如果这样的话就必须以最长的字节表示为单位，那么应为字母、数字都得使用3个字节或者4个字节来存储，这显然是不能够接受的，这对存储空间是极大的浪费。<br>根据第一个问题，我们是否能够使用变长的存储方式来存unicode编码呢，如果可以，怎么在读取的时候区分一个字符是使用一个字节表示（比如字母、数字），还是使用3个字节表示的中文呢？</p><p>所以最初期，由于存在Unicode存在这些问题的存在<br>它们造成的结果是：1）出现了Unicode的多种存储方式，也就是说有许多种不同的二进制格式，可以用来表示Unicode。<br>2）Unicode在很长一段时间内无法推广，直到互联网的出现。</p><p>我们来看下<code>UTF-8</code>是怎么实现unicode编码的。<br>UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。<br>UTF-8的编码规则很简单，只有二条：<br>1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。<br>2）对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。</p><pre><code>Unicode符号范围 | UTF-8编码方式(十六进制) | （二进制）--------------------+---------------------------------------------0000 0000 ~ 0000 007F | 0xxxxxxx0000 0080 ~ 0000 07FF | 110xxxxx 10xxxxxx0000 0800 ~ 0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx0001 0000 ~ 0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></pre><p>跟据上表，解读UTF-8编码非常简单。如果一个字节的第一位是0，则这个字节单独就是一个字符；如果第一位是1，则连续有多少个1，就表示当前字符占用多少个字节。<br>下面，还是以汉字”严”为例，演示如何实现UTF-8编码。<br>已知”漲”的unicode是<code>\u6f32</code>,6f32二进制为<code>110111100110010</code>，根据上表，可以发现4E25处在第三行的范围内（0000 0800 ~ 0000 FFFF），因此”漲”的UTF-8编码需要三个字节，即格式是<code>1110xxxx 10xxxxxx 10xxxxxx</code>。然后，从<code>漲</code>的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，”漲”的UTF-8编码是1110<code>0110</code> 101<code>11100</code> 10<code>110010</code>，转换成十六进制就是<code>e6bcb2</code>。<br>所以理论上讲UTF-8 可以表示2^31个字符，所以还有很多符号表情可以开发编入unicode中。</p><p><em>其他实现方式还包括UTF-16（字符用两个字节或四个字节表示）和UTF-32（字符用四个字节表示），不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8是Unicode的实现方式之一。</em></p><p>#5. 使用java打印出所有中文代码</p><pre><code>   下标         中文    unicode          unicode十进制值           unicode二进制      utf-8编码二进制            utf-8十六进制      长度字节数    0          葦     \u6f32                28466                110111100110010    11101000 10010001 10100110           e891a6          3    1          葧     \u6f33                28467                110111100110011    11101000 10010001 10100111           e891a7          3    2          葨     \u6f34                28468                110111100110100    11101000 10010001 10101000           e891a8          3    3          葩     \u6f35                28469                110111100110101    11101000 10010001 10101001           e891a9          3    4          葰     \u6f36                28470                110111100110110    11101000 10010001 10110000           e891b0          3    5          葱     \u6f37                28471                110111100110111    11101000 10010001 10110001           e891b1          3    6          葲     \u6f38                28472                110111100111000    11101000 10010001 10110010           e891b2          3    7          葳     \u6f39                28473                110111100111001    11101000 10010001 10110011           e891b3          3    8          葴     \u6f3a                28474                110111100111010    11101000 10010001 10110100           e891b4          3    9          葵     \u6f3b                28475                110111100111011    11101000 10010001 10110101           e891b5          3</code></pre><p>java代码如下：</p><pre><code>  @Test    public void writeAllChinese() {        int start = 0x6f32;        int index = 0;        System.out.printf(&quot;%5s %10s %10s %20s %20s %15s %20s %10s\n&quot;,&quot;下标&quot;,&quot;中文&quot; ,&quot;unicode&quot; ,&quot;unicode十进制值&quot; ,&quot;unicode二进制&quot; , &quot;utf-8编码二进制&quot;, &quot;utf-8十六进制&quot; ,&quot;长度字节数&quot;);        while (start &lt; 0x6f32 + 10) {            String unicode = &quot;\\u&quot; + Integer.toHexString(start);            char c = (char) Integer.parseInt((start+&quot;&quot;),16);            String chinese = String.valueOf(c);            byte[] bytes = chinese.getBytes();            System.out.printf(&quot;%5s %10s %10s %20s %30s %30s %15s %10s\n&quot;,index,chinese ,unicode ,start ,Integer.toBinaryString(start) , getBinaryString(bytes), Integer.toHexString(Integer.valueOf(getBinaryString(bytes).replace(&quot; &quot;,&quot;&quot;),2)) ,bytes.length);            start++;            index++;        }    }    public static String getBinaryString(byte bytes[]) {        String s = &quot;&quot;;        for(byte b : bytes) {            /**             * 由于java 虚拟机为了方便整数的加减，使用了补码(反码+1)来表示,方便数值的符号直接参与二进制的加减，这样省去了很多计算步骤             * 所以在java中使用String#getBytes()返回的字节数值是反码的表示方法；             * 又由于Int 在java中表示是4个字节32位的，在控制台进行输出的时候，jvm把11001111之前进行了补补全然后再取补码，等到的就是11111111111111111111111110111110             * 所以需要在使用 与 运算将取 反码  0xff = 11111111             */            s = s + Integer.toBinaryString(b &amp; 0xff) +  &quot; &quot;;            //s = s + Integer.toBinaryString(b) +  &quot; &quot;;        }        return s;    }</code></pre>]]></content>
+        <content type="html"><![CDATA[<h1 id="Dubbo-Provider暴露源码分析"><a href="#Dubbo-Provider暴露源码分析" class="headerlink" title="Dubbo Provider暴露源码分析"></a>Dubbo Provider暴露源码分析</h1><p>Dubbo服务端的服务暴露及初始化</p><ol><li><code>org.apache.dubbo.config.spring.ServiceBean#afterPropertiesSet</code> 开始spring 容器初始化好属性后，回调这个方法开始初始化Provider</li><li>前面一堆是初始化<code>ApplicationConfig</code>、<code>Module</code>、<code>Registry</code>(注册中心)、<code>ConfigCenter</code>(配置中心)、<code>Monitor</code>（监控中心）、<code>Metrics</code>(监控项)、<code>Service</code>(服务bean)</li><li>接着找到<code>org.apache.dubbo.config.ServiceConfig#doExportUrls;</code><ol><li>主要看 <code>org.apache.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></li><li>这个方法主要是构建Invoker代理，然后用<code>Exporter&lt;?&gt; exporter = protocol.export(wrapperInvoker);</code> 通过SPI加载默认<code>DubboProtocol</code>.</li><li>进入<code>org.apache.dubbo.rpc.DubboProtocol#export</code>之后我们看到一个<code>openServer</code>调用,初始化一个Server</li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#openServer</code>，主要调用<code>createServer</code></li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#createServer</code>,调用了一个静态方法<code>Exchangers#bind()</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.Exchangers#bind</code>,入参是当前要暴露服务的URL和一个<code>requestHandler</code>, requestHandler实现在 <code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>里<ol><li>进入<code>Exchangers#bind</code>,调用了 <code>org.apache.dubbo.remoting.exchange.Exchangers#getExchanger(org.apache.dubbo.common.URL)</code>获取当前暴露服务URL的个性化<code>Exchanger</code>配置，默认加载<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger</code></li><li>进入<code>HeaderExchanger</code>,有两个方法实现分别为<code>bind</code>和 <code>connect</code>,看样子一个事用于Server端暴露服务，一个事用于Client来请求服务</li><li>主要看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger#bind</code>,调用了<code>Transporters#bind()</code>，这里吧requestHandler进行包装成了一个<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.Transporters#bind()</code>，看到默认加载的是nett4的<code>org.apache.dubbo.remoting.transport.netty4.NettyTransporter#bind()</code>,而这个实现主要是new了一个<code>org.apache.dubbo.remoting.transport.netty4.NettyServer#NettyServer</code>,到此一个Provider的Invoker代理就绑定到NettyServer里可以对外提供服务了</li><li>在<code>NettyServer</code>的构造方法中，调用了<code>org.apache.dubbo.remoting.transport.dispatcher.ChannelHandlers#wrap</code>,将HeaderExchangeHandler进行一个<code>Dispatcher</code>的分发，默认实现是<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllDispatcher</code>,除此之外还有<code>ConnectionOrderedDispatcher</code>、<code>DirectDispatcher</code>、<code>ExecutionDispatcher</code>、<code>MessageOnlyDispatcher</code>，这里不做展开</li><li>在AllDispatcher中的dispatch实现是<code>AllChannelHandler</code>,所有类型的请求都可以接受处理</li><li>进入<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllChannelHandler#received</code>,我们看到它将接收到的请求丢到一个<code>ExecutorService</code>线程池中异步处理，这里就是Dubbo线程处理的核心了</li></ol></li><li>我们回到第6步，这里说到默认的handler是<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>, 这个requestHandler被6.3包装成了<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code>,这是NIO请求的处理handler,我们了解NIO的Channel是双向通信的，所以当接收到请求时和响应时都会进入到<code>received</code>,当出现异常时进入<code>caught</code><ol><li>我们先来看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#received</code>,主要判断是请求还是响应，如果是请求判断是否是否有响应，如果是<code>towWay</code>通信，即有响应结果的请求，进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#handleRequest</code></li><li>在这里调用了一开始传入的requestHandler#reply,实在在<code>org.apache.dubbo.remoting.exchange.support.ExchangeHandlerAdapter</code>，这里就是具体调用找到具体要请求的Provider的Invoker，异步请求并返回一个Feature，然后在当前received方法中进行异步等待，等待响应结果完成send进channel进行响应</li></ol></li></ol></li><li>发布到注册中心</li></ol>]]></content>
       
       
       <categories>
@@ -830,9 +832,7 @@
             
             <tag> 学习 </tag>
             
-            <tag> Unicode </tag>
-            
-            <tag> 字符集 </tag>
+            <tag> Dubbo </tag>
             
         </tags>
       

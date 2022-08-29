@@ -292,7 +292,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/26.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -1148,8 +1148,8 @@
 <script>
     new Valine({
         el: '#vcomments',
-        appId: 'STBldAQJtVSJkhjqcYgjtmPL-gzGzoHsz',
-        appKey: 'FnIMnsXhTkXVXQuzykLukEgQ',
+        appId: 'GjiqQwhojXYm2W20KjDDlk19-9Nh9j0Va',
+        appKey: 'w8fOuluBKT5D5LiCnhlLRRpY',
         notify: 'false' === 'true',
         verify: 'false' === 'true',
         visitor: 'false' === 'true',
@@ -1171,19 +1171,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/">
+                <a href="/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="磁盘空间满处理">
+                        <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="靠谱的maven仓库地址">
                         
-                        <span class="card-title">磁盘空间满处理</span>
+                        <span class="card-title">靠谱的maven仓库地址</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            查看当前目录磁盘使用情况df -lh统计当前目录下的目录及文件磁盘使用从大到小排序du -h --max-depth=1
+                            
+#阿里云maven
+&lt;mirror&gt;
+    &lt;id&gt;alimaven&lt;/id&gt;
+    &lt;name&gt;aliyun maven&lt;/name&gt;
+    &lt;url&gt;htt
                         
                     </div>
                     <div class="publish-info">
@@ -1220,33 +1225,31 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/">
+                <a href="/cao-zuo-xi-tong-yuan-li/cao-zuo-xi-tong-yuan-li-chu-shi-cao-zuo-xi-tong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="抓包工具Charles安装、破解及使用">
+                        <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="操作系统原理——初识操作系统">
                         
-                        <span class="card-title">抓包工具Charles安装、破解及使用</span>
+                        <span class="card-title">操作系统原理——初识操作系统</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Charles是一款抓包必备的工具，支持Windows、Mac、手机的抓包测试，还能对https的SLL加密内容进行解密。
-下载安装
-进入官网下载地址：http://www.charlesproxy.com/，点击链接下载30天免费试用版本
+                            什么是操作系统  操作系统是提供计算机用不与计算机硬件之间的使用接口，并能够管理计算机软件和硬件资源的一个复杂的系统软件，为用户的应用程序提供直接可用的运行环境，是应用程序的开发变得简单、高效。  试想一下如果没有操作系统，你将怎样写代码？
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-26
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2021-10-29
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/软件笔记/" class="post-category" target="_blank">
-                                    软件笔记
+                            <a href="/categories/操作系统原理/" class="post-category" target="_blank">
+                                    操作系统原理
                                 </a>
                             
                             
@@ -1256,8 +1259,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/软件笔记/" target="_blank">
-                        <span class="chip bg-color">软件笔记</span>
+                    <a href="/tags/操作系统原理/" target="_blank">
+                        <span class="chip bg-color">操作系统原理</span>
                     </a>
                     
                 </div>
@@ -1433,26 +1436,6 @@
 
 <div class="progress-bar"></div>
 
-<!-- 不蒜子计数初始值纠正 -->
-<script>
-    $(document).ready(function () {
-
-        var int = setInterval(fixCount, 50);
-        var pvcountOffset = 80000;
-        var uvcountOffset = 20000;
-
-        function fixCount() {
-            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
-                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
-                clearInterval(int);
-            }
-            if ($("#busuanzi_container_site_pv").css("display") != "none") {
-                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
-                clearInterval(int);
-            }
-        }
-    });
-</script>
 
 <script language=javascript>
     function siteTime() {
@@ -1542,7 +1525,7 @@ $(function () {
     
 
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
 
     <!-- 雪花特效 -->

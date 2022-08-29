@@ -292,7 +292,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -921,8 +921,8 @@ Optional&lt;Dish&gt; minDish = Dish.menu.stream().
 <script>
     new Valine({
         el: '#vcomments',
-        appId: 'STBldAQJtVSJkhjqcYgjtmPL-gzGzoHsz',
-        appKey: 'FnIMnsXhTkXVXQuzykLukEgQ',
+        appId: 'GjiqQwhojXYm2W20KjDDlk19-9Nh9j0Va',
+        appKey: 'w8fOuluBKT5D5LiCnhlLRRpY',
         notify: 'false' === 'true',
         verify: 'false' === 'true',
         visitor: 'false' === 'true',
@@ -944,19 +944,19 @@ Optional&lt;Dish&gt; minDish = Dish.menu.stream().
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/">
+                <a href="/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Idea maven 插件安装">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Java bean的Getter Setter 自动编译生成工具Lombok">
                         
-                        <span class="card-title">Idea maven 插件安装</span>
+                        <span class="card-title">Java bean的Getter Setter 自动编译生成工具Lombok</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            默认idea 是已经安装好了maven插件的，在File&gt;settings&gt;能搜索到maven的相关配置但是有时候它会莫名其妙的不见了或消失检查Plugins是否启用了maven![](../images/Idea maven 
+                            背景  我们在开发过程中，通常都会定义大量的JavaBean，然后通过IDE去生成其属性的构造器、getter、setter、equals、hashcode、toString方法，当要对某个属性进行改变时，比如命名、类型等，都需要重新去生成
                         
                     </div>
                     <div class="publish-info">
@@ -993,22 +993,25 @@ Optional&lt;Dish&gt; minDish = Dish.menu.stream().
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/">
+                <a href="/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Centos 下Redis 安装以及集群搭建">
+                        <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Redis批量删除命令">
                         
-                        <span class="card-title">Centos 下Redis 安装以及集群搭建</span>
+                        <span class="card-title">Redis批量删除命令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1.下载redis安装包
-cd /root/software
-wget http://download.redis.io/releases/redis-3.2.4.tar.gz
-tar -zxvf redis-3.2.4.tar.gz　2.
+                            
+Redis中有指定多个key批量删除的命令,却没有指定模糊key批量删除命令
+
+批量删除多个key
+del key1 key2通过通配符”*”模糊匹配删除的lua脚本命令
+# 模糊删除
+eval &quot;local keys = re
                         
                     </div>
                     <div class="publish-info">
@@ -1207,26 +1210,6 @@ tar -zxvf redis-3.2.4.tar.gz　2.
 
 <div class="progress-bar"></div>
 
-<!-- 不蒜子计数初始值纠正 -->
-<script>
-    $(document).ready(function () {
-
-        var int = setInterval(fixCount, 50);
-        var pvcountOffset = 80000;
-        var uvcountOffset = 20000;
-
-        function fixCount() {
-            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
-                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
-                clearInterval(int);
-            }
-            if ($("#busuanzi_container_site_pv").css("display") != "none") {
-                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
-                clearInterval(int);
-            }
-        }
-    });
-</script>
 
 <script language=javascript>
     function siteTime() {
@@ -1316,7 +1299,7 @@ $(function () {
     
 
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
 
     <!-- 雪花特效 -->

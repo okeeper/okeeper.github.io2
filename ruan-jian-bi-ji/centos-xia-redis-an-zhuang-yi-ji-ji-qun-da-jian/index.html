@@ -290,7 +290,7 @@ tar -zxvf redis-3.2.4.tar.gz　2.">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -973,8 +973,8 @@ cd /opt/redis-cluster/7004
 <script>
     new Valine({
         el: '#vcomments',
-        appId: 'STBldAQJtVSJkhjqcYgjtmPL-gzGzoHsz',
-        appKey: 'FnIMnsXhTkXVXQuzykLukEgQ',
+        appId: 'GjiqQwhojXYm2W20KjDDlk19-9Nh9j0Va',
+        appKey: 'w8fOuluBKT5D5LiCnhlLRRpY',
         notify: 'false' === 'true',
         verify: 'false' === 'true',
         visitor: 'false' === 'true',
@@ -996,24 +996,20 @@ cd /opt/redis-cluster/7004
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/">
+                <a href="/hou-duan-jia-gou/xian-liu-xiang-guan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Java 8常用转换">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="限流相关">
                         
-                        <span class="card-title">Java 8常用转换</span>
+                        <span class="card-title">限流相关</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1. List转Map/**
- * List -&gt; Map
- * 需要注意的是：
- * toMap 如果集合对象有重复的key，会报错Duplicate key ....
- *  apple1,apple12的id都为1。
- *  可
+                            前言在大流量场景，秒杀、抢购场景，一般会对网站做一些流量控制，牺牲一部分流量而保护系统而不至于系统直接down机。
+常见限流算法固定计算限流就是统计固定时间内的流量数量，如果超过了就限制。这种很容易实现，利用AutomicLong统计，下一
                         
                     </div>
                     <div class="publish-info">
@@ -1024,8 +1020,8 @@ cd /opt/redis-cluster/7004
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/软件笔记/" class="post-category" target="_blank">
-                                    软件笔记
+                            <a href="/categories/后端-架构/" class="post-category" target="_blank">
+                                    后端&架构
                                 </a>
                             
                             
@@ -1035,8 +1031,8 @@ cd /opt/redis-cluster/7004
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/软件笔记/" target="_blank">
-                        <span class="chip bg-color">软件笔记</span>
+                    <a href="/tags/后端-架构/" target="_blank">
+                        <span class="chip bg-color">后端&amp;架构</span>
                     </a>
                     
                 </div>
@@ -1050,21 +1046,19 @@ cd /opt/redis-cluster/7004
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/">
+                <a href="/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Java开发环境准备">
+                        <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="Idea maven 插件安装">
                         
-                        <span class="card-title">Java开发环境准备</span>
+                        <span class="card-title">Idea maven 插件安装</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            JDK下载地址：https://github.com/frekele/oracle-java/releases
-idea激活：https://juejin.im/post/5df8a5a5e51d4557f0460990
-maven环境变量
+                            默认idea 是已经安装好了maven插件的，在File&gt;settings&gt;能搜索到maven的相关配置但是有时候它会莫名其妙的不见了或消失检查Plugins是否启用了maven![](../images/Idea maven 
                         
                     </div>
                     <div class="publish-info">
@@ -1263,26 +1257,6 @@ maven环境变量
 
 <div class="progress-bar"></div>
 
-<!-- 不蒜子计数初始值纠正 -->
-<script>
-    $(document).ready(function () {
-
-        var int = setInterval(fixCount, 50);
-        var pvcountOffset = 80000;
-        var uvcountOffset = 20000;
-
-        function fixCount() {
-            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
-                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
-                clearInterval(int);
-            }
-            if ($("#busuanzi_container_site_pv").css("display") != "none") {
-                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
-                clearInterval(int);
-            }
-        }
-    });
-</script>
 
 <script language=javascript>
     function siteTime() {
@@ -1372,7 +1346,7 @@ $(function () {
     
 
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
 
     <!-- 雪花特效 -->

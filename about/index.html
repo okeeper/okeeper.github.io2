@@ -544,7 +544,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"分享","value":2},{"name":"RocketMQ","value":1},{"name":"架构","value":1},{"name":"区块链","value":2},{"name":"学习","value":4},{"name":"操作系统原理","value":4},{"name":"后端&架构","value":3},{"name":"软件笔记","value":19},{"name":"软考","value":2}],
+                data: [{"name":"分享","value":2},{"name":"RocketMQ","value":1},{"name":"架构","value":1},{"name":"区块链","value":2},{"name":"后端&架构","value":3},{"name":"学习","value":4},{"name":"软件笔记","value":19},{"name":"操作系统原理","value":4},{"name":"软考","value":2}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -568,7 +568,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
         xAxis: [
             {
                 type: 'category',
-                data: ["软件笔记","学习","操作系统原理","后端&架构","区块链","软考","Blog","typora-vue-theme","hexo","分享"]
+                data: ["软件笔记","学习","操作系统原理","后端&架构","区块链","软考","分享","Blog","typora-vue-theme","hexo"]
             }
         ],
         yAxis: [
@@ -720,6 +720,12 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
         <div class="tag-chips center-align">
             
             
+            <a href="/tags/分享/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">分享</span>
+            </a>
+            
+            
+            
             <a href="/tags/Blog/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">Blog</span>
             </a>
@@ -734,12 +740,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             <a href="/tags/hexo/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">hexo</span>
-            </a>
-            
-            
-            
-            <a href="/tags/分享/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">分享</span>
             </a>
             
             
@@ -770,20 +770,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             
             
-            <a href="/tags/Dubbo/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">Dubbo</span>
-            </a>
-            
-            
-            
-            <a href="/tags/学习/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">学习</span>
-            </a>
-            
-            
-            
-            <a href="/tags/操作系统原理/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">操作系统原理</span>
+            <a href="/tags/后端-架构/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">后端&架构</span>
             </a>
             
             
@@ -794,14 +782,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             
             
-            <a href="/tags/HTTP/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">HTTP</span>
-            </a>
-            
-            
-            
-            <a href="/tags/HTTPS/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">HTTPS</span>
+            <a href="/tags/学习/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">学习</span>
             </a>
             
             
@@ -818,14 +800,32 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             
             
-            <a href="/tags/后端-架构/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">后端&架构</span>
+            <a href="/tags/HTTP/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">HTTP</span>
+            </a>
+            
+            
+            
+            <a href="/tags/HTTPS/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">HTTPS</span>
             </a>
             
             
             
             <a href="/tags/软件笔记/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">软件笔记</span>
+            </a>
+            
+            
+            
+            <a href="/tags/操作系统原理/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">操作系统原理</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Dubbo/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">Dubbo</span>
             </a>
             
             
@@ -939,26 +939,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
 
 <div class="progress-bar"></div>
 
-<!-- 不蒜子计数初始值纠正 -->
-<script>
-    $(document).ready(function () {
-
-        var int = setInterval(fixCount, 50);
-        var pvcountOffset = 80000;
-        var uvcountOffset = 20000;
-
-        function fixCount() {
-            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
-                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
-                clearInterval(int);
-            }
-            if ($("#busuanzi_container_site_pv").css("display") != "none") {
-                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
-                clearInterval(int);
-            }
-        }
-    });
-</script>
 
 <script language=javascript>
     function siteTime() {
@@ -1048,7 +1028,7 @@ $(function () {
     
 
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
 
     <!-- 雪花特效 -->
