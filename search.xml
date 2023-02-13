@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Mac好用的Markdown编辑器</title>
+      <link href="/ruan-jian-bi-ji/mac-hao-yong-de-markdown-bian-ji-qi/"/>
+      <url>/ruan-jian-bi-ji/mac-hao-yong-de-markdown-bian-ji-qi/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>企业信息化和政务信息化</title>
       <link href="/ruan-kao/qi-ye-xin-xi-hua-he-zheng-wu-xin-xi-hua/"/>
       <url>/ruan-kao/qi-ye-xin-xi-hua-he-zheng-wu-xin-xi-hua/</url>
@@ -204,31 +229,6 @@
     
     
     <entry>
-      <title>Selenium</title>
-      <link href="/ruan-jian-bi-ji/selenium/"/>
-      <url>/ruan-jian-bi-ji/selenium/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Selenium安装环境搭建"><a href="#Selenium安装环境搭建" class="headerlink" title="Selenium安装环境搭建"></a>Selenium安装环境搭建</h1><p><a href="https://www.zybuluo.com/mwumli/note/222253" target="_blank" rel="noopener">https://www.zybuluo.com/mwumli/note/222253</a></p><h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>报-13权限问题时</p><pre><code>sudo npm install --unsafe-perm -g polymer-cli</code></pre><p>adb找不到设备时</p><pre><code>adb kill-serveradb start-serveradb devices</code></pre><h1 id="元素定位"><a href="#元素定位" class="headerlink" title="元素定位"></a>元素定位</h1><p>find_element_by_android_uiautomator<br><a href="https://blog.csdn.net/weixin_30824277/article/details/95229071" target="_blank" rel="noopener">https://blog.csdn.net/weixin_30824277/article/details/95229071</a></p><h1 id="三种等待方式详解"><a href="#三种等待方式详解" class="headerlink" title="三种等待方式详解"></a>三种等待方式详解</h1><p><a href="http://blog.csdn.net/ping523/article/details/53419622" target="_blank" rel="noopener">http://blog.csdn.net/ping523/article/details/53419622</a></p><p><a href="http://www.cnblogs.com/BigFishFly/p/6380024.html" target="_blank" rel="noopener">http://www.cnblogs.com/BigFishFly/p/6380024.html</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Java开发环境准备</title>
       <link href="/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/"/>
       <url>/ruan-jian-bi-ji/java-kai-fa-huan-jing-zhun-bei/</url>
@@ -254,61 +254,11 @@
     
     
     <entry>
-      <title>docker ES安装</title>
-      <link href="/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
-      <url>/ruan-jian-bi-ji/docker-es-an-zhuang/</url>
+      <title>Selenium</title>
+      <link href="/ruan-jian-bi-ji/selenium/"/>
+      <url>/ruan-jian-bi-ji/selenium/</url>
       
-        <content type="html"><![CDATA[<p>参考docker安装Elasticsearch官方文档<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html</a></p><h1 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h1><pre><code>docker pull docker.elastic.co/kibana/kibana:7.16.0</code></pre><h1 id="docker-compose启动"><a href="#docker-compose启动" class="headerlink" title="docker-compose启动"></a>docker-compose启动</h1><h2 id="新建docker-compose-yml文件"><a href="#新建docker-compose-yml文件" class="headerlink" title="新建docker-compose.yml文件"></a>新建docker-compose.yml文件</h2><pre><code>version: &#39;2.2&#39;services:  es01:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es01    environment:      - node.name=es01      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es02,es03      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9200#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es01/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es01/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es01/logs:/usr/share/elasticsearch/logs#      - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9200:9200    networks:      - elastic  es02:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es02    environment:      - node.name=es02      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es01,es03      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9201#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es02/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es02/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es02/logs:/usr/share/elasticsearch/logs #     - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9201:9200    networks:      - elastic  es03:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es03    environment:      - node.name=es03      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es01,es02      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9202#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es03/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es03/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es03/logs:/usr/share/elasticsearch/logs#      - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9202:9200    networks:      - elastic  kib01:    image: docker.elastic.co/kibana/kibana:7.16.0    container_name: kib01    ports:      - 5601:5601    environment:      ELASTICSEARCH_URL: http://es01:9200      ELASTICSEARCH_HOSTS: &#39;[&quot;http://es01:9200&quot;,&quot;http://es02:9200&quot;,&quot;http://es03:9200&quot;]&#39;    networks:      - elastic  cerebro:    image: lmenezes/cerebro:latest    container_name: cerebro    ports:      - &quot;9000:9000&quot;    command:      - -Dhosts.0.host=http://es01:9200      - -Dhosts.1.host=http://es02:9200      - -Dhosts.2.host=http://es03:9200    networks:      - elasticvolumes:  data01:    driver: local  data02:    driver: local  data03:    driver: localnetworks:  elastic:    driver: bridge</code></pre><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><pre><code>docker-compose -f ./docker-compose.yml up d</code></pre><blockquote><p>有可能报错’failed to resolve host [es01] ‘<br>This sample docker-compose.yml file uses the ES_JAVA_OPTS environment variable to manually set the heap size to 512MB. We do not recommend using ES_JAVA_OPTS in production. See Manually set the heap size.<br>解决办法，如果你用的市Mac左面版的docker,docker虚拟机内存默认是2G是不够的，调整到4G以上这个问题解决<br>![](../images/docker ES安装/getImage-20220825184627503.png)</p></blockquote><h1 id="elasticsearch运维常用api"><a href="#elasticsearch运维常用api" class="headerlink" title="elasticsearch运维常用api"></a>elasticsearch运维常用api</h1><h2 id="查看实例健康状态"><a href="#查看实例健康状态" class="headerlink" title="查看实例健康状态"></a>查看实例健康状态</h2><pre><code>http://localhost:9200/_cat/health?v</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=61d832d4ab644142b460789c" alt></p><h2 id="查看集群健康状态"><a href="#查看集群健康状态" class="headerlink" title="查看集群健康状态"></a>查看集群健康状态</h2><pre><code>http://localhost:9200/_cluster/health?pretty</code></pre><p>![](../images/docker ES安装/getImage-20220825184627531.png)</p><h2 id="查询分片状态"><a href="#查询分片状态" class="headerlink" title="查询分片状态"></a>查询分片状态</h2><pre><code>http://localhost:9200/_cat/shards/test*?v</code></pre><h1 id="Elasticsearch的console常用api"><a href="#Elasticsearch的console常用api" class="headerlink" title="Elasticsearch的console常用api"></a>Elasticsearch的console常用api</h1><pre><code></code></pre><h1 id="安装cerebro"><a href="#安装cerebro" class="headerlink" title="安装cerebro"></a>安装cerebro</h1><p>cerebro是Elasticsearch的可视化运维工具</p><p>docker 镜像获取</p><pre><code> docker pull lmenezes/cerebro</code></pre><p>启动</p><pre><code> docker run -d --name cerebro -p 9000:9000 045d7f40bf06</code></pre><p>cerebro可以看到每index的分片分布情况</p><p>浏览器打开：<a href="http://localhost:9000/" target="_blank" rel="noopener">http://localhost:9000/</a></p><h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><h2 id="问题一：如果出现docker-容器假死需要强制stop时"><a href="#问题一：如果出现docker-容器假死需要强制stop时" class="headerlink" title="问题一：如果出现docker 容器假死需要强制stop时"></a>问题一：如果出现docker 容器假死需要强制stop时</h2><pre><code>停止所有的容器 docker stop $(docker ps -q)强制移除此容器 docker rm -f mysql1最后一招，强制重启docker服务service 方式重启docker服务sudo service docker restart关闭dockersudo service docker stop</code></pre><p>如果是Docker-Destop左面版，可以在设置中重启</p><h2 id="问题二：ELK出现unassigned-shards查看及删除"><a href="#问题二：ELK出现unassigned-shards查看及删除" class="headerlink" title="问题二：ELK出现unassigned_shards查看及删除"></a>问题二：ELK出现unassigned_shards查看及删除</h2><p>ES的data节点异常关闭，会导致副本出现unassigned shard，致使索引状态变为yellow，甚至是red。</p><h3 id="解决办法1："><a href="#解决办法1：" class="headerlink" title="解决办法1："></a>解决办法1：</h3><pre><code># 查询所有分片数据GET _cat/shards# 或者查询集群健康状态GET _cluster/health出现unassigned_shards大于0时表示有异常分片数据</code></pre><p>如果运气不好，遇到了主分片异常，上面的方法不管用，可以先用重试的方法尝试恢复</p><pre><code>/_cluster/reroute?retry_failed=true</code></pre><p>一般data节点异常退出，该方法都能解决。</p><h3 id="解决办法2："><a href="#解决办法2：" class="headerlink" title="解决办法2："></a>解决办法2：</h3><p>若不起作用，可以尝试重新分配主分片，不过可能会有部分数据丢失。</p><pre><code>POST /_cluster/reroute?pretty{    &quot;commands&quot; : [ {        &quot;allocate_stale_primary&quot; :            {              &quot;index&quot; : &quot;test&quot;,               &quot;shard&quot; : 3,              &quot;node&quot; : &quot;192.168.1.1_9200&quot;,              &quot;accept_data_loss&quot; : true            }        }    ]}</code></pre><h3 id="解决办法3："><a href="#解决办法3：" class="headerlink" title="解决办法3："></a>解决办法3：</h3><p>删除问题索引</p><pre><code>curl -XDELETE localhost:9200/索引名称</code></pre><p>解决办法4：出现以上问题的原因除了同步异常外，还有一个原因可能是磁盘空间使用率大于85%。<br>es中有个配置<code>cluster.routing.allocation.disk.watermark.low</code>默认是85%，系统磁盘空间使用率大于85%将出现此问题</p><p>解决办法要么调整这个配置，要么清理磁盘</p><pre><code>PUT /_cluster/settings{    &quot;transient&quot; : {        &quot;cluster.routing.allocation.disk.watermark.low&quot; : &quot;90%&quot;    }}</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>iterm2 rz sz 安装</title>
-      <link href="/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/"/>
-      <url>/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/</url>
-      
-        <content type="html"><![CDATA[<p>一、本地rz sz安装<br><a href="https://github.com/aikuyun/iterm2-zmodem" target="_blank" rel="noopener">https://github.com/aikuyun/iterm2-zmodem</a></p><p>二、服务器端rz sz安装<br>yum install lrzsz</p><p>rz：从本地上传文件至服务器<br>sz filename：从服务器下载文件至本地</p><p>三、iTrm2配置<br>参考这里：<a href="https://github.com/aikuyun/iterm2-zmodem" target="_blank" rel="noopener">https://github.com/aikuyun/iterm2-zmodem</a></p><p>二、使用#<br>2.1 sz 命令发送文件到本地#<br>sz filename<br>2.2 rz 命令本地上传文件到服务器#<br>rz</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>idea 突然闪退，内存溢出</title>
-      <link href="/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/"/>
-      <url>/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/</url>
-      
-        <content type="html"><![CDATA[<p>解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin<br>找到idea.exe.vmoptions配置修改Xmx 为合适大小1024/2048，然后启动此路径下的idea.exe</p><pre><code>-Xms128m-Xmx1024m-XX:MaxPermSize=350m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-Djava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow</code></pre><p>** 如果你的系统是64位的，则就需要修改idea64.exe.vmoptions这个配置，然后启动idea64.exe**</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Selenium安装环境搭建"><a href="#Selenium安装环境搭建" class="headerlink" title="Selenium安装环境搭建"></a>Selenium安装环境搭建</h1><p><a href="https://www.zybuluo.com/mwumli/note/222253" target="_blank" rel="noopener">https://www.zybuluo.com/mwumli/note/222253</a></p><h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>报-13权限问题时</p><pre><code>sudo npm install --unsafe-perm -g polymer-cli</code></pre><p>adb找不到设备时</p><pre><code>adb kill-serveradb start-serveradb devices</code></pre><h1 id="元素定位"><a href="#元素定位" class="headerlink" title="元素定位"></a>元素定位</h1><p>find_element_by_android_uiautomator<br><a href="https://blog.csdn.net/weixin_30824277/article/details/95229071" target="_blank" rel="noopener">https://blog.csdn.net/weixin_30824277/article/details/95229071</a></p><h1 id="三种等待方式详解"><a href="#三种等待方式详解" class="headerlink" title="三种等待方式详解"></a>三种等待方式详解</h1><p><a href="http://blog.csdn.net/ping523/article/details/53419622" target="_blank" rel="noopener">http://blog.csdn.net/ping523/article/details/53419622</a></p><p><a href="http://www.cnblogs.com/BigFishFly/p/6380024.html" target="_blank" rel="noopener">http://www.cnblogs.com/BigFishFly/p/6380024.html</a></p>]]></content>
       
       
       <categories>
@@ -354,86 +304,86 @@
     
     
     <entry>
+      <title>docker命令笔记</title>
+      <link href="/ruan-jian-bi-ji/docker-ming-ling-bi-ji/"/>
+      <url>/ruan-jian-bi-ji/docker-ming-ling-bi-ji/</url>
+      
+        <content type="html"><![CDATA[<h1 id="制作自己的镜像"><a href="#制作自己的镜像" class="headerlink" title="制作自己的镜像"></a>制作自己的镜像</h1><p>从互联网拉取镜像</p><pre><code>docker pull centos:7</code></pre><p>启动容器</p><pre><code>docker run -it -d centos:7 /bin/bash</code></pre><p>进入启动容器</p><pre><code>docker exec -it -v /data/soft:/data/soft centos:7 /bin/bash</code></pre><p>在容器中安装jdk</p><pre><code>yum -y list java*docker yum -y java-11-openjdk.x86_64</code></pre><p>将容器提交到镜像仓库</p><pre><code>docker commit centos:7 okeeper:centos7  #将正在运行的容器打包为镜像</code></pre><p>将镜像导出为文件</p><pre><code>docker save -o ./okeeper-centos7.tar okeeper:centos7</code></pre><h1 id="在java项目中配置maven自动构建镜像"><a href="#在java项目中配置maven自动构建镜像" class="headerlink" title="在java项目中配置maven自动构建镜像"></a>在java项目中配置maven自动构建镜像</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docker ES安装</title>
+      <link href="/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
+      <url>/ruan-jian-bi-ji/docker-es-an-zhuang/</url>
+      
+        <content type="html"><![CDATA[<p>参考docker安装Elasticsearch官方文档<br><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html</a></p><h1 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h1><pre><code>docker pull docker.elastic.co/kibana/kibana:7.16.0</code></pre><h1 id="docker-compose启动"><a href="#docker-compose启动" class="headerlink" title="docker-compose启动"></a>docker-compose启动</h1><h2 id="新建docker-compose-yml文件"><a href="#新建docker-compose-yml文件" class="headerlink" title="新建docker-compose.yml文件"></a>新建docker-compose.yml文件</h2><pre><code>version: &#39;2.2&#39;services:  es01:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es01    environment:      - node.name=es01      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es02,es03      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9200#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es01/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es01/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es01/logs:/usr/share/elasticsearch/logs#      - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9200:9200    networks:      - elastic  es02:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es02    environment:      - node.name=es02      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es01,es03      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9201#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es02/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es02/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es02/logs:/usr/share/elasticsearch/logs #     - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9201:9200    networks:      - elastic  es03:    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0    container_name: es03    environment:      - node.name=es03      - cluster.name=es-docker-cluster      - discovery.seed_hosts=es01,es02      - cluster.initial_master_nodes=es01,es02,es03      - bootstrap.memory_lock=true      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;#      - http.port=9202#      - node.master=true#      - node.data=true#      - node.ingest=true    ulimits:      memlock:        soft: -1        hard: -1    volumes:      # - /Users/yue/data/elasticsearch-cluster/es03/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml      - /Users/yue/data/elasticsearch-cluster/es03/data:/usr/share/elasticsearch/data       - /Users/yue/data/elasticsearch-cluster/es03/logs:/usr/share/elasticsearch/logs#      - /Users/yue/data/elasticsearch-cluster/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml    ports:      - 9202:9200    networks:      - elastic  kib01:    image: docker.elastic.co/kibana/kibana:7.16.0    container_name: kib01    ports:      - 5601:5601    environment:      ELASTICSEARCH_URL: http://es01:9200      ELASTICSEARCH_HOSTS: &#39;[&quot;http://es01:9200&quot;,&quot;http://es02:9200&quot;,&quot;http://es03:9200&quot;]&#39;    networks:      - elastic  cerebro:    image: lmenezes/cerebro:latest    container_name: cerebro    ports:      - &quot;9000:9000&quot;    command:      - -Dhosts.0.host=http://es01:9200      - -Dhosts.1.host=http://es02:9200      - -Dhosts.2.host=http://es03:9200    networks:      - elasticvolumes:  data01:    driver: local  data02:    driver: local  data03:    driver: localnetworks:  elastic:    driver: bridge</code></pre><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><pre><code>docker-compose -f ./docker-compose.yml up d</code></pre><blockquote><p>有可能报错’failed to resolve host [es01] ‘<br>This sample docker-compose.yml file uses the ES_JAVA_OPTS environment variable to manually set the heap size to 512MB. We do not recommend using ES_JAVA_OPTS in production. See Manually set the heap size.<br>解决办法，如果你用的市Mac左面版的docker,docker虚拟机内存默认是2G是不够的，调整到4G以上这个问题解决<br>![](../images/docker ES安装/getImage-20220825184627503.png)</p></blockquote><h1 id="elasticsearch运维常用api"><a href="#elasticsearch运维常用api" class="headerlink" title="elasticsearch运维常用api"></a>elasticsearch运维常用api</h1><h2 id="查看实例健康状态"><a href="#查看实例健康状态" class="headerlink" title="查看实例健康状态"></a>查看实例健康状态</h2><pre><code>http://localhost:9200/_cat/health?v</code></pre><p><img src="https://leanote.com/api/file/getImage?fileId=61d832d4ab644142b460789c" alt></p><h2 id="查看集群健康状态"><a href="#查看集群健康状态" class="headerlink" title="查看集群健康状态"></a>查看集群健康状态</h2><pre><code>http://localhost:9200/_cluster/health?pretty</code></pre><p>![](../images/docker ES安装/getImage-20220825184627531.png)</p><h2 id="查询分片状态"><a href="#查询分片状态" class="headerlink" title="查询分片状态"></a>查询分片状态</h2><pre><code>http://localhost:9200/_cat/shards/test*?v</code></pre><h1 id="Elasticsearch的console常用api"><a href="#Elasticsearch的console常用api" class="headerlink" title="Elasticsearch的console常用api"></a>Elasticsearch的console常用api</h1><pre><code></code></pre><h1 id="安装cerebro"><a href="#安装cerebro" class="headerlink" title="安装cerebro"></a>安装cerebro</h1><p>cerebro是Elasticsearch的可视化运维工具</p><p>docker 镜像获取</p><pre><code> docker pull lmenezes/cerebro</code></pre><p>启动</p><pre><code> docker run -d --name cerebro -p 9000:9000 045d7f40bf06</code></pre><p>cerebro可以看到每index的分片分布情况</p><p>浏览器打开：<a href="http://localhost:9000/" target="_blank" rel="noopener">http://localhost:9000/</a></p><h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><h2 id="问题一：如果出现docker-容器假死需要强制stop时"><a href="#问题一：如果出现docker-容器假死需要强制stop时" class="headerlink" title="问题一：如果出现docker 容器假死需要强制stop时"></a>问题一：如果出现docker 容器假死需要强制stop时</h2><pre><code>停止所有的容器 docker stop $(docker ps -q)强制移除此容器 docker rm -f mysql1最后一招，强制重启docker服务service 方式重启docker服务sudo service docker restart关闭dockersudo service docker stop</code></pre><p>如果是Docker-Destop左面版，可以在设置中重启</p><h2 id="问题二：ELK出现unassigned-shards查看及删除"><a href="#问题二：ELK出现unassigned-shards查看及删除" class="headerlink" title="问题二：ELK出现unassigned_shards查看及删除"></a>问题二：ELK出现unassigned_shards查看及删除</h2><p>ES的data节点异常关闭，会导致副本出现unassigned shard，致使索引状态变为yellow，甚至是red。</p><h3 id="解决办法1："><a href="#解决办法1：" class="headerlink" title="解决办法1："></a>解决办法1：</h3><pre><code># 查询所有分片数据GET _cat/shards# 或者查询集群健康状态GET _cluster/health出现unassigned_shards大于0时表示有异常分片数据</code></pre><p>如果运气不好，遇到了主分片异常，上面的方法不管用，可以先用重试的方法尝试恢复</p><pre><code>/_cluster/reroute?retry_failed=true</code></pre><p>一般data节点异常退出，该方法都能解决。</p><h3 id="解决办法2："><a href="#解决办法2：" class="headerlink" title="解决办法2："></a>解决办法2：</h3><p>若不起作用，可以尝试重新分配主分片，不过可能会有部分数据丢失。</p><pre><code>POST /_cluster/reroute?pretty{    &quot;commands&quot; : [ {        &quot;allocate_stale_primary&quot; :            {              &quot;index&quot; : &quot;test&quot;,               &quot;shard&quot; : 3,              &quot;node&quot; : &quot;192.168.1.1_9200&quot;,              &quot;accept_data_loss&quot; : true            }        }    ]}</code></pre><h3 id="解决办法3："><a href="#解决办法3：" class="headerlink" title="解决办法3："></a>解决办法3：</h3><p>删除问题索引</p><pre><code>curl -XDELETE localhost:9200/索引名称</code></pre><p>解决办法4：出现以上问题的原因除了同步异常外，还有一个原因可能是磁盘空间使用率大于85%。<br>es中有个配置<code>cluster.routing.allocation.disk.watermark.low</code>默认是85%，系统磁盘空间使用率大于85%将出现此问题</p><p>解决办法要么调整这个配置，要么清理磁盘</p><pre><code>PUT /_cluster/settings{    &quot;transient&quot; : {        &quot;cluster.routing.allocation.disk.watermark.low&quot; : &quot;90%&quot;    }}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>idea 突然闪退，内存溢出</title>
+      <link href="/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/"/>
+      <url>/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/</url>
+      
+        <content type="html"><![CDATA[<p>解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin<br>找到idea.exe.vmoptions配置修改Xmx 为合适大小1024/2048，然后启动此路径下的idea.exe</p><pre><code>-Xms128m-Xmx1024m-XX:MaxPermSize=350m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-Djava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow</code></pre><p>** 如果你的系统是64位的，则就需要修改idea64.exe.vmoptions这个配置，然后启动idea64.exe**</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>git重命名的坑</title>
       <link href="/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/"/>
       <url>/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/</url>
       
         <content type="html"><![CDATA[<p>如果使用git命令进行仅涉及大小写的重命名,git 默认是把你的动作忽略的，所以当你删掉本地代码，重新pull代码时，你会发现文件还是重命名之前的,神奇吧，记下这个坑，等着你们踩着坑来这看吧，坏笑/</p><p>解决方法如下：</p><ul><li><p>设置git库为大小写敏感（不建议）</p><pre><code>git config core.ignorecase false</code></pre><p>用这种方法进行重命名，用git status就可以识别出修改了，但是不推荐用这种方式，因为在更新这种修改的时候会有麻烦。</p></li><li><p>使用git mv命令（仅当core.ignorecase为true时可用）</p><pre><code>$ git mv ABC.java Abc.java</code></pre></li></ul><p>$ git status<br>……<br>renamed:<br> ABC.java -&gt; Abc.java</p><p>```</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>maven 包冲突 解决</title>
-      <link href="/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
-      <url>/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</url>
-      
-        <content type="html"><![CDATA[<pre><code>mvn dependency:tree -Dverbose -Dincludes=org.slf4j</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>使用Jmeter进行Dubbo接口压测</title>
-      <link href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
-      <url>/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</url>
-      
-        <content type="html"><![CDATA[<h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><h2 id="一、下载Jmeter3-1"><a href="#一、下载Jmeter3-1" class="headerlink" title="一、下载Jmeter3.1"></a>一、下载Jmeter3.1</h2><p>下载地址：<a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip</a><br>其他版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></p><p>更高版本的Jmeter 5+好像有点问题，建议还是用这个版本吧</p><h2 id="二、下载dubbo官方的jmeter插件"><a href="#二、下载dubbo官方的jmeter插件" class="headerlink" title="二、下载dubbo官方的jmeter插件"></a>二、下载dubbo官方的jmeter插件</h2><p>下载地址：<a href="https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar" target="_blank" rel="noopener">https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar</a><br>官方用户指南：<a href="https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97</a></p><h2 id="三、解压Jmeter"><a href="#三、解压Jmeter" class="headerlink" title="三、解压Jmeter"></a>三、解压Jmeter</h2><p>将jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar放到<code>${JMETER_HOME}\lib\ext.</code>中</p><h2 id="四、启动Jmeter"><a href="#四、启动Jmeter" class="headerlink" title="四、启动Jmeter"></a>四、启动Jmeter</h2><p> <code>${JMETER_HOME}\jmeter.bat</code></p><h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="../images/Untitled/getImage-20220825182246944.png" alt><br><img src="../images/Untitled/getImage-20220825182247846.png" alt></p><h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="../images/Untitled/getImage-20220825182248427.png" alt></p><p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="../images/Untitled/getImage-20220825182248165.png" alt></p><h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="../images/Untitled/getImage-20220825182248034.png" alt></p><h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="../images/Untitled/getImage-20220825182247230.png" alt></p><h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="../images/Untitled/getImage-20220825182248268.png" alt></p><h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="../images/Untitled/getImage-20220825182247269.png" alt></p><h1 id="六、dubbo服务器状态查看"><a href="#六、dubbo服务器状态查看" class="headerlink" title="六、dubbo服务器状态查看"></a>六、dubbo服务器状态查看</h1><ol><li>使用telnet进入dubbo的console界面<pre><code>telnet 192.168.1.131 32101后回车</code></pre><img src="../images/Untitled/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="../images/Untitled/getImage-20220825182247961.png" alt></li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>使用Maven命令指定上传打包到私库</title>
-      <link href="/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/"/>
-      <url>/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/</url>
-      
-        <content type="html"><![CDATA[<p>我们一般在pom.xml中加入<code>distributionManagement</code></p><pre><code>&lt;distributionManagement&gt;    &lt;repository&gt;      &lt;id&gt;internal.repo&lt;/id&gt;      &lt;name&gt;MyCo Internal Repository&lt;/name&gt;      &lt;url&gt;Host to Company Repository&lt;/url&gt;    &lt;/repository&gt;  &lt;/distributionManagement&gt;</code></pre><p>来指定setting.xml中的server私库地址，然后通过<code>mvn clean install deploy</code>打包上传 </p><hr><p>但是为了子类不必要的应用，我们可以用<code>-DaltDeploymentRepository</code>来指定打包到私服的参数</p><pre><code>mvn deploy -DaltDeploymentRepository=releases::default::http://198.11.174.75:8081/nexus/content/repositories/releases/</code></pre><p>上传本地jar到私库</p><pre><code>mvn deploy:deploy-file -DgroupId=com.xy.Oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar -Dfile=E:\ojdbc14.jar -Durl=http://localhost:9090/nexus-2.2-01/content/repositories/thirdparty/ -DrepositoryId=thirdparty#上传小米push 到私有仓库mvn deploy:deploy-file -DgroupId=com.xiaomi -DartifactId=MiPush_SDK_Server -Dversion=2.2.18 -Dpackaging=jar -Dfile=lib/MiPush_SDK_Server_2_2_18.jar -Durl=http://198.11.174.75:8081/nexus/content/groups/public/</code></pre><p>单独构建上传模块 pingjuan-web，同时会构建上传 pingjuan-web</p><pre><code>mvn clean install deploy -pl trade-center-api -ammvn clean install deploy -DaltDeploymentRepository=releases::default::http://198.11.174.75:8081/nexus/content/repositories/releases/ -pl trade-center-api -am</code></pre>]]></content>
       
       
       <categories>
@@ -479,11 +429,11 @@
     
     
     <entry>
-      <title>磁盘空间满处理</title>
-      <link href="/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/"/>
-      <url>/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/</url>
+      <title>使用Jmeter进行Dubbo接口压测</title>
+      <link href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
+      <url>/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</url>
       
-        <content type="html"><![CDATA[<h1 id="查看当前目录磁盘使用情况"><a href="#查看当前目录磁盘使用情况" class="headerlink" title="查看当前目录磁盘使用情况"></a>查看当前目录磁盘使用情况</h1><pre><code>df -lh</code></pre><h1 id="统计当前目录下的目录及文件磁盘使用从大到小排序"><a href="#统计当前目录下的目录及文件磁盘使用从大到小排序" class="headerlink" title="统计当前目录下的目录及文件磁盘使用从大到小排序"></a>统计当前目录下的目录及文件磁盘使用从大到小排序</h1><pre><code>du -h --max-depth=1</code></pre>]]></content>
+        <content type="html"><![CDATA[<h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><h2 id="一、下载Jmeter3-1"><a href="#一、下载Jmeter3-1" class="headerlink" title="一、下载Jmeter3.1"></a>一、下载Jmeter3.1</h2><p>下载地址：<a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip</a><br>其他版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></p><p>更高版本的Jmeter 5+好像有点问题，建议还是用这个版本吧</p><h2 id="二、下载dubbo官方的jmeter插件"><a href="#二、下载dubbo官方的jmeter插件" class="headerlink" title="二、下载dubbo官方的jmeter插件"></a>二、下载dubbo官方的jmeter插件</h2><p>下载地址：<a href="https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar" target="_blank" rel="noopener">https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar</a><br>官方用户指南：<a href="https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97</a></p><h2 id="三、解压Jmeter"><a href="#三、解压Jmeter" class="headerlink" title="三、解压Jmeter"></a>三、解压Jmeter</h2><p>将jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar放到<code>${JMETER_HOME}\lib\ext.</code>中</p><h2 id="四、启动Jmeter"><a href="#四、启动Jmeter" class="headerlink" title="四、启动Jmeter"></a>四、启动Jmeter</h2><p> <code>${JMETER_HOME}\jmeter.bat</code></p><h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="../images/Untitled/getImage-20220825182246944.png" alt><br><img src="../images/Untitled/getImage-20220825182247846.png" alt></p><h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="../images/Untitled/getImage-20220825182248427.png" alt></p><p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="../images/Untitled/getImage-20220825182248165.png" alt></p><h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="../images/Untitled/getImage-20220825182248034.png" alt></p><h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="../images/Untitled/getImage-20220825182247230.png" alt></p><h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="../images/Untitled/getImage-20220825182248268.png" alt></p><h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="../images/Untitled/getImage-20220825182247269.png" alt></p><h1 id="六、dubbo服务器状态查看"><a href="#六、dubbo服务器状态查看" class="headerlink" title="六、dubbo服务器状态查看"></a>六、dubbo服务器状态查看</h1><ol><li>使用telnet进入dubbo的console界面<pre><code>telnet 192.168.1.131 32101后回车</code></pre><img src="../images/Untitled/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="../images/Untitled/getImage-20220825182247961.png" alt></li></ol>]]></content>
       
       
       <categories>
@@ -529,11 +479,36 @@
     
     
     <entry>
-      <title>科学上网神器,熊猫VPN, 亲测很舒服</title>
-      <link href="/ruan-jian-bi-ji/ke-xue-shang-wang-shen-qi-xiong-mao-vpn-qin-ce-hen-shu-fu/"/>
-      <url>/ruan-jian-bi-ji/ke-xue-shang-wang-shen-qi-xiong-mao-vpn-qin-ce-hen-shu-fu/</url>
+      <title>iterm2 rz sz 安装</title>
+      <link href="/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/"/>
+      <url>/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/</url>
       
-        <content type="html"><![CDATA[<p>官方网站国内已经不能访问了：<br>请用以下网址进入：<br>熊猫VPN: <a href="https://www.pantavv.xyz/i/58074818" target="_blank" rel="noopener">https://www.pantavv.xyz/i/58074818</a></p>]]></content>
+        <content type="html"><![CDATA[<p>一、本地rz sz安装<br><a href="https://github.com/aikuyun/iterm2-zmodem" target="_blank" rel="noopener">https://github.com/aikuyun/iterm2-zmodem</a></p><p>二、服务器端rz sz安装<br>yum install lrzsz</p><p>rz：从本地上传文件至服务器<br>sz filename：从服务器下载文件至本地</p><p>三、iTrm2配置<br>参考这里：<a href="https://github.com/aikuyun/iterm2-zmodem" target="_blank" rel="noopener">https://github.com/aikuyun/iterm2-zmodem</a></p><p>二、使用#<br>2.1 sz 命令发送文件到本地#<br>sz filename<br>2.2 rz 命令本地上传文件到服务器#<br>rz</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>maven 包冲突 解决</title>
+      <link href="/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
+      <url>/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</url>
+      
+        <content type="html"><![CDATA[<pre><code>mvn dependency:tree -Dverbose -Dincludes=org.slf4j</code></pre>]]></content>
       
       
       <categories>
@@ -579,6 +554,81 @@
     
     
     <entry>
+      <title>自行搭建v2ray科学上网工具，支持mac、ios、windows</title>
+      <link href="/ruan-jian-bi-ji/zi-xing-da-jian-v2ray-ke-xue-shang-wang-gong-ju-zhi-chi-mac-ios-windows/"/>
+      <url>/ruan-jian-bi-ji/zi-xing-da-jian-v2ray-ke-xue-shang-wang-gong-ju-zhi-chi-mac-ios-windows/</url>
+      
+        <content type="html"><![CDATA[<h1 id="服务器搭建"><a href="#服务器搭建" class="headerlink" title="服务器搭建"></a>服务器搭建</h1><ol><li><p>购买海外VPS/ECS, 我这里用的是vultr，它家可以随时换IP、换服务器位置，无须另外收费，比较适合新手</p></li><li><p>安装v2ray服务端，有一键安装脚本，傻瓜式安装，安装时如果用的是shadowrocket客户端方式连接，安装时询问时这一步选择是即可</p><p><img src="../images/%E8%87%AA%E8%A1%8C%E6%90%AD%E5%BB%BAv2ray%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%B7%A5%E5%85%B7%EF%BC%8C%E6%94%AF%E6%8C%81mac%E3%80%81ios%E3%80%81windows/v2ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%856.png" alt="img"></p></li></ol><p>详细步骤参考网上文章进行一键安装：</p><p><a href="https://xiaoheicn.top/v2ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC-233boy%E5%A4%A7%E7%A5%9E%E7%89%88%E6%9C%AC-%E5%8D%95%E7%94%A8%E6%88%B7/" target="_blank" rel="noopener">https://xiaoheicn.top/v2ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC-233boy%E5%A4%A7%E7%A5%9E%E7%89%88%E6%9C%AC-%E5%8D%95%E7%94%A8%E6%88%B7/</a></p><h1 id="客户端下载"><a href="#客户端下载" class="headerlink" title="客户端下载"></a>客户端下载</h1><p>因政策原因，国内apple id无法下载ssr的客户端。为了在你的iphone/ipad上下载可用的ss客户端，你需要一个境外apple id登录app store，然后再下载需要的软件。境外apple id请参考：<a href="https://v2xtls.org/境外apple-id信息汇总/" target="_blank" rel="noopener">境外apple id信息汇总</a>，切换apple id下载软件请参考：<a href="https://v2xtls.org/切换apple-id下载其它国家和地区的应用/" target="_blank" rel="noopener">切换apple id下载其它国家和地区的应用</a>。</p><p>app store中， <strong>免费</strong>的ssr ios客户端有：</p><ul><li>Mume（图标是一朵梅花，有红梅/黑梅两个版本，黑梅免费且内置免费节点）</li><li>Potatso Lite</li><li>NetShuttle(网际飞梭)</li><li>FastSocks</li><li>Sockswitch（没有中文界面）</li><li>shadowrock</li></ul><p><strong>免费ssr ios客户端个人推荐使用Mume和Potatso lite</strong>，简洁好用。</p><p><strong>付费</strong>的SSr ios客户端有：</p><ul><li>Shadowrocket（俗称小火箭，注意不是shadowrocket VPN）</li><li>pepi</li><li>Potasto 2</li><li>surge pro</li></ul><p><strong>付费的ssr ios客户端个人推荐Shadowrocket和pepi</strong>，两个应用都支持包括SS/SSR/V2Ray在内的等多种协议，功能强大且好用。</p><p>注意：有些shadowsocksr客户端已经下架，但app store中存在同名的应用，请注意区分，例如Waterdrop、MUME。</p><p>注意：上述列出的仅是客户端，安装后需要配置服务端信息才能科学上网。获取服务端信息请参考：<a href="https://v2xtls.org/获取科学上网服务端信息/" target="_blank" rel="noopener">获取科学上网服务端信息</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用Maven命令指定上传打包到私库</title>
+      <link href="/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/"/>
+      <url>/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/</url>
+      
+        <content type="html"><![CDATA[<p>我们一般在pom.xml中加入<code>distributionManagement</code></p><pre><code>&lt;distributionManagement&gt;    &lt;repository&gt;      &lt;id&gt;internal.repo&lt;/id&gt;      &lt;name&gt;MyCo Internal Repository&lt;/name&gt;      &lt;url&gt;Host to Company Repository&lt;/url&gt;    &lt;/repository&gt;  &lt;/distributionManagement&gt;</code></pre><p>来指定setting.xml中的server私库地址，然后通过<code>mvn clean install deploy</code>打包上传 </p><hr><p>但是为了子类不必要的应用，我们可以用<code>-DaltDeploymentRepository</code>来指定打包到私服的参数</p><pre><code>mvn deploy -DaltDeploymentRepository=releases::default::http://198.11.174.75:8081/nexus/content/repositories/releases/</code></pre><p>上传本地jar到私库</p><pre><code>mvn deploy:deploy-file -DgroupId=com.xy.Oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar -Dfile=E:\ojdbc14.jar -Durl=http://localhost:9090/nexus-2.2-01/content/repositories/thirdparty/ -DrepositoryId=thirdparty#上传小米push 到私有仓库mvn deploy:deploy-file -DgroupId=com.xiaomi -DartifactId=MiPush_SDK_Server -Dversion=2.2.18 -Dpackaging=jar -Dfile=lib/MiPush_SDK_Server_2_2_18.jar -Durl=http://198.11.174.75:8081/nexus/content/groups/public/</code></pre><p>单独构建上传模块 pingjuan-web，同时会构建上传 pingjuan-web</p><pre><code>mvn clean install deploy -pl trade-center-api -ammvn clean install deploy -DaltDeploymentRepository=releases::default::http://198.11.174.75:8081/nexus/content/repositories/releases/ -pl trade-center-api -am</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>科学上网神器,熊猫VPN,狗屁，踩坑了！！！现已跑路，不要用</title>
+      <link href="/ruan-jian-bi-ji/ke-xue-shang-wang-shen-qi-xiong-mao-vpn-qin-ce-hen-shu-fu/"/>
+      <url>/ruan-jian-bi-ji/ke-xue-shang-wang-shen-qi-xiong-mao-vpn-qin-ce-hen-shu-fu/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>软件开发方法</title>
       <link href="/ruan-kao/ruan-jian-kai-fa-fang-fa/"/>
       <url>/ruan-kao/ruan-jian-kai-fa-fang-fa/</url>
@@ -596,6 +646,31 @@
         <tags>
             
             <tag> 软考 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>磁盘空间满处理</title>
+      <link href="/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/"/>
+      <url>/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/</url>
+      
+        <content type="html"><![CDATA[<h1 id="查看当前目录磁盘使用情况"><a href="#查看当前目录磁盘使用情况" class="headerlink" title="查看当前目录磁盘使用情况"></a>查看当前目录磁盘使用情况</h1><pre><code>df -lh</code></pre><h1 id="统计当前目录下的目录及文件磁盘使用从大到小排序"><a href="#统计当前目录下的目录及文件磁盘使用从大到小排序" class="headerlink" title="统计当前目录下的目录及文件磁盘使用从大到小排序"></a>统计当前目录下的目录及文件磁盘使用从大到小排序</h1><pre><code>du -h --max-depth=1</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
             
         </tags>
       
@@ -720,9 +795,9 @@
       
         <tags>
             
-            <tag> Disruptor </tag>
-            
             <tag> 学习 </tag>
+            
+            <tag> Disruptor </tag>
             
         </tags>
       
@@ -756,6 +831,33 @@
     
     
     <entry>
+      <title>Dubbo源码学习</title>
+      <link href="/xue-xi/dubbo-yuan-ma-xue-xi/"/>
+      <url>/xue-xi/dubbo-yuan-ma-xue-xi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Dubbo-Provider暴露源码分析"><a href="#Dubbo-Provider暴露源码分析" class="headerlink" title="Dubbo Provider暴露源码分析"></a>Dubbo Provider暴露源码分析</h1><p>Dubbo服务端的服务暴露及初始化</p><ol><li><code>org.apache.dubbo.config.spring.ServiceBean#afterPropertiesSet</code> 开始spring 容器初始化好属性后，回调这个方法开始初始化Provider</li><li>前面一堆是初始化<code>ApplicationConfig</code>、<code>Module</code>、<code>Registry</code>(注册中心)、<code>ConfigCenter</code>(配置中心)、<code>Monitor</code>（监控中心）、<code>Metrics</code>(监控项)、<code>Service</code>(服务bean)</li><li>接着找到<code>org.apache.dubbo.config.ServiceConfig#doExportUrls;</code><ol><li>主要看 <code>org.apache.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></li><li>这个方法主要是构建Invoker代理，然后用<code>Exporter&lt;?&gt; exporter = protocol.export(wrapperInvoker);</code> 通过SPI加载默认<code>DubboProtocol</code>.</li><li>进入<code>org.apache.dubbo.rpc.DubboProtocol#export</code>之后我们看到一个<code>openServer</code>调用,初始化一个Server</li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#openServer</code>，主要调用<code>createServer</code></li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#createServer</code>,调用了一个静态方法<code>Exchangers#bind()</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.Exchangers#bind</code>,入参是当前要暴露服务的URL和一个<code>requestHandler</code>, requestHandler实现在 <code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>里<ol><li>进入<code>Exchangers#bind</code>,调用了 <code>org.apache.dubbo.remoting.exchange.Exchangers#getExchanger(org.apache.dubbo.common.URL)</code>获取当前暴露服务URL的个性化<code>Exchanger</code>配置，默认加载<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger</code></li><li>进入<code>HeaderExchanger</code>,有两个方法实现分别为<code>bind</code>和 <code>connect</code>,看样子一个事用于Server端暴露服务，一个事用于Client来请求服务</li><li>主要看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger#bind</code>,调用了<code>Transporters#bind()</code>，这里吧requestHandler进行包装成了一个<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.Transporters#bind()</code>，看到默认加载的是nett4的<code>org.apache.dubbo.remoting.transport.netty4.NettyTransporter#bind()</code>,而这个实现主要是new了一个<code>org.apache.dubbo.remoting.transport.netty4.NettyServer#NettyServer</code>,到此一个Provider的Invoker代理就绑定到NettyServer里可以对外提供服务了</li><li>在<code>NettyServer</code>的构造方法中，调用了<code>org.apache.dubbo.remoting.transport.dispatcher.ChannelHandlers#wrap</code>,将HeaderExchangeHandler进行一个<code>Dispatcher</code>的分发，默认实现是<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllDispatcher</code>,除此之外还有<code>ConnectionOrderedDispatcher</code>、<code>DirectDispatcher</code>、<code>ExecutionDispatcher</code>、<code>MessageOnlyDispatcher</code>，这里不做展开</li><li>在AllDispatcher中的dispatch实现是<code>AllChannelHandler</code>,所有类型的请求都可以接受处理</li><li>进入<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllChannelHandler#received</code>,我们看到它将接收到的请求丢到一个<code>ExecutorService</code>线程池中异步处理，这里就是Dubbo线程处理的核心了</li></ol></li><li>我们回到第6步，这里说到默认的handler是<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>, 这个requestHandler被6.3包装成了<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code>,这是NIO请求的处理handler,我们了解NIO的Channel是双向通信的，所以当接收到请求时和响应时都会进入到<code>received</code>,当出现异常时进入<code>caught</code><ol><li>我们先来看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#received</code>,主要判断是请求还是响应，如果是请求判断是否是否有响应，如果是<code>towWay</code>通信，即有响应结果的请求，进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#handleRequest</code></li><li>在这里调用了一开始传入的requestHandler#reply,实在在<code>org.apache.dubbo.remoting.exchange.support.ExchangeHandlerAdapter</code>，这里就是具体调用找到具体要请求的Provider的Invoker，异步请求并返回一个Feature，然后在当前received方法中进行异步等待，等待响应结果完成send进channel进行响应</li></ol></li></ol></li><li>发布到注册中心</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Dubbo </tag>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HTTP及HTTPS的理解</title>
       <link href="/xue-xi/http-ji-https-de-li-jie/"/>
       <url>/xue-xi/http-ji-https-de-li-jie/</url>
@@ -777,33 +879,6 @@
             <tag> HTTP </tag>
             
             <tag> HTTPS </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Dubbo源码学习</title>
-      <link href="/xue-xi/dubbo-yuan-ma-xue-xi/"/>
-      <url>/xue-xi/dubbo-yuan-ma-xue-xi/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Dubbo-Provider暴露源码分析"><a href="#Dubbo-Provider暴露源码分析" class="headerlink" title="Dubbo Provider暴露源码分析"></a>Dubbo Provider暴露源码分析</h1><p>Dubbo服务端的服务暴露及初始化</p><ol><li><code>org.apache.dubbo.config.spring.ServiceBean#afterPropertiesSet</code> 开始spring 容器初始化好属性后，回调这个方法开始初始化Provider</li><li>前面一堆是初始化<code>ApplicationConfig</code>、<code>Module</code>、<code>Registry</code>(注册中心)、<code>ConfigCenter</code>(配置中心)、<code>Monitor</code>（监控中心）、<code>Metrics</code>(监控项)、<code>Service</code>(服务bean)</li><li>接着找到<code>org.apache.dubbo.config.ServiceConfig#doExportUrls;</code><ol><li>主要看 <code>org.apache.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></li><li>这个方法主要是构建Invoker代理，然后用<code>Exporter&lt;?&gt; exporter = protocol.export(wrapperInvoker);</code> 通过SPI加载默认<code>DubboProtocol</code>.</li><li>进入<code>org.apache.dubbo.rpc.DubboProtocol#export</code>之后我们看到一个<code>openServer</code>调用,初始化一个Server</li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#openServer</code>，主要调用<code>createServer</code></li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#createServer</code>,调用了一个静态方法<code>Exchangers#bind()</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.Exchangers#bind</code>,入参是当前要暴露服务的URL和一个<code>requestHandler</code>, requestHandler实现在 <code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>里<ol><li>进入<code>Exchangers#bind</code>,调用了 <code>org.apache.dubbo.remoting.exchange.Exchangers#getExchanger(org.apache.dubbo.common.URL)</code>获取当前暴露服务URL的个性化<code>Exchanger</code>配置，默认加载<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger</code></li><li>进入<code>HeaderExchanger</code>,有两个方法实现分别为<code>bind</code>和 <code>connect</code>,看样子一个事用于Server端暴露服务，一个事用于Client来请求服务</li><li>主要看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger#bind</code>,调用了<code>Transporters#bind()</code>，这里吧requestHandler进行包装成了一个<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.Transporters#bind()</code>，看到默认加载的是nett4的<code>org.apache.dubbo.remoting.transport.netty4.NettyTransporter#bind()</code>,而这个实现主要是new了一个<code>org.apache.dubbo.remoting.transport.netty4.NettyServer#NettyServer</code>,到此一个Provider的Invoker代理就绑定到NettyServer里可以对外提供服务了</li><li>在<code>NettyServer</code>的构造方法中，调用了<code>org.apache.dubbo.remoting.transport.dispatcher.ChannelHandlers#wrap</code>,将HeaderExchangeHandler进行一个<code>Dispatcher</code>的分发，默认实现是<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllDispatcher</code>,除此之外还有<code>ConnectionOrderedDispatcher</code>、<code>DirectDispatcher</code>、<code>ExecutionDispatcher</code>、<code>MessageOnlyDispatcher</code>，这里不做展开</li><li>在AllDispatcher中的dispatch实现是<code>AllChannelHandler</code>,所有类型的请求都可以接受处理</li><li>进入<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllChannelHandler#received</code>,我们看到它将接收到的请求丢到一个<code>ExecutorService</code>线程池中异步处理，这里就是Dubbo线程处理的核心了</li></ol></li><li>我们回到第6步，这里说到默认的handler是<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>, 这个requestHandler被6.3包装成了<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code>,这是NIO请求的处理handler,我们了解NIO的Channel是双向通信的，所以当接收到请求时和响应时都会进入到<code>received</code>,当出现异常时进入<code>caught</code><ol><li>我们先来看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#received</code>,主要判断是请求还是响应，如果是请求判断是否是否有响应，如果是<code>towWay</code>通信，即有响应结果的请求，进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#handleRequest</code></li><li>在这里调用了一开始传入的requestHandler#reply,实在在<code>org.apache.dubbo.remoting.exchange.support.ExchangeHandlerAdapter</code>，这里就是具体调用找到具体要请求的Provider的Invoker，异步请求并返回一个Feature，然后在当前received方法中进行异步等待，等待响应结果完成send进channel进行响应</li></ol></li></ol></li><li>发布到注册中心</li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> 学习 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 学习 </tag>
-            
-            <tag> Dubbo </tag>
             
         </tags>
       

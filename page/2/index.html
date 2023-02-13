@@ -316,20 +316,23 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/" target="_blank">
+                    <a href="/ruan-jian-bi-ji/docker-ming-ling-bi-ji/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="idea 突然闪退，内存溢出">
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="docker命令笔记">
                             
-                            <span class="card-title">idea 突然闪退，内存溢出</span>
+                            <span class="card-title">docker命令笔记</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                            解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin找到idea.exe.vmoptions配置修改Xmx 为合适大小1024/2048，然后启动此路径下的i
+                            制作自己的镜像从互联网拉取镜像
+docker pull centos:7启动容器
+docker run -it -d centos:7 /bin/bash进入启动容器
+docker exec -it -v /data/soft:/data/
                             
                         </div>
                         <div class="publish-info">
@@ -363,26 +366,68 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/" target="_blank">
+                    <a href="/ruan-jian-bi-ji/docker-es-an-zhuang/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="Redis批量删除命令">
+                            <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="docker ES安装">
                             
-                            <span class="card-title">Redis批量删除命令</span>
+                            <span class="card-title">docker ES安装</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
+                            参考docker安装Elasticsearch官方文档https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+获取镜像docker pull d
                             
-Redis中有指定多个key批量删除的命令,却没有指定模糊key批量删除命令
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-26
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/软件笔记/" class="post-category" target="_blank">
+                                    软件笔记
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-批量删除多个key
-del key1 key2通过通配符”*”模糊匹配删除的lua脚本命令
-# 模糊删除
-eval &quot;local keys = re
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/软件笔记/" target="_blank">
+                            <span class="chip bg-color">软件笔记</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/ruan-jian-bi-ji/idea-tu-ran-shan-tui-nei-cun-yi-chu/" target="_blank">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="idea 突然闪退，内存溢出">
+                            
+                            <span class="card-title">idea 突然闪退，内存溢出</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                            解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin找到idea.exe.vmoptions配置修改Xmx 为合适大小1024/2048，然后启动此路径下的i
                             
                         </div>
                         <div class="publish-info">
@@ -466,150 +511,6 @@ eval &quot;local keys = re
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/" target="_blank">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="maven 包冲突 解决">
-                            
-                            <span class="card-title">maven 包冲突 解决</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                            mvn dependency:tree -Dverbose -Dincludes=org.slf4j
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-26
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/软件笔记/" class="post-category" target="_blank">
-                                    软件笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/软件笔记/" target="_blank">
-                            <span class="chip bg-color">软件笔记</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/" target="_blank">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="使用Jmeter进行Dubbo接口压测">
-                            
-                            <span class="card-title">使用Jmeter进行Dubbo接口压测</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                            软件准备一、下载Jmeter3.1下载地址：https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip其他版本：https://archive.apache.o
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-26
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/软件笔记/" class="post-category" target="_blank">
-                                    软件笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/软件笔记/" target="_blank">
-                            <span class="chip bg-color">软件笔记</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/" target="_blank">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="使用Maven命令指定上传打包到私库">
-                            
-                            <span class="card-title">使用Maven命令指定上传打包到私库</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                            我们一般在pom.xml中加入distributionManagement
-&lt;distributionManagement&gt;
-    &lt;repository&gt;
-      &lt;id&gt;internal.rep
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-26
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/软件笔记/" class="post-category" target="_blank">
-                                    软件笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/软件笔记/" target="_blank">
-                            <span class="chip bg-color">软件笔记</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
                     <a href="/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/" target="_blank">
                         <div class="card-image">
                             
@@ -659,20 +560,20 @@ eval &quot;local keys = re
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/" target="_blank">
+                    <a href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="磁盘空间满处理">
+                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="使用Jmeter进行Dubbo接口压测">
                             
-                            <span class="card-title">磁盘空间满处理</span>
+                            <span class="card-title">使用Jmeter进行Dubbo接口压测</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                            查看当前目录磁盘使用情况df -lh统计当前目录下的目录及文件磁盘使用从大到小排序du -h --max-depth=1
+                            软件准备一、下载Jmeter3.1下载地址：https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip其他版本：https://archive.apache.o
                             
                         </div>
                         <div class="publish-info">
@@ -754,21 +655,69 @@ eval &quot;local keys = re
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/ruan-jian-bi-ji/ke-xue-shang-wang-shen-qi-xiong-mao-vpn-qin-ce-hen-shu-fu/" target="_blank">
+                    <a href="/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="科学上网神器,熊猫VPN, 亲测很舒服">
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="iterm2 rz sz 安装">
                             
-                            <span class="card-title">科学上网神器,熊猫VPN, 亲测很舒服</span>
+                            <span class="card-title">iterm2 rz sz 安装</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                            官方网站国内已经不能访问了：请用以下网址进入：熊猫VPN: https://www.pantavv.xyz/i/58074818
+                            一、本地rz sz安装https://github.com/aikuyun/iterm2-zmodem
+二、服务器端rz sz安装yum install lrzsz
+rz：从本地上传文件至服务器sz filename：从服务器下载文件至本地
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-26
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/软件笔记/" class="post-category" target="_blank">
+                                    软件笔记
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/软件笔记/" target="_blank">
+                            <span class="chip bg-color">软件笔记</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/" target="_blank">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="maven 包冲突 解决">
+                            
+                            <span class="card-title">maven 包冲突 解决</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                            mvn dependency:tree -Dverbose -Dincludes=org.slf4j
                             
                         </div>
                         <div class="publish-info">
@@ -854,25 +803,23 @@ eval &quot;local keys = re
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/ruan-kao/ruan-jian-kai-fa-fang-fa/" target="_blank">
+                    <a href="/ruan-jian-bi-ji/zi-xing-da-jian-v2ray-ke-xue-shang-wang-gong-ju-zhi-chi-mac-ios-windows/" target="_blank">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="软件开发方法">
+                            <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="自行搭建v2ray科学上网工具，支持mac、ios、windows">
                             
-                            <span class="card-title">软件开发方法</span>
+                            <span class="card-title">自行搭建v2ray科学上网工具，支持mac、ios、windows</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                            
-前言：软件开发方法是软件开发的方法学，旨在提供软件的质量，降低开发成本
+                            服务器搭建
+购买海外VPS/ECS, 我这里用的是vultr，它家可以随时换IP、换服务器位置，无须另外收费，比较适合新手
 
-1 软件生命周期
-可行性研究和规划：通过可行性分析确认原件的必要性，价值点，初步确认软件的目标、范围、风险和开发成本等内容。
-需求分析：需求分析是开发过程的重要阶段
+安装v2ray服务端，有一键安装脚本，傻瓜式安装，安装时如果用的是shadowrocket客户端方式连接，安装时询
                             
                         </div>
                         <div class="publish-info">
@@ -883,8 +830,8 @@ eval &quot;local keys = re
                                 
                                 <i class="fa fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/软考/" class="post-category" target="_blank">
-                                    软考
+                                <a href="/categories/软件笔记/" class="post-category" target="_blank">
+                                    软件笔记
                                 </a>
                                 
                                 
@@ -895,8 +842,58 @@ eval &quot;local keys = re
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/软考/" target="_blank">
-                            <span class="chip bg-color">软考</span>
+                        <a href="/tags/软件笔记/" target="_blank">
+                            <span class="chip bg-color">软件笔记</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/" target="_blank">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="使用Maven命令指定上传打包到私库">
+                            
+                            <span class="card-title">使用Maven命令指定上传打包到私库</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                            我们一般在pom.xml中加入distributionManagement
+&lt;distributionManagement&gt;
+    &lt;repository&gt;
+      &lt;id&gt;internal.rep
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-26
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/软件笔记/" class="post-category" target="_blank">
+                                    软件笔记
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/软件笔记/" target="_blank">
+                            <span class="chip bg-color">软件笔记</span>
                         </a>
                         
                     </div>
@@ -942,7 +939,7 @@ eval &quot;local keys = re
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">55.8k</span>
+            <span class="white-color">56.3k</span>
             
 
             <br>
