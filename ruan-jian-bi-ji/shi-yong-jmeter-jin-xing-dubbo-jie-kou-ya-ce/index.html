@@ -470,16 +470,16 @@
 <h2 id="二、下载dubbo官方的jmeter插件"><a href="#二、下载dubbo官方的jmeter插件" class="headerlink" title="二、下载dubbo官方的jmeter插件"></a>二、下载dubbo官方的jmeter插件</h2><p>下载地址：<a href="https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar" target="_blank" rel="noopener">https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar</a><br>官方用户指南：<a href="https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97</a></p>
 <h2 id="三、解压Jmeter"><a href="#三、解压Jmeter" class="headerlink" title="三、解压Jmeter"></a>三、解压Jmeter</h2><p>将jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar放到<code>${JMETER_HOME}\lib\ext.</code>中</p>
 <h2 id="四、启动Jmeter"><a href="#四、启动Jmeter" class="headerlink" title="四、启动Jmeter"></a>四、启动Jmeter</h2><p> <code>${JMETER_HOME}\jmeter.bat</code></p>
-<h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="../images/Untitled/getImage-20220825182246944.png" alt><br><img src="../images/Untitled/getImage-20220825182247846.png" alt></p>
-<h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="../images/Untitled/getImage-20220825182248427.png" alt></p>
-<p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="../images/Untitled/getImage-20220825182248165.png" alt></p>
-<h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="../images/Untitled/getImage-20220825182248034.png" alt></p>
-<h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="../images/Untitled/getImage-20220825182247230.png" alt></p>
-<h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="../images/Untitled/getImage-20220825182248268.png" alt></p>
-<h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="../images/Untitled/getImage-20220825182247269.png" alt></p>
+<h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182246944.png" alt><br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247846.png" alt></p>
+<h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248427.png" alt></p>
+<p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248165.png" alt></p>
+<h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248034.png" alt></p>
+<h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247230.png" alt></p>
+<h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248268.png" alt></p>
+<h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247269.png" alt></p>
 <h1 id="六、dubbo服务器状态查看"><a href="#六、dubbo服务器状态查看" class="headerlink" title="六、dubbo服务器状态查看"></a>六、dubbo服务器状态查看</h1><ol>
 <li>使用telnet进入dubbo的console界面<pre><code>telnet 192.168.1.131 32101
-后回车</code></pre><img src="../images/Untitled/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="../images/Untitled/getImage-20220825182247961.png" alt></li>
+后回车</code></pre><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247961.png" alt></li>
 </ol>
 
             </div>
@@ -981,21 +981,22 @@ rz：从本地上传文件至服务器sz filename：从服务器下载文件至�
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/">
+                <a href="/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/">
                     <div class="card-image">
                         
                         
-                        <img src="http://api.btstu.cn/sjbz/?lx=suiji" class="responsive-img" alt="抓包工具Charles安装、破解及使用">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="使用Maven命令指定上传打包到私库">
                         
-                        <span class="card-title">抓包工具Charles安装、破解及使用</span>
+                        <span class="card-title">使用Maven命令指定上传打包到私库</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Charles是一款抓包必备的工具，支持Windows、Mac、手机的抓包测试，还能对https的SLL加密内容进行解密。
-下载安装
-进入官网下载地址：http://www.charlesproxy.com/，点击链接下载30天免费试用版本
+                            我们一般在pom.xml中加入distributionManagement
+&lt;distributionManagement&gt;
+    &lt;repository&gt;
+      &lt;id&gt;internal.rep
                         
                     </div>
                     <div class="publish-info">

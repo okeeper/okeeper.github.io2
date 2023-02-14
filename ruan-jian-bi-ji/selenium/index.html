@@ -981,22 +981,22 @@ eval &quot;local keys = re
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/docker-ming-ling-bi-ji/">
+                <a href="/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="docker命令笔记">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="git重命名的坑">
                         
-                        <span class="card-title">docker命令笔记</span>
+                        <span class="card-title">git重命名的坑</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            制作自己的镜像从互联网拉取镜像
-docker pull centos:7启动容器
-docker run -it -d centos:7 /bin/bash进入启动容器
-docker exec -it -v /data/soft:/data/
+                            如果使用git命令进行仅涉及大小写的重命名,git 默认是把你的动作忽略的，所以当你删掉本地代码，重新pull代码时，你会发现文件还是重命名之前的,神奇吧，记下这个坑，等着你们踩着坑来这看吧，坏笑/
+解决方法如下：
+
+设置git库为大小写敏
                         
                     </div>
                     <div class="publish-info">

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://okeeper.com/"/>
-  <updated>2023-02-02T07:42:09.786Z</updated>
+  <updated>2023-02-13T14:39:48.806Z</updated>
   <id>https://okeeper.com/</id>
   
   <author>
@@ -21,9 +21,17 @@
     <link href="https://okeeper.com/ruan-jian-bi-ji/mac-hao-yong-de-markdown-bian-ji-qi/"/>
     <id>https://okeeper.com/ruan-jian-bi-ji/mac-hao-yong-de-markdown-bian-ji-qi/</id>
     <published>2023-02-02T07:54:13.000Z</published>
-    <updated>2023-02-02T07:42:09.786Z</updated>
+    <updated>2023-02-13T14:39:48.806Z</updated>
     
     <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Typora&quot;&gt;&lt;a href=&quot;#Typora&quot; class=&quot;headerlink&quot;
+        
+      
     
     </summary>
     
@@ -65,7 +73,7 @@
     <link href="https://okeeper.com/hou-duan-jia-gou/java-xue-xi-da-gang/"/>
     <id>https://okeeper.com/hou-duan-jia-gou/java-xue-xi-da-gang/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.551Z</updated>
+    <updated>2023-02-13T14:37:02.531Z</updated>
     
     <summary type="html">
     
@@ -92,7 +100,7 @@
     <link href="https://okeeper.com/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/"/>
     <id>https://okeeper.com/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.550Z</updated>
+    <updated>2023-02-13T14:36:53.957Z</updated>
     
     <summary type="html">
     
@@ -110,6 +118,35 @@
     
     
       <category term="后端&amp;架构" scheme="https://okeeper.com/tags/%E5%90%8E%E7%AB%AF-%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Centos 下Redis 安装以及集群搭建</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2023-02-13T14:27:18.957Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;1.下载redis安装包&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd /root/software
+wget http://download.redis.io/releases/redis-3.2.4.tar.gz
+tar -zxvf
+        
+      
+    
+    </summary>
+    
+      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -141,40 +178,11 @@
   </entry>
   
   <entry>
-    <title>Centos 下Redis 安装以及集群搭建</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/centos-xia-redis-an-zhuang-yi-ji-ji-qun-da-jian/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.570Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;1.下载redis安装包&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cd /root/software
-wget http://download.redis.io/releases/redis-3.2.4.tar.gz
-tar -zxvf
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Idea maven 插件安装</title>
     <link href="https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
     <id>https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.578Z</updated>
+    <updated>2023-02-13T14:28:14.918Z</updated>
     
     <summary type="html">
     
@@ -182,7 +190,7 @@ tar -zxvf
       
         
         
-          &lt;p&gt;默认idea 是已经安装好了maven插件的，在File&amp;gt;settings&amp;gt;能搜索到maven的相关配置&lt;br&gt;但是有时候它会莫名其妙的不见了或消失&lt;br&gt;检查Plugins是否启用了maven&lt;br&gt;![](../images/Idea maven
+          &lt;p&gt;默认idea 是已经安装好了maven插件的，在File&amp;gt;settings&amp;gt;能搜索到maven的相关配置&lt;br&gt;但是有时候它会莫名其妙的不见了或消失&lt;br&gt;检查Plugins是否启用了maven&lt;br&gt;&lt;img
         
       
     
@@ -200,7 +208,7 @@ tar -zxvf
     <link href="https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
     <id>https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.564Z</updated>
+    <updated>2023-02-13T14:53:01.290Z</updated>
     
     <summary type="html">
     
@@ -332,6 +340,32 @@ tar -zxvf
   </entry>
   
   <entry>
+    <title>git重命名的坑</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2022-08-26T11:58:13.576Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;如果使用git命令进行仅涉及大小写的重命名,git
+        
+      
+    
+    </summary>
+    
+      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>docker命令笔记</title>
     <link href="https://okeeper.com/ruan-jian-bi-ji/docker-ming-ling-bi-ji/"/>
     <id>https://okeeper.com/ruan-jian-bi-ji/docker-ming-ling-bi-ji/</id>
@@ -346,32 +380,6 @@ tar -zxvf
         
           &lt;h1 id=&quot;制作自己的镜像&quot;&gt;&lt;a href=&quot;#制作自己的镜像&quot; class=&quot;headerlink&quot; title=&quot;制作自己的镜像&quot;&gt;&lt;/a&gt;制作自己的镜像&lt;/h1&gt;&lt;p&gt;从互联网拉取镜像&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;docker pull
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git重命名的坑</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.576Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;如果使用git命令进行仅涉及大小写的重命名,git
         
       
     
@@ -415,7 +423,7 @@ tar -zxvf
     <link href="https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
     <id>https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.583Z</updated>
+    <updated>2023-02-13T14:27:57.408Z</updated>
     
     <summary type="html">
     
@@ -424,6 +432,32 @@ tar -zxvf
         
         
           &lt;p&gt;参考docker安装Elasticsearch官方文档&lt;br&gt;&lt;a href=&quot;https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>maven 包冲突 解决</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2023-02-02T07:41:35.288Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;pre&gt;&lt;code&gt;mvn dependency:tree -Dverbose
         
       
     
@@ -467,7 +501,7 @@ tar -zxvf
     <link href="https://okeeper.com/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
     <id>https://okeeper.com/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.575Z</updated>
+    <updated>2023-02-13T14:25:17.780Z</updated>
     
     <summary type="html">
     
@@ -489,11 +523,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>抓包工具Charles安装、破解及使用</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/</id>
+    <title>使用Maven命令指定上传打包到私库</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2023-02-13T07:59:10.782Z</updated>
+    <updated>2023-02-13T07:05:32.526Z</updated>
     
     <summary type="html">
     
@@ -501,34 +535,10 @@ tar -zxvf
       
         
         
-          &lt;p&gt;Charles是一款抓包必备的工具，支持Windows、Mac、手机的抓包测试，还能对https的SLL加密内容进行解密。&lt;/p&gt;
-&lt;h1 id=&quot;下载安装&quot;&gt;&lt;a href=&quot;#下载安装&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>maven 包冲突 解决</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2023-02-02T07:41:35.288Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;pre&gt;&lt;code&gt;mvn dependency:tree -Dverbose
+          &lt;p&gt;我们一般在pom.xml中加入&lt;code&gt;distributionManagement&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;distributionManagement&amp;gt;
+    &amp;lt;repository&amp;gt;
+     
         
       
     

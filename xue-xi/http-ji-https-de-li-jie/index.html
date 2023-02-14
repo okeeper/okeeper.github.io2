@@ -481,8 +481,8 @@ TCP/IP关于计算机通讯，需要了解的一些背景知识，TCP/IP.我们�
 <li>IP：负责将TCP分隔的IP包发送传输到指定ip的机器上，IP包之间的传输不保证顺序性，在TCP重组时才还原数据顺序</li>
 </ul>
 <p>所以说TCP/IP是传输协议的上下层关系。</p>
-<h2 id="关于HTTP"><a href="#关于HTTP" class="headerlink" title="关于HTTP"></a>关于HTTP</h2><p>而HTTP则是在TCP/IP基础上的进一步封装的协议，属于应用层协议.网络传输的协议关系图如下：<br><img src="../images/HTTP%E5%8F%8AHTTPS%E7%9A%84%E7%90%86%E8%A7%A3/getImage-20220825184529465.png" alt></p>
-<p>网络传输的协议，两边刚好是相反的:<br><img src="../images/HTTP%E5%8F%8AHTTPS%E7%9A%84%E7%90%86%E8%A7%A3/getImage-20220825184529221.png" alt></p>
+<h2 id="关于HTTP"><a href="#关于HTTP" class="headerlink" title="关于HTTP"></a>关于HTTP</h2><p>而HTTP则是在TCP/IP基础上的进一步封装的协议，属于应用层协议.网络传输的协议关系图如下：<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184529465.png" alt></p>
+<p>网络传输的协议，两边刚好是相反的:<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184529221.png" alt></p>
 <h2 id="HTTP原理"><a href="#HTTP原理" class="headerlink" title="HTTP原理"></a>HTTP原理</h2><p>HTTP请求主要分为以下几个步奏：</p>
 <ol>
 <li>域名解析，查找对应DNS服务器域名解析找到对应的IP</li>
@@ -498,10 +498,10 @@ TCP/IP关于计算机通讯，需要了解的一些背景知识，TCP/IP.我们�
 <li><code>readTimeout</code> 是指从发送http请求开始等待响应内容的总超时时间,指上面步骤的第4步</li>
 <li><code>socketTimeout</code> 响应内容有可能是分成几个socket数据包传输的，而这个socketTimeout的意思就是每个socket传输的超时时间</li>
 </ul>
-<p>例如下图：<br>readTimeout设为6s,socketTimeout设为4秒，发送http报文之后响应<br>时间超时为6s,响应内容abc分三次socket传输,每次间隔超时时间为4s，所以总共花费6s是不会抛出<code>socket timeout</code><br><img src="../images/HTTP%E5%8F%8AHTTPS%E7%9A%84%E7%90%86%E8%A7%A3/getImage-20220825184529343.png" alt></p>
+<p>例如下图：<br>readTimeout设为6s,socketTimeout设为4秒，发送http报文之后响应<br>时间超时为6s,响应内容abc分三次socket传输,每次间隔超时时间为4s，所以总共花费6s是不会抛出<code>socket timeout</code><br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184529343.png" alt></p>
 <h2 id="JAVA中使用http"><a href="#JAVA中使用http" class="headerlink" title="JAVA中使用http"></a>JAVA中使用http</h2><p>Java 访问http通过</p>
 <h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><p>HTTPS简单的说就是，http的安全版</p>
-<h2 id="HTTPS基本原理"><a href="#HTTPS基本原理" class="headerlink" title="HTTPS基本原理"></a>HTTPS基本原理</h2><p><img src="../images/HTTP%E5%8F%8AHTTPS%E7%9A%84%E7%90%86%E8%A7%A3/getImage-20220825184528912.png" alt></p>
+<h2 id="HTTPS基本原理"><a href="#HTTPS基本原理" class="headerlink" title="HTTPS基本原理"></a>HTTPS基本原理</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184528912.png" alt></p>
 <p>过程大致如下：</p>
 <ol>
 <li>SSL客户端通过TCP和服务器建立连接之后（443端口），并且在一般的tcp连接协商（握手）过程中请求证书。<br>即客户端发出一个消息给服务器，这个消息里面包含了自己可实现的算法列表和其它一些需要的消息，SSL的服务器端会回应一个数据包，这里面确定了这次通信所需要的算法，然后服务器向客户端返回证书。（证书里面包含了服务器信息：域名。申请证书的公司，公共秘钥）。                 </li>
