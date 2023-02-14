@@ -289,7 +289,7 @@ rz：从本地上传文件至服务器sz filename：从服务器下载文件至�
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -921,19 +921,20 @@ rz：从本地上传文件至服务器sz filename：从服务器下载文件至�
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/">
+                <a href="/ruan-jian-bi-ji/docker-es-an-zhuang/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="maven 包冲突 解决">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="docker ES安装">
                         
-                        <span class="card-title">maven 包冲突 解决</span>
+                        <span class="card-title">docker ES安装</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            mvn dependency:tree -Dverbose -Dincludes=org.slf4j
+                            参考docker安装Elasticsearch官方文档https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+获取镜像docker pull d
                         
                     </div>
                     <div class="publish-info">
@@ -970,19 +971,22 @@ rz：从本地上传文件至服务器sz filename：从服务器下载文件至�
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/">
+                <a href="/ruan-jian-bi-ji/docker-ming-ling-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="使用Jmeter进行Dubbo接口压测">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="docker命令笔记">
                         
-                        <span class="card-title">使用Jmeter进行Dubbo接口压测</span>
+                        <span class="card-title">docker命令笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            软件准备一、下载Jmeter3.1下载地址：https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip其他版本：https://archive.apache.o
+                            制作自己的镜像从互联网拉取镜像
+docker pull centos:7启动容器
+docker run -it -d centos:7 /bin/bash进入启动容器
+docker exec -it -v /data/soft:/data/
                         
                     </div>
                     <div class="publish-info">

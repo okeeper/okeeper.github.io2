@@ -54,11 +54,11 @@
     
     
     <entry>
-      <title>Java学习大纲</title>
-      <link href="/hou-duan-jia-gou/java-xue-xi-da-gang/"/>
-      <url>/hou-duan-jia-gou/java-xue-xi-da-gang/</url>
+      <title>限流相关</title>
+      <link href="/hou-duan-jia-gou/xian-liu-xiang-guan/"/>
+      <url>/hou-duan-jia-gou/xian-liu-xiang-guan/</url>
       
-        <content type="html"><![CDATA[<p>任何学习都要有目标有规划，这是整个Java知识体系大纲，根据自己的知识体系认知画出来的，有很多还没有细化，也还有很多没有涉猎，比如大数据，列出这些好让自己学的有目标一些吧，也算是一个总结。</p><p>在线预览地址：<a href="http://naotu.baidu.com/file/a94181bfafe64d39874b524ce8df18c1?token=a8efb35e029a526f" target="_blank" rel="noopener">http://naotu.baidu.com/file/a94181bfafe64d39874b524ce8df18c1?token=a8efb35e029a526f</a></p><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184207294.png" alt></p><p>来自网络的架构师大纲图：</p><hr><p><a href="https://leanote.com/api/file/getAttach?fileId=5d2c29a6ab64416644002311" target="_blank" rel="noopener">Java架构VIP课程大纲5.1.png</a></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在大流量场景，秒杀、抢购场景，一般会对网站做一些流量控制，牺牲一部分流量而保护系统而不至于系统直接down机。</p><h1 id="常见限流算法"><a href="#常见限流算法" class="headerlink" title="常见限流算法"></a>常见限流算法</h1><h2 id="固定计算限流"><a href="#固定计算限流" class="headerlink" title="固定计算限流"></a>固定计算限流</h2><p>就是统计固定时间内的流量数量，如果超过了就限制。这种很容易实现，利用AutomicLong统计，下一个统计周期后又清零重新计算。<br>这样会有以下问题：</p><ol><li>1s之内的前100ms就已经达到了,那么后900ms就是空闲的。</li><li>如果1s之内的后100ms和下一秒的前100ms,那么在这个前后1s内加起来的流量是限流的两倍，显然这没有达到“在任意1s内流量不超过限制”的控制，很多黑客利用这个缺陷攻击网站，从而拖垮服务器。<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239907.png" alt></li></ol><h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><p>为了解决“计数限流”的缺陷，我们引入“滑动窗口”的计数方法。就是在计数限流的基础之上，将1个限流时间周期内切分成更小的单位计数，使得限制流量更加均分。<br>具体做法如下：</p><ol><li>将1s钟切成更细粒度200ms为计数单位，将请求时间点按取模的方式计算落到对应的计数格中，然后判断从当前计数格往前推1s(也就是5个计数格)的统计数总和当成当前流量的计数，如果超过阈值则限流，否则放行<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239739-1424159.png" alt></li><li>随着请求时间的推进，计数窗口也会随之往前移动<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239638.png" alt></li><li>这样的好处是，优化了“固定计数法”的缺陷，即在任意时刻，都将都以更小粒度的计数方法往前累加计算，防止在单位时间内流量超过限额。如图：<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239708.png" alt></li></ol><h2 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h2><p>漏桶算法思路很简单，水（请求）先进入到漏桶里，漏桶以一定的速度出水，当水流入速度过大会时，有一定的缓冲能力，超过最大缓冲时将直接拒绝。这个算法的特点就是，不管桶里面是空还是满，都以均匀的速度放行。下面是从网上找的图：<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239739.png" alt></p><h2 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h2><p>令牌桶算法（Token Bucket）：是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。令牌桶算法示意图如下所示：<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239758.png" alt></p><p>令牌桶算法与漏桶算法的区别在于如果在一段时间内都没有流量，而桶中的令牌数有随着时间流逝匀速增加，那么桶中将会缓冲一定数量的令牌，即使后面流量突然增加超过了限额，也会由于还有可用的令牌直接放行，无需要等待。</p><h1 id="限流实现"><a href="#限流实现" class="headerlink" title="限流实现"></a>限流实现</h1><h2 id="Guava的RateLimiter实现"><a href="#Guava的RateLimiter实现" class="headerlink" title="Guava的RateLimiter实现"></a>Guava的RateLimiter实现</h2><p>在Guava的工具包中，<code>RateLimiter</code>就是居于<code>令牌桶算法</code>实现的内存限流。<br>其构造有如下几个：</p><pre><code> //构造方法1  @VisibleForTesting  static RateLimiter create(SleepingTicker ticker, double permitsPerSecond) {    //实现类是Bursty    RateLimiter rateLimiter = new Bursty(ticker, 1.0 /* maxBurstSeconds */);    //根据permitsPerSecond每秒令牌数计算，每个令牌产生的毫秒数    rateLimiter.setRate(permitsPerSecond);    return rateLimiter;  }  //构造方法2 static RateLimiter create(      SleepingTicker ticker, double permitsPerSecond, long warmupPeriod, TimeUnit unit) {    //实现类是一个平滑预热限流，就是如果流量突然暴增，即使有足够的令牌，也不会一下子全部放下，会加一些线性等待时间平滑过渡    RateLimiter rateLimiter = new WarmingUp(ticker, warmupPeriod, unit);    rateLimiter.setRate(permitsPerSecond);    return rateLimiter;  }</code></pre><p>获取令牌</p><pre><code>  public double acquire(int permits) {    checkPermits(permits);    long microsToWait;    //获取全局锁    synchronized (mutex) {        //根据当前时间算出还需要等待的时间        microsToWait = reserveNextTicket(permits, readSafeMicros());    }    ticker.sleepMicrosUninterruptibly(microsToWait);    return 1.0 * microsToWait / TimeUnit.SECONDS.toMicros(1L);  }</code></pre><p>下面是令牌桶算法的核心</p><pre><code>  private long reserveNextTicket(double requiredPermits, long nowMicros) {    //根据当前时间算出可用令牌数及要出来这么多令牌的时间点    resync(nowMicros);    //看下还需要等多久    long microsToNextFreeTicket = nextFreeTicketMicros - nowMicros;    //看下当前要立即花费多少令牌    double storedPermitsToSpend = Math.min(requiredPermits, this.storedPermits);    //还剩多少令牌需要等待    double freshPermits = requiredPermits - storedPermitsToSpend;    //根据不同的实现，Bursty或者WarmingUp，返回额外需要等待的时间    long waitMicros = storedPermitsToWaitTime(this.storedPermits, storedPermitsToSpend)        + (long) (freshPermits * stableIntervalMicros);    //重置获取这么多令牌要等到啥时候    this.nextFreeTicketMicros = nextFreeTicketMicros + waitMicros;    //更新下还剩多少可用令牌    this.storedPermits -= storedPermitsToSpend;    //返回还需要等待的时间    return microsToNextFreeTicket;  }</code></pre><p>可以看到这个实现，并不是根据算法图一个生产者不断的往一个数组中添加令牌，一个消费者不断的取令牌，而是以时间线的方式，计算出当前获取令牌需要花费的时间及算出当前时间以设定的速度能够无产生多少令牌的方式实时计算的，简单并且没有额外的轮询操作，非常高效节省资源。</p><h2 id="使用Semphore进行并发流控"><a href="#使用Semphore进行并发流控" class="headerlink" title="使用Semphore进行并发流控"></a>使用Semphore进行并发流控</h2><p><code>Semphore</code> 是JUC里面的并发信号量实现，Semaphore可以控制某个资源可被同时访问的个数，通过 acquire() 获取一个许可，如果没有就等待，而 release() 释放一个许可。很适合多线程情况对有限资源的抢占控制。</p><h2 id="Netflix-Hystrix-熔断限流"><a href="#Netflix-Hystrix-熔断限流" class="headerlink" title="Netflix Hystrix 熔断限流"></a>Netflix Hystrix 熔断限流</h2><p>Spring Clound里的Hystrix能否实现根据一定的访问异常设置，对应用做到降级限流的的控制</p><h2 id="阿里的Sentinel实现"><a href="#阿里的Sentinel实现" class="headerlink" title="阿里的Sentinel实现"></a>阿里的Sentinel实现</h2><p>Sentinel 是阿里中间件团队开源的，面向分布式服务架构的轻量级高可用流量控制组件，主要以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度来帮助用户保护服务的稳定性。<br>GITHUB:<a href="https://github.com/alibaba/Sentinel" target="_blank" rel="noopener">https://github.com/alibaba/Sentinel</a><br>其官方文档中也提到，其受到Guava RateLmiter的启发。</p><p>大家可能会问：Sentinel 和上面提到的Netflix Hystrix 有什么异同呢？<br>其官方文档有专门的说明：<br><a href="https://github.com/alibaba/Sentinel/wiki/Sentinel-%E4%B8%8E-Hystrix-%E7%9A%84%E5%AF%B9%E6%AF%94" target="_blank" rel="noopener">https://github.com/alibaba/Sentinel/wiki/Sentinel-%E4%B8%8E-Hystrix-%E7%9A%84%E5%AF%B9%E6%AF%94</a></p><h2 id="其他实现"><a href="#其他实现" class="headerlink" title="其他实现"></a>其他实现</h2><p>进行限流控制还可以有很多种方法，针对不同的场景各有优劣，例如通过AtomicLong计数器控制、Redis计数，使用MQ消息队列进行流量消峰等等都是可以的。</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>流量控制在高并发场景是一个对系统保护必不可少的一个手段，能够牺牲一部分流量而保护整个应用的可用性，不止于发生雪崩情况。</p>]]></content>
       
       
       <categories>
@@ -79,11 +79,11 @@
     
     
     <entry>
-      <title>分库分表的分页查询</title>
-      <link href="/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/"/>
-      <url>/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/</url>
+      <title>Java学习大纲</title>
+      <link href="/hou-duan-jia-gou/java-xue-xi-da-gang/"/>
+      <url>/hou-duan-jia-gou/java-xue-xi-da-gang/</url>
       
-        <content type="html"><![CDATA[<h1 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h1><p>我们知道，当我们的数据量达到一定数量时，需要将数据表进行水平拆分，从而满足大量数据的存储和查询，保证系统的可用性，但同时会出现另外一个问题就是，如果业务要查询“最近注册的第3页用户”，该如何实现呢？单库上，可以通过简单的sql实现分页查询</p><pre><code>select * from t_user order by time limit 200,100</code></pre><p>分库分表后变成两个库后，分库依据是user_id，排序依据是time，单个分数据库层失去了time排序的全局视野，如果同样需要实现分页查询时该怎么办呢？</p><h1 id="全局视野法"><a href="#全局视野法" class="headerlink" title="全局视野法"></a>全局视野法</h1><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040381.png" alt></p><p>正常来讲，不管哪一个分库的第3页都不一定有全局第3页的所有数据，例如一下三种情况：</p><p>情况一：两个分库按照时间排序，数据各占一半，则每页取offset和limit的一般数据回来合并就可以了<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040402.png" alt><br>情况二：所有数据都在一个库上，则取一个库的所有数据回来就可以了<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040384.png" alt><br>情况三，那么一般情况是，每个分库的数据数据是随机的，但是一定是在全局offset=600之内<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040393.png" alt></p><p>由于不清楚到底是哪种情况，所以必须每个库都返回3页数据，所得到的6页数据在服务层进行内存排序，得到数据全局视野，再取第3页数据，便能够得到想要的全局分页数据。</p><p>这种方法缺点是：当查询的页数增大时，每个分库所需返回的数据也越来成倍增加，降低了查询的性能</p><h1 id="业务折中"><a href="#业务折中" class="headerlink" title="业务折中"></a>业务折中</h1><h2 id="第一种折中的方案是"><a href="#第一种折中的方案是" class="headerlink" title="第一种折中的方案是"></a>第一种折中的方案是</h2><p>对全局视野法的一种优化，即禁用制定页数的分页查询，必须通过下一页来实现分页查询的页数跳转，并且在每次查询下一页时将上一页的最大排序字段的值带上（这里就是时间time）,这样在每个分库查询数据时待上这个条件，可以优化查询速率。</p><h2 id="第二种折中的方案是"><a href="#第二种折中的方案是" class="headerlink" title="第二种折中的方案是"></a>第二种折中的方案是</h2><p>数据库分库-数据均衡原理</p><p>使用patition key进行分库，在数据量较大，数据分布足够随机的情况下，各分库所有非patition key属性，在各个分库上的数据分布，统计概率情况是一致的。</p><p>例如，在uid随机的情况下，使用uid取模分两库，db0和db1：</p><p>（1）性别属性，如果db0库上的男性用户占比70%，则db1上男性用户占比也应为70%</p><p>（2）年龄属性，如果db0库上18-28岁少女用户比例占比15%，则db1上少女用户比例也应为15%</p><p>（3）时间属性，如果db0库上每天10:00之前登录的用户占比为20%，则db1上应该是相同的统计规律</p><p>利用这一原理，要查询全局100页数据，offset 9900 limit 100改写为offset 4950 limit 50，每个分库偏移4950（一半），获取50条数据（半页），得到的数据集的并集，基本能够认为，是全局数据的offset 9900 limit 100的数据，当然，这一页数据的精度，并不是精准的。</p><p>根据实际业务经验，用户都要查询第100页网页、帖子、邮件的数据了，这一页数据的精准性损失，业务上往往是可以接受的，但此时技术方案的复杂度便大大降低了，既不需要返回更多的数据，也不需要进行服务内存排序了。</p><h1 id="二次查找法"><a href="#二次查找法" class="headerlink" title="二次查找法"></a>二次查找法</h1><p>有没有一种方法既能满足业务要求，并且不需要折中，性能还高的方法呢？<br>接下来介绍一种“二次查找法”，不知道能不能讲的明白，我尽量吧。</p><p>为了方便举例，假设一页只有5条数据，查询第200页的SQL语句为select * from T order by time offset 1000 limit 5;</p><p>分五步：</p><h3 id="1-将select-from-T-order-by-time-offset-1000-limit-5-优化成select-from-T-order-by-time-offset-500-limit-5-注意这里的500-1000-分表数量，并将这个sql下发至每个分库分表中执行，每个分库返回这个sql执行的结果。"><a href="#1-将select-from-T-order-by-time-offset-1000-limit-5-优化成select-from-T-order-by-time-offset-500-limit-5-注意这里的500-1000-分表数量，并将这个sql下发至每个分库分表中执行，每个分库返回这个sql执行的结果。" class="headerlink" title="1. 将select * from T order by time offset 1000 limit 5; 优化成select * from T order by time offset 500 limit 5,注意这里的500=1000/分表数量，并将这个sql下发至每个分库分表中执行，每个分库返回这个sql执行的结果。"></a>1. 将<code>select * from T order by time offset 1000 limit 5;</code> 优化成<code>select * from T order by time offset 500 limit 5</code>,注意这里的500=1000/分表数量，并将这个sql下发至每个分库分表中执行，每个分库返回这个sql执行的结果。</h3><h3 id="2-找到所有分库返回结果的time的最小值"><a href="#2-找到所有分库返回结果的time的最小值" class="headerlink" title="2. 找到所有分库返回结果的time的最小值"></a>2. 找到所有分库返回结果的time的最小值</h3><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040369.png" alt><br>第一个库，5条数据的time最小值是1487501123<br>第二个库，5条数据的time最小值是1487501223</p><p>故，三页数据中，time最小值来自第一个库，time_min=1487501123，这个过程只需要比较各个分库第一条数据，时间复杂度很低</p><h3 id="3-查询二次改写"><a href="#3-查询二次改写" class="headerlink" title="3. 查询二次改写"></a>3. 查询二次改写</h3><p>第一次改写的SQL语句是select * from T order by time offset 500 limit 5</p><p>第二次要改写成一个between语句，between的起点是time_min，between的终点是原来每个分库各自返回数据的最大值：</p><p>第一个分库，第一次返回数据的最大值是1487501523<br>所以查询改写为select * from T order by time where time between time_min and 1487501523</p><p>第二个分库，第一次返回数据的最大值是1487501699<br>所以查询改写为select * from T order by time where time between time_min and 1487501699</p><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040363.png" alt></p><p>从上面图片可以看出，DB1比第一次查出来的数据多了两行，应为查询的范围扩大了</p><h3 id="4-计算time-min这条记录在全局的offset"><a href="#4-计算time-min这条记录在全局的offset" class="headerlink" title="4. 计算time_min这条记录在全局的offset"></a>4. 计算time_min这条记录在全局的offset</h3><p>根据第一步查询的sql<code>select * from T order by time offset 500 limit</code> ,我们知道每个库的offset值了，将DB0中的最小time的数据虚拟到DB1中推算在DB1中的offset值=497<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040525.png" alt><br>从而我们得知time_min这条记录在全局的offset值=500+497=997</p><h3 id="5-根据第二次查询出来的结果集，在内存中作排序，已知time-min在全局中的offset-997-那么结果集排序之后也能推算出offset-1000所在的记录，从而获得sqlselect-from-T-order-by-time-offset-1000-limit-5的分页查询记录（图片黄色部分）"><a href="#5-根据第二次查询出来的结果集，在内存中作排序，已知time-min在全局中的offset-997-那么结果集排序之后也能推算出offset-1000所在的记录，从而获得sqlselect-from-T-order-by-time-offset-1000-limit-5的分页查询记录（图片黄色部分）" class="headerlink" title="5. 根据第二次查询出来的结果集，在内存中作排序，已知time_min在全局中的offset=997,那么结果集排序之后也能推算出offset=1000所在的记录，从而获得sqlselect * from T order by time offset 1000 limit 5的分页查询记录（图片黄色部分）"></a>5. 根据第二次查询出来的结果集，在内存中作排序，已知time_min在全局中的offset=997,那么结果集排序之后也能推算出offset=1000所在的记录，从而获得sql<code>select * from T order by time offset 1000 limit 5</code>的分页查询记录（图片黄色部分）</h3><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040515.png" alt></p><p>总结：可以精确的返回业务所需数据，每次返回的数据量都非常小，不会随着翻页增加数据的返回量。</p>]]></content>
+        <content type="html"><![CDATA[<p>任何学习都要有目标有规划，这是整个Java知识体系大纲，根据自己的知识体系认知画出来的，有很多还没有细化，也还有很多没有涉猎，比如大数据，列出这些好让自己学的有目标一些吧，也算是一个总结。</p><p>在线预览地址：<a href="http://naotu.baidu.com/file/a94181bfafe64d39874b524ce8df18c1?token=a8efb35e029a526f" target="_blank" rel="noopener">http://naotu.baidu.com/file/a94181bfafe64d39874b524ce8df18c1?token=a8efb35e029a526f</a></p><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184207294.png" alt></p><p>来自网络的架构师大纲图：</p><hr><p><a href="https://leanote.com/api/file/getAttach?fileId=5d2c29a6ab64416644002311" target="_blank" rel="noopener">Java架构VIP课程大纲5.1.png</a></p>]]></content>
       
       
       <categories>
@@ -129,11 +129,11 @@
     
     
     <entry>
-      <title>限流相关</title>
-      <link href="/hou-duan-jia-gou/xian-liu-xiang-guan/"/>
-      <url>/hou-duan-jia-gou/xian-liu-xiang-guan/</url>
+      <title>分库分表的分页查询</title>
+      <link href="/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/"/>
+      <url>/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在大流量场景，秒杀、抢购场景，一般会对网站做一些流量控制，牺牲一部分流量而保护系统而不至于系统直接down机。</p><h1 id="常见限流算法"><a href="#常见限流算法" class="headerlink" title="常见限流算法"></a>常见限流算法</h1><h2 id="固定计算限流"><a href="#固定计算限流" class="headerlink" title="固定计算限流"></a>固定计算限流</h2><p>就是统计固定时间内的流量数量，如果超过了就限制。这种很容易实现，利用AutomicLong统计，下一个统计周期后又清零重新计算。<br>这样会有以下问题：</p><ol><li>1s之内的前100ms就已经达到了,那么后900ms就是空闲的。</li><li>如果1s之内的后100ms和下一秒的前100ms,那么在这个前后1s内加起来的流量是限流的两倍，显然这没有达到“在任意1s内流量不超过限制”的控制，很多黑客利用这个缺陷攻击网站，从而拖垮服务器。<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239907.png" alt></li></ol><h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><p>为了解决“计数限流”的缺陷，我们引入“滑动窗口”的计数方法。就是在计数限流的基础之上，将1个限流时间周期内切分成更小的单位计数，使得限制流量更加均分。<br>具体做法如下：</p><ol><li>将1s钟切成更细粒度200ms为计数单位，将请求时间点按取模的方式计算落到对应的计数格中，然后判断从当前计数格往前推1s(也就是5个计数格)的统计数总和当成当前流量的计数，如果超过阈值则限流，否则放行<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239739-1424159.png" alt></li><li>随着请求时间的推进，计数窗口也会随之往前移动<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239638.png" alt></li><li>这样的好处是，优化了“固定计数法”的缺陷，即在任意时刻，都将都以更小粒度的计数方法往前累加计算，防止在单位时间内流量超过限额。如图：<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239708.png" alt></li></ol><h2 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h2><p>漏桶算法思路很简单，水（请求）先进入到漏桶里，漏桶以一定的速度出水，当水流入速度过大会时，有一定的缓冲能力，超过最大缓冲时将直接拒绝。这个算法的特点就是，不管桶里面是空还是满，都以均匀的速度放行。下面是从网上找的图：<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239739.png" alt></p><h2 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h2><p>令牌桶算法（Token Bucket）：是网络流量整形（Traffic Shaping）和速率限制（Rate Limiting）中最常使用的一种算法。典型情况下，令牌桶算法用来控制发送到网络上的数据的数目，并允许突发数据的发送。令牌桶算法示意图如下所示：<br><img src="../images/%E9%99%90%E6%B5%81%E7%9B%B8%E5%85%B3/getImage-20220825184239758.png" alt></p><p>令牌桶算法与漏桶算法的区别在于如果在一段时间内都没有流量，而桶中的令牌数有随着时间流逝匀速增加，那么桶中将会缓冲一定数量的令牌，即使后面流量突然增加超过了限额，也会由于还有可用的令牌直接放行，无需要等待。</p><h1 id="限流实现"><a href="#限流实现" class="headerlink" title="限流实现"></a>限流实现</h1><h2 id="Guava的RateLimiter实现"><a href="#Guava的RateLimiter实现" class="headerlink" title="Guava的RateLimiter实现"></a>Guava的RateLimiter实现</h2><p>在Guava的工具包中，<code>RateLimiter</code>就是居于<code>令牌桶算法</code>实现的内存限流。<br>其构造有如下几个：</p><pre><code> //构造方法1  @VisibleForTesting  static RateLimiter create(SleepingTicker ticker, double permitsPerSecond) {    //实现类是Bursty    RateLimiter rateLimiter = new Bursty(ticker, 1.0 /* maxBurstSeconds */);    //根据permitsPerSecond每秒令牌数计算，每个令牌产生的毫秒数    rateLimiter.setRate(permitsPerSecond);    return rateLimiter;  }  //构造方法2 static RateLimiter create(      SleepingTicker ticker, double permitsPerSecond, long warmupPeriod, TimeUnit unit) {    //实现类是一个平滑预热限流，就是如果流量突然暴增，即使有足够的令牌，也不会一下子全部放下，会加一些线性等待时间平滑过渡    RateLimiter rateLimiter = new WarmingUp(ticker, warmupPeriod, unit);    rateLimiter.setRate(permitsPerSecond);    return rateLimiter;  }</code></pre><p>获取令牌</p><pre><code>  public double acquire(int permits) {    checkPermits(permits);    long microsToWait;    //获取全局锁    synchronized (mutex) {        //根据当前时间算出还需要等待的时间        microsToWait = reserveNextTicket(permits, readSafeMicros());    }    ticker.sleepMicrosUninterruptibly(microsToWait);    return 1.0 * microsToWait / TimeUnit.SECONDS.toMicros(1L);  }</code></pre><p>下面是令牌桶算法的核心</p><pre><code>  private long reserveNextTicket(double requiredPermits, long nowMicros) {    //根据当前时间算出可用令牌数及要出来这么多令牌的时间点    resync(nowMicros);    //看下还需要等多久    long microsToNextFreeTicket = nextFreeTicketMicros - nowMicros;    //看下当前要立即花费多少令牌    double storedPermitsToSpend = Math.min(requiredPermits, this.storedPermits);    //还剩多少令牌需要等待    double freshPermits = requiredPermits - storedPermitsToSpend;    //根据不同的实现，Bursty或者WarmingUp，返回额外需要等待的时间    long waitMicros = storedPermitsToWaitTime(this.storedPermits, storedPermitsToSpend)        + (long) (freshPermits * stableIntervalMicros);    //重置获取这么多令牌要等到啥时候    this.nextFreeTicketMicros = nextFreeTicketMicros + waitMicros;    //更新下还剩多少可用令牌    this.storedPermits -= storedPermitsToSpend;    //返回还需要等待的时间    return microsToNextFreeTicket;  }</code></pre><p>可以看到这个实现，并不是根据算法图一个生产者不断的往一个数组中添加令牌，一个消费者不断的取令牌，而是以时间线的方式，计算出当前获取令牌需要花费的时间及算出当前时间以设定的速度能够无产生多少令牌的方式实时计算的，简单并且没有额外的轮询操作，非常高效节省资源。</p><h2 id="使用Semphore进行并发流控"><a href="#使用Semphore进行并发流控" class="headerlink" title="使用Semphore进行并发流控"></a>使用Semphore进行并发流控</h2><p><code>Semphore</code> 是JUC里面的并发信号量实现，Semaphore可以控制某个资源可被同时访问的个数，通过 acquire() 获取一个许可，如果没有就等待，而 release() 释放一个许可。很适合多线程情况对有限资源的抢占控制。</p><h2 id="Netflix-Hystrix-熔断限流"><a href="#Netflix-Hystrix-熔断限流" class="headerlink" title="Netflix Hystrix 熔断限流"></a>Netflix Hystrix 熔断限流</h2><p>Spring Clound里的Hystrix能否实现根据一定的访问异常设置，对应用做到降级限流的的控制</p><h2 id="阿里的Sentinel实现"><a href="#阿里的Sentinel实现" class="headerlink" title="阿里的Sentinel实现"></a>阿里的Sentinel实现</h2><p>Sentinel 是阿里中间件团队开源的，面向分布式服务架构的轻量级高可用流量控制组件，主要以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度来帮助用户保护服务的稳定性。<br>GITHUB:<a href="https://github.com/alibaba/Sentinel" target="_blank" rel="noopener">https://github.com/alibaba/Sentinel</a><br>其官方文档中也提到，其受到Guava RateLmiter的启发。</p><p>大家可能会问：Sentinel 和上面提到的Netflix Hystrix 有什么异同呢？<br>其官方文档有专门的说明：<br><a href="https://github.com/alibaba/Sentinel/wiki/Sentinel-%E4%B8%8E-Hystrix-%E7%9A%84%E5%AF%B9%E6%AF%94" target="_blank" rel="noopener">https://github.com/alibaba/Sentinel/wiki/Sentinel-%E4%B8%8E-Hystrix-%E7%9A%84%E5%AF%B9%E6%AF%94</a></p><h2 id="其他实现"><a href="#其他实现" class="headerlink" title="其他实现"></a>其他实现</h2><p>进行限流控制还可以有很多种方法，针对不同的场景各有优劣，例如通过AtomicLong计数器控制、Redis计数，使用MQ消息队列进行流量消峰等等都是可以的。</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>流量控制在高并发场景是一个对系统保护必不可少的一个手段，能够牺牲一部分流量而保护整个应用的可用性，不止于发生雪崩情况。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="问题的提出"><a href="#问题的提出" class="headerlink" title="问题的提出"></a>问题的提出</h1><p>我们知道，当我们的数据量达到一定数量时，需要将数据表进行水平拆分，从而满足大量数据的存储和查询，保证系统的可用性，但同时会出现另外一个问题就是，如果业务要查询“最近注册的第3页用户”，该如何实现呢？单库上，可以通过简单的sql实现分页查询</p><pre><code>select * from t_user order by time limit 200,100</code></pre><p>分库分表后变成两个库后，分库依据是user_id，排序依据是time，单个分数据库层失去了time排序的全局视野，如果同样需要实现分页查询时该怎么办呢？</p><h1 id="全局视野法"><a href="#全局视野法" class="headerlink" title="全局视野法"></a>全局视野法</h1><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040381.png" alt></p><p>正常来讲，不管哪一个分库的第3页都不一定有全局第3页的所有数据，例如一下三种情况：</p><p>情况一：两个分库按照时间排序，数据各占一半，则每页取offset和limit的一般数据回来合并就可以了<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040402.png" alt><br>情况二：所有数据都在一个库上，则取一个库的所有数据回来就可以了<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040384.png" alt><br>情况三，那么一般情况是，每个分库的数据数据是随机的，但是一定是在全局offset=600之内<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040393.png" alt></p><p>由于不清楚到底是哪种情况，所以必须每个库都返回3页数据，所得到的6页数据在服务层进行内存排序，得到数据全局视野，再取第3页数据，便能够得到想要的全局分页数据。</p><p>这种方法缺点是：当查询的页数增大时，每个分库所需返回的数据也越来成倍增加，降低了查询的性能</p><h1 id="业务折中"><a href="#业务折中" class="headerlink" title="业务折中"></a>业务折中</h1><h2 id="第一种折中的方案是"><a href="#第一种折中的方案是" class="headerlink" title="第一种折中的方案是"></a>第一种折中的方案是</h2><p>对全局视野法的一种优化，即禁用制定页数的分页查询，必须通过下一页来实现分页查询的页数跳转，并且在每次查询下一页时将上一页的最大排序字段的值带上（这里就是时间time）,这样在每个分库查询数据时待上这个条件，可以优化查询速率。</p><h2 id="第二种折中的方案是"><a href="#第二种折中的方案是" class="headerlink" title="第二种折中的方案是"></a>第二种折中的方案是</h2><p>数据库分库-数据均衡原理</p><p>使用patition key进行分库，在数据量较大，数据分布足够随机的情况下，各分库所有非patition key属性，在各个分库上的数据分布，统计概率情况是一致的。</p><p>例如，在uid随机的情况下，使用uid取模分两库，db0和db1：</p><p>（1）性别属性，如果db0库上的男性用户占比70%，则db1上男性用户占比也应为70%</p><p>（2）年龄属性，如果db0库上18-28岁少女用户比例占比15%，则db1上少女用户比例也应为15%</p><p>（3）时间属性，如果db0库上每天10:00之前登录的用户占比为20%，则db1上应该是相同的统计规律</p><p>利用这一原理，要查询全局100页数据，offset 9900 limit 100改写为offset 4950 limit 50，每个分库偏移4950（一半），获取50条数据（半页），得到的数据集的并集，基本能够认为，是全局数据的offset 9900 limit 100的数据，当然，这一页数据的精度，并不是精准的。</p><p>根据实际业务经验，用户都要查询第100页网页、帖子、邮件的数据了，这一页数据的精准性损失，业务上往往是可以接受的，但此时技术方案的复杂度便大大降低了，既不需要返回更多的数据，也不需要进行服务内存排序了。</p><h1 id="二次查找法"><a href="#二次查找法" class="headerlink" title="二次查找法"></a>二次查找法</h1><p>有没有一种方法既能满足业务要求，并且不需要折中，性能还高的方法呢？<br>接下来介绍一种“二次查找法”，不知道能不能讲的明白，我尽量吧。</p><p>为了方便举例，假设一页只有5条数据，查询第200页的SQL语句为select * from T order by time offset 1000 limit 5;</p><p>分五步：</p><h3 id="1-将select-from-T-order-by-time-offset-1000-limit-5-优化成select-from-T-order-by-time-offset-500-limit-5-注意这里的500-1000-分表数量，并将这个sql下发至每个分库分表中执行，每个分库返回这个sql执行的结果。"><a href="#1-将select-from-T-order-by-time-offset-1000-limit-5-优化成select-from-T-order-by-time-offset-500-limit-5-注意这里的500-1000-分表数量，并将这个sql下发至每个分库分表中执行，每个分库返回这个sql执行的结果。" class="headerlink" title="1. 将select * from T order by time offset 1000 limit 5; 优化成select * from T order by time offset 500 limit 5,注意这里的500=1000/分表数量，并将这个sql下发至每个分库分表中执行，每个分库返回这个sql执行的结果。"></a>1. 将<code>select * from T order by time offset 1000 limit 5;</code> 优化成<code>select * from T order by time offset 500 limit 5</code>,注意这里的500=1000/分表数量，并将这个sql下发至每个分库分表中执行，每个分库返回这个sql执行的结果。</h3><h3 id="2-找到所有分库返回结果的time的最小值"><a href="#2-找到所有分库返回结果的time的最小值" class="headerlink" title="2. 找到所有分库返回结果的time的最小值"></a>2. 找到所有分库返回结果的time的最小值</h3><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040369.png" alt><br>第一个库，5条数据的time最小值是1487501123<br>第二个库，5条数据的time最小值是1487501223</p><p>故，三页数据中，time最小值来自第一个库，time_min=1487501123，这个过程只需要比较各个分库第一条数据，时间复杂度很低</p><h3 id="3-查询二次改写"><a href="#3-查询二次改写" class="headerlink" title="3. 查询二次改写"></a>3. 查询二次改写</h3><p>第一次改写的SQL语句是select * from T order by time offset 500 limit 5</p><p>第二次要改写成一个between语句，between的起点是time_min，between的终点是原来每个分库各自返回数据的最大值：</p><p>第一个分库，第一次返回数据的最大值是1487501523<br>所以查询改写为select * from T order by time where time between time_min and 1487501523</p><p>第二个分库，第一次返回数据的最大值是1487501699<br>所以查询改写为select * from T order by time where time between time_min and 1487501699</p><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040363.png" alt></p><p>从上面图片可以看出，DB1比第一次查出来的数据多了两行，应为查询的范围扩大了</p><h3 id="4-计算time-min这条记录在全局的offset"><a href="#4-计算time-min这条记录在全局的offset" class="headerlink" title="4. 计算time_min这条记录在全局的offset"></a>4. 计算time_min这条记录在全局的offset</h3><p>根据第一步查询的sql<code>select * from T order by time offset 500 limit</code> ,我们知道每个库的offset值了，将DB0中的最小time的数据虚拟到DB1中推算在DB1中的offset值=497<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040525.png" alt><br>从而我们得知time_min这条记录在全局的offset值=500+497=997</p><h3 id="5-根据第二次查询出来的结果集，在内存中作排序，已知time-min在全局中的offset-997-那么结果集排序之后也能推算出offset-1000所在的记录，从而获得sqlselect-from-T-order-by-time-offset-1000-limit-5的分页查询记录（图片黄色部分）"><a href="#5-根据第二次查询出来的结果集，在内存中作排序，已知time-min在全局中的offset-997-那么结果集排序之后也能推算出offset-1000所在的记录，从而获得sqlselect-from-T-order-by-time-offset-1000-limit-5的分页查询记录（图片黄色部分）" class="headerlink" title="5. 根据第二次查询出来的结果集，在内存中作排序，已知time_min在全局中的offset=997,那么结果集排序之后也能推算出offset=1000所在的记录，从而获得sqlselect * from T order by time offset 1000 limit 5的分页查询记录（图片黄色部分）"></a>5. 根据第二次查询出来的结果集，在内存中作排序，已知time_min在全局中的offset=997,那么结果集排序之后也能推算出offset=1000所在的记录，从而获得sql<code>select * from T order by time offset 1000 limit 5</code>的分页查询记录（图片黄色部分）</h3><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825184040515.png" alt></p><p>总结：可以精确的返回业务所需数据，每次返回的数据量都非常小，不会随着翻页增加数据的返回量。</p>]]></content>
       
       
       <categories>
@@ -154,61 +154,36 @@
     
     
     <entry>
-      <title>Idea maven 插件安装</title>
-      <link href="/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
-      <url>/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</url>
-      
-        <content type="html"><![CDATA[<p>默认idea 是已经安装好了maven插件的，在File&gt;settings&gt;能搜索到maven的相关配置<br>但是有时候它会莫名其妙的不见了或消失<br>检查Plugins是否启用了maven<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825183122891.png" alt></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Java 8常用转换</title>
-      <link href="/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
-      <url>/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</url>
-      
-        <content type="html"><![CDATA[<h1 id="1-List转Map"><a href="#1-List转Map" class="headerlink" title="1. List转Map"></a>1. List转Map</h1><pre><code>/** * List -&gt; Map * 需要注意的是： * toMap 如果集合对象有重复的key，会报错Duplicate key .... *  apple1,apple12的id都为1。 *  可以用 (k1,k2)-&gt;k1 来设置，如果有重复的key,则保留key1,舍弃key2 */Map&lt;Integer, Apple&gt; appleMap = appleList.stream().collect(Collectors.toMap(Apple::getId, a -&gt; a,(k1,k2)-&gt;k1));</code></pre><h1 id="List分组成Map"><a href="#List分组成Map" class="headerlink" title="List分组成Map"></a>List分组成Map</h1><pre><code>//List 以ID分组 Map&lt;Integer,List&lt;Apple&gt;&gt;Map&lt;Integer, List&lt;Apple&gt;&gt; groupBy = appleList.stream().collect(Collectors.groupingBy(Apple::getId));System.err.println(&quot;groupBy:&quot;+groupBy);{1=[Apple{id=1, name=&#39;苹果1&#39;, money=3.25, num=10}, Apple{id=1, name=&#39;苹果2&#39;, money=1.35, num=20}], 2=[Apple{id=2, name=&#39;香蕉&#39;, money=2.89, num=30}], 3=[Apple{id=3, name=&#39;荔枝&#39;, money=9.99, num=40}]}</code></pre><h1 id="3-Map转List"><a href="#3-Map转List" class="headerlink" title="3. Map转List"></a>3. Map转List</h1><pre><code>List&lt;Long&gt; skuIdList = order.getItemList().stream().map(OrderItemDTO::getSkuId).collect(Collectors.toList());</code></pre><h1 id="4-统计求和"><a href="#4-统计求和" class="headerlink" title="4. 统计求和"></a>4. 统计求和</h1><pre><code>//计算 总金额BigDecimal totalMoney = appleList.stream().map(Apple::getMoney).reduce(BigDecimal.ZERO, BigDecimal::add);System.err.println(&quot;totalMoney:&quot;+totalMoney);  //totalMoney:17.48</code></pre><h1 id="5-最大值、最小值"><a href="#5-最大值、最小值" class="headerlink" title="5. 最大值、最小值"></a>5. 最大值、最小值</h1><pre><code>Optional&lt;Dish&gt; maxDish = Dish.menu.stream().      collect(Collectors.maxBy(Comparator.comparing(Dish::getCalories)));maxDish.ifPresent(System.out::println);Optional&lt;Dish&gt; minDish = Dish.menu.stream().      collect(Collectors.minBy(Comparator.comparing(Dish::getCalories)));</code></pre><h1 id="6-过滤Map"><a href="#6-过滤Map" class="headerlink" title="6. 过滤Map"></a>6. 过滤Map</h1><pre><code>//Map -&gt; Stream -&gt; Filter -&gt; MAP    Map&lt;Integer, String&gt; collect = map.entrySet().stream()        .filter(x -&gt; x.getKey() == 2)        .collect(Collectors.toMap(x -&gt; x.getKey(), x -&gt; x.getValue()));</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Java bean的Getter Setter 自动编译生成工具Lombok</title>
       <link href="/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/"/>
       <url>/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/</url>
       
         <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>  我们在开发过程中，通常都会定义大量的JavaBean，然后通过IDE去生成其属性的构造器、getter、setter、equals、hashcode、toString方法，当要对某个属性进行改变时，比如命名、类型等，都需要重新去生成上面提到的这些方法，那Java中有没有一种方式能够避免这种重复的劳动呢？答案是有，lombok插件  </p><h2 id="Idea插件安装lombok"><a href="#Idea插件安装lombok" class="headerlink" title="Idea插件安装lombok"></a>Idea插件安装lombok</h2><ol><li>File &gt; Settings &gt; Plugins &gt; Browse repositories… &gt; Search for “lombok” &gt; Install Plugin</li><li>在使用项目中引入lombok 的类库<pre><code>&lt;dependency&gt;     &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;     &lt;artifactId&gt;lombok&lt;/artifactId&gt;     &lt;version&gt;1.16.10&lt;/version&gt;     &lt;scope&gt;provided&lt;/scope&gt; &lt;/dependency&gt;</code></pre></li></ol><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>@Getter / @Setter</strong></p><p>  可以作用在类上和属性上，放在类上，会对所有的非静态(non-static)属性生成Getter/Setter方法，放在属性上，会对该属性生成Getter/Setter方法。并可以指定Getter/Setter方法的访问级别。</p><p><strong>@EqualsAndHashCode</strong></p><p>  默认情况下，会使用所有非瞬态(non-transient)和非静态(non-static)字段来生成equals和hascode方法，也可以指定具体使用哪些属性。</p><p><strong>@ToString</strong></p><p>  生成toString方法，默认情况下，会输出类名、所有属性，属性会按照顺序输出，以逗号分割。</p><p><strong>@NoArgsConstructor, @RequiredArgsConstructor and @AllArgsConstructor</strong></p><p>  无参构造器、部分参数构造器、全参构造器，当我们需要重载多个构造器的时候，Lombok就无能为力了。</p><p><strong>@Data</strong></p><p>  @ToString, @EqualsAndHashCode, 所有属性的@Getter, 所有non-final属性的@Setter和@RequiredArgsConstructor的组合，通常情况下，我们使用这个注解就足够了。<br>  <br>  ## 原理<br>  该插件的原理是在编码过程中屏蔽bean的getter/setter 方法，在编译成class的时候插件自动根据注解生成对应的gettter/setter 方法，我们通过发编译源码发现  </p><pre><code>@Datapublic class Test {    private String id;    private String name;    public void test(){        this.getId();    }}</code></pre><p>编译后等价于</p><pre><code>public class Test {    private String id;    private String name;    public void test() {        this.getId();    }    public Test() {    }    public String getId() {        return this.id;    }    public String getName() {        return this.name;    }    public void setId(String id) {        this.id = id;    }    public void setName(String name) {        this.name = name;    }    public boolean equals(Object o) {        if(o == this) {            return true;        } else if(!(o instanceof Test)) {            return false;        } else {            Test other = (Test)o;            if(!other.canEqual(this)) {                return false;            } else {                String this$id = this.getId();                String other$id = other.getId();                if(this$id == null) {                    if(other$id != null) {                        return false;                    }                } else if(!this$id.equals(other$id)) {                    return false;                }                String this$name = this.getName();                String other$name = other.getName();                if(this$name == null) {                    if(other$name == null) {                        return true;                    }                } else if(this$name.equals(other$name)) {                    return true;                }                return false;            }        }    }    protected boolean canEqual(Object other) {        return other instanceof Test;    }    public int hashCode() {        boolean PRIME = true;        byte result = 1;        String $id = this.getId();        int result1 = result * 59 + ($id == null?43:$id.hashCode());        String $name = this.getName();        result1 = result1 * 59 + ($name == null?43:$name.hashCode());        return result1;    }    public String toString() {        return &quot;Test(id=&quot; + this.getId() + &quot;, name=&quot; + this.getName() + &quot;)&quot;;    }}</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Idea maven 插件安装</title>
+      <link href="/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
+      <url>/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</url>
+      
+        <content type="html"><![CDATA[<p>默认idea 是已经安装好了maven插件的，在File&gt;settings&gt;能搜索到maven的相关配置<br>但是有时候它会莫名其妙的不见了或消失<br>检查Plugins是否启用了maven<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825183122891.png" alt></p>]]></content>
       
       
       <categories>
@@ -279,6 +254,31 @@
     
     
     <entry>
+      <title>Java 8常用转换</title>
+      <link href="/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
+      <url>/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-List转Map"><a href="#1-List转Map" class="headerlink" title="1. List转Map"></a>1. List转Map</h1><pre><code>/** * List -&gt; Map * 需要注意的是： * toMap 如果集合对象有重复的key，会报错Duplicate key .... *  apple1,apple12的id都为1。 *  可以用 (k1,k2)-&gt;k1 来设置，如果有重复的key,则保留key1,舍弃key2 */Map&lt;Integer, Apple&gt; appleMap = appleList.stream().collect(Collectors.toMap(Apple::getId, a -&gt; a,(k1,k2)-&gt;k1));</code></pre><h1 id="List分组成Map"><a href="#List分组成Map" class="headerlink" title="List分组成Map"></a>List分组成Map</h1><pre><code>//List 以ID分组 Map&lt;Integer,List&lt;Apple&gt;&gt;Map&lt;Integer, List&lt;Apple&gt;&gt; groupBy = appleList.stream().collect(Collectors.groupingBy(Apple::getId));System.err.println(&quot;groupBy:&quot;+groupBy);{1=[Apple{id=1, name=&#39;苹果1&#39;, money=3.25, num=10}, Apple{id=1, name=&#39;苹果2&#39;, money=1.35, num=20}], 2=[Apple{id=2, name=&#39;香蕉&#39;, money=2.89, num=30}], 3=[Apple{id=3, name=&#39;荔枝&#39;, money=9.99, num=40}]}</code></pre><h1 id="3-Map转List"><a href="#3-Map转List" class="headerlink" title="3. Map转List"></a>3. Map转List</h1><pre><code>List&lt;Long&gt; skuIdList = order.getItemList().stream().map(OrderItemDTO::getSkuId).collect(Collectors.toList());</code></pre><h1 id="4-统计求和"><a href="#4-统计求和" class="headerlink" title="4. 统计求和"></a>4. 统计求和</h1><pre><code>//计算 总金额BigDecimal totalMoney = appleList.stream().map(Apple::getMoney).reduce(BigDecimal.ZERO, BigDecimal::add);System.err.println(&quot;totalMoney:&quot;+totalMoney);  //totalMoney:17.48</code></pre><h1 id="5-最大值、最小值"><a href="#5-最大值、最小值" class="headerlink" title="5. 最大值、最小值"></a>5. 最大值、最小值</h1><pre><code>Optional&lt;Dish&gt; maxDish = Dish.menu.stream().      collect(Collectors.maxBy(Comparator.comparing(Dish::getCalories)));maxDish.ifPresent(System.out::println);Optional&lt;Dish&gt; minDish = Dish.menu.stream().      collect(Collectors.minBy(Comparator.comparing(Dish::getCalories)));</code></pre><h1 id="6-过滤Map"><a href="#6-过滤Map" class="headerlink" title="6. 过滤Map"></a>6. 过滤Map</h1><pre><code>//Map -&gt; Stream -&gt; Filter -&gt; MAP    Map&lt;Integer, String&gt; collect = map.entrySet().stream()        .filter(x -&gt; x.getKey() == 2)        .collect(Collectors.toMap(x -&gt; x.getKey(), x -&gt; x.getValue()));</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Selenium</title>
       <link href="/ruan-jian-bi-ji/selenium/"/>
       <url>/ruan-jian-bi-ji/selenium/</url>
@@ -309,31 +309,6 @@
       <url>/ruan-jian-bi-ji/git-chong-ming-ming-de-keng/</url>
       
         <content type="html"><![CDATA[<p>如果使用git命令进行仅涉及大小写的重命名,git 默认是把你的动作忽略的，所以当你删掉本地代码，重新pull代码时，你会发现文件还是重命名之前的,神奇吧，记下这个坑，等着你们踩着坑来这看吧，坏笑/</p><p>解决方法如下：</p><ul><li><p>设置git库为大小写敏感（不建议）</p><pre><code>git config core.ignorecase false</code></pre><p>用这种方法进行重命名，用git status就可以识别出修改了，但是不推荐用这种方式，因为在更新这种修改的时候会有麻烦。</p></li><li><p>使用git mv命令（仅当core.ignorecase为true时可用）</p><pre><code>$ git mv ABC.java Abc.java</code></pre></li></ul><p>$ git status<br>……<br>renamed:<br> ABC.java -&gt; Abc.java</p><p>```</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>docker命令笔记</title>
-      <link href="/ruan-jian-bi-ji/docker-ming-ling-bi-ji/"/>
-      <url>/ruan-jian-bi-ji/docker-ming-ling-bi-ji/</url>
-      
-        <content type="html"><![CDATA[<h1 id="制作自己的镜像"><a href="#制作自己的镜像" class="headerlink" title="制作自己的镜像"></a>制作自己的镜像</h1><p>从互联网拉取镜像</p><pre><code>docker pull centos:7</code></pre><p>启动容器</p><pre><code>docker run -it -d centos:7 /bin/bash</code></pre><p>进入启动容器</p><pre><code>docker exec -it -v /data/soft:/data/soft centos:7 /bin/bash</code></pre><p>在容器中安装jdk</p><pre><code>yum -y list java*docker yum -y java-11-openjdk.x86_64</code></pre><p>将容器提交到镜像仓库</p><pre><code>docker commit centos:7 okeeper:centos7  #将正在运行的容器打包为镜像</code></pre><p>将镜像导出为文件</p><pre><code>docker save -o ./okeeper-centos7.tar okeeper:centos7</code></pre><h1 id="在java项目中配置maven自动构建镜像"><a href="#在java项目中配置maven自动构建镜像" class="headerlink" title="在java项目中配置maven自动构建镜像"></a>在java项目中配置maven自动构建镜像</h1>]]></content>
       
       
       <categories>
@@ -404,31 +379,6 @@
     
     
     <entry>
-      <title>maven 包冲突 解决</title>
-      <link href="/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
-      <url>/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</url>
-      
-        <content type="html"><![CDATA[<pre><code>mvn dependency:tree -Dverbose -Dincludes=org.slf4j</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>iterm2 rz sz 安装</title>
       <link href="/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/"/>
       <url>/ruan-jian-bi-ji/iterm2-rz-sz-an-zhuang/</url>
@@ -454,11 +404,11 @@
     
     
     <entry>
-      <title>使用Jmeter进行Dubbo接口压测</title>
-      <link href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
-      <url>/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</url>
+      <title>docker命令笔记</title>
+      <link href="/ruan-jian-bi-ji/docker-ming-ling-bi-ji/"/>
+      <url>/ruan-jian-bi-ji/docker-ming-ling-bi-ji/</url>
       
-        <content type="html"><![CDATA[<h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><h2 id="一、下载Jmeter3-1"><a href="#一、下载Jmeter3-1" class="headerlink" title="一、下载Jmeter3.1"></a>一、下载Jmeter3.1</h2><p>下载地址：<a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip</a><br>其他版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></p><p>更高版本的Jmeter 5+好像有点问题，建议还是用这个版本吧</p><h2 id="二、下载dubbo官方的jmeter插件"><a href="#二、下载dubbo官方的jmeter插件" class="headerlink" title="二、下载dubbo官方的jmeter插件"></a>二、下载dubbo官方的jmeter插件</h2><p>下载地址：<a href="https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar" target="_blank" rel="noopener">https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar</a><br>官方用户指南：<a href="https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97</a></p><h2 id="三、解压Jmeter"><a href="#三、解压Jmeter" class="headerlink" title="三、解压Jmeter"></a>三、解压Jmeter</h2><p>将jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar放到<code>${JMETER_HOME}\lib\ext.</code>中</p><h2 id="四、启动Jmeter"><a href="#四、启动Jmeter" class="headerlink" title="四、启动Jmeter"></a>四、启动Jmeter</h2><p> <code>${JMETER_HOME}\jmeter.bat</code></p><h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182246944.png" alt><br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247846.png" alt></p><h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248427.png" alt></p><p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248165.png" alt></p><h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248034.png" alt></p><h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247230.png" alt></p><h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248268.png" alt></p><h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247269.png" alt></p><h1 id="六、dubbo服务器状态查看"><a href="#六、dubbo服务器状态查看" class="headerlink" title="六、dubbo服务器状态查看"></a>六、dubbo服务器状态查看</h1><ol><li>使用telnet进入dubbo的console界面<pre><code>telnet 192.168.1.131 32101后回车</code></pre><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247961.png" alt></li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="制作自己的镜像"><a href="#制作自己的镜像" class="headerlink" title="制作自己的镜像"></a>制作自己的镜像</h1><p>从互联网拉取镜像</p><pre><code>docker pull centos:7</code></pre><p>启动容器</p><pre><code>docker run -it -d centos:7 /bin/bash</code></pre><p>进入启动容器</p><pre><code>docker exec -it -v /data/soft:/data/soft centos:7 /bin/bash</code></pre><p>在容器中安装jdk</p><pre><code>yum -y list java*docker yum -y java-11-openjdk.x86_64</code></pre><p>将容器提交到镜像仓库</p><pre><code>docker commit centos:7 okeeper:centos7  #将正在运行的容器打包为镜像</code></pre><p>将镜像导出为文件</p><pre><code>docker save -o ./okeeper-centos7.tar okeeper:centos7</code></pre><h1 id="在java项目中配置maven自动构建镜像"><a href="#在java项目中配置maven自动构建镜像" class="headerlink" title="在java项目中配置maven自动构建镜像"></a>在java项目中配置maven自动构建镜像</h1>]]></content>
       
       
       <categories>
@@ -479,11 +429,11 @@
     
     
     <entry>
-      <title>使用Maven命令指定上传打包到私库</title>
-      <link href="/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/"/>
-      <url>/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/</url>
+      <title>maven 包冲突 解决</title>
+      <link href="/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/"/>
+      <url>/ruan-jian-bi-ji/maven-bao-chong-tu-jie-jue/</url>
       
-        <content type="html"><![CDATA[<p>我们一般在pom.xml中加入<code>distributionManagement</code></p><pre><code>&lt;distributionManagement&gt;    &lt;repository&gt;      &lt;id&gt;internal.repo&lt;/id&gt;      &lt;name&gt;MyCo Internal Repository&lt;/name&gt;      &lt;url&gt;Host to Company Repository&lt;/url&gt;    &lt;/repository&gt;  &lt;/distributionManagement&gt;</code></pre><p>来指定setting.xml中的server私库地址，然后通过<code>mvn clean install deploy</code>打包上传 </p><hr><p>但是为了子类不必要的应用，我们可以用<code>-DaltDeploymentRepository</code>来指定打包到私服的参数</p><pre><code>mvn deploy -DaltDeploymentRepository=releases::default::http://198.11.174.75:8081/nexus/content/repositories/releases/</code></pre><p>上传本地jar到私库</p><pre><code>mvn deploy:deploy-file -DgroupId=com.xy.Oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar -Dfile=E:\ojdbc14.jar -Durl=http://localhost:9090/nexus-2.2-01/content/repositories/thirdparty/ -DrepositoryId=thirdparty#上传小米push 到私有仓库mvn deploy:deploy-file -DgroupId=com.xiaomi -DartifactId=MiPush_SDK_Server -Dversion=2.2.18 -Dpackaging=jar -Dfile=lib/MiPush_SDK_Server_2_2_18.jar -Durl=http://198.11.174.75:8081/nexus/content/groups/public/</code></pre><p>单独构建上传模块 pingjuan-web，同时会构建上传 pingjuan-web</p><pre><code>mvn clean install deploy -pl trade-center-api -ammvn clean install deploy -DaltDeploymentRepository=releases::default::http://198.11.174.75:8081/nexus/content/repositories/releases/ -pl trade-center-api -am</code></pre>]]></content>
+        <content type="html"><![CDATA[<pre><code>mvn dependency:tree -Dverbose -Dincludes=org.slf4j</code></pre>]]></content>
       
       
       <categories>
@@ -529,6 +479,56 @@
     
     
     <entry>
+      <title>使用Maven命令指定上传打包到私库</title>
+      <link href="/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/"/>
+      <url>/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/</url>
+      
+        <content type="html"><![CDATA[<p>我们一般在pom.xml中加入<code>distributionManagement</code></p><pre><code>&lt;distributionManagement&gt;    &lt;repository&gt;      &lt;id&gt;internal.repo&lt;/id&gt;      &lt;name&gt;MyCo Internal Repository&lt;/name&gt;      &lt;url&gt;Host to Company Repository&lt;/url&gt;    &lt;/repository&gt;  &lt;/distributionManagement&gt;</code></pre><p>来指定setting.xml中的server私库地址，然后通过<code>mvn clean install deploy</code>打包上传 </p><hr><p>但是为了子类不必要的应用，我们可以用<code>-DaltDeploymentRepository</code>来指定打包到私服的参数</p><pre><code>mvn deploy -DaltDeploymentRepository=releases::default::http://198.11.174.75:8081/nexus/content/repositories/releases/</code></pre><p>上传本地jar到私库</p><pre><code>mvn deploy:deploy-file -DgroupId=com.xy.Oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar -Dfile=E:\ojdbc14.jar -Durl=http://localhost:9090/nexus-2.2-01/content/repositories/thirdparty/ -DrepositoryId=thirdparty#上传小米push 到私有仓库mvn deploy:deploy-file -DgroupId=com.xiaomi -DartifactId=MiPush_SDK_Server -Dversion=2.2.18 -Dpackaging=jar -Dfile=lib/MiPush_SDK_Server_2_2_18.jar -Durl=http://198.11.174.75:8081/nexus/content/groups/public/</code></pre><p>单独构建上传模块 pingjuan-web，同时会构建上传 pingjuan-web</p><pre><code>mvn clean install deploy -pl trade-center-api -ammvn clean install deploy -DaltDeploymentRepository=releases::default::http://198.11.174.75:8081/nexus/content/repositories/releases/ -pl trade-center-api -am</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用Jmeter进行Dubbo接口压测</title>
+      <link href="/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
+      <url>/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</url>
+      
+        <content type="html"><![CDATA[<h1 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h1><h2 id="一、下载Jmeter3-1"><a href="#一、下载Jmeter3-1" class="headerlink" title="一、下载Jmeter3.1"></a>一、下载Jmeter3.1</h2><p>下载地址：<a href="https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-3.1.zip</a><br>其他版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></p><p>更高版本的Jmeter 5+好像有点问题，建议还是用这个版本吧</p><h2 id="二、下载dubbo官方的jmeter插件"><a href="#二、下载dubbo官方的jmeter插件" class="headerlink" title="二、下载dubbo官方的jmeter插件"></a>二、下载dubbo官方的jmeter插件</h2><p>下载地址：<a href="https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar" target="_blank" rel="noopener">https://gitee.com/ningyu/dist-jmeter-plugins-for-apache-dubbo/raw/master/2.7.7/jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar</a><br>官方用户指南：<a href="https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/thubbo/jmeter-plugins-for-apache-dubbo/wiki/%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97</a></p><h2 id="三、解压Jmeter"><a href="#三、解压Jmeter" class="headerlink" title="三、解压Jmeter"></a>三、解压Jmeter</h2><p>将jmeter-plugins-dubbo-2.7.7-jar-with-dependencies.jar放到<code>${JMETER_HOME}\lib\ext.</code>中</p><h2 id="四、启动Jmeter"><a href="#四、启动Jmeter" class="headerlink" title="四、启动Jmeter"></a>四、启动Jmeter</h2><p> <code>${JMETER_HOME}\jmeter.bat</code></p><h1 id="五、使用Jmeter进行订单接口压测"><a href="#五、使用Jmeter进行订单接口压测" class="headerlink" title="五、使用Jmeter进行订单接口压测"></a>五、使用Jmeter进行订单接口压测</h1><h2 id="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"><a href="#在测试计划中右键添加一个线程组，设置压测的线程数及并发数" class="headerlink" title="在测试计划中右键添加一个线程组，设置压测的线程数及并发数"></a>在测试计划中右键添加一个线程组，设置压测的线程数及并发数</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182246944.png" alt><br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247846.png" alt></p><h2 id="添加一个Dubbo-Simple测试任务"><a href="#添加一个Dubbo-Simple测试任务" class="headerlink" title="添加一个Dubbo Simple测试任务"></a>添加一个Dubbo Simple测试任务</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248427.png" alt></p><p>将被测试的dubbo api加入<code>${JMETER_HOME}\lib\ext.</code>中，否则paramType将找不到类，paramValue填入入参DTO的json对象，注意不能有格式，否则解析不出来，这是个坑<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248165.png" alt></p><h2 id="添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树"><a href="#添加请求查看树，方便查询每个请求的出入参；线程组-gt-添加-gt-监听器-gt-查看结果树" class="headerlink" title="添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树"></a>添加请求查看树，方便查询每个请求的出入参；线程组&gt;添加&gt;监听器&gt;查看结果树</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248034.png" alt></p><h2 id="添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report"><a href="#添加测试结果汇总报告；线程组-gt-添加-gt-监听器-gt-Summary-Report" class="headerlink" title="添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report"></a>添加测试结果汇总报告；线程组&gt;添加&gt;监听器&gt;Summary Report</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247230.png" alt></p><h2 id="开始压测，点击启动"><a href="#开始压测，点击启动" class="headerlink" title="开始压测，点击启动"></a>开始压测，点击启动</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182248268.png" alt></p><h2 id="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"><a href="#结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点" class="headerlink" title="结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点"></a>结果查看，压测过程中可以看到请求参数，压测完之后可以压测结果，一般需要经过多次压测且压测的线程和并发数多一点</h2><p><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247269.png" alt></p><h1 id="六、dubbo服务器状态查看"><a href="#六、dubbo服务器状态查看" class="headerlink" title="六、dubbo服务器状态查看"></a>六、dubbo服务器状态查看</h1><ol><li>使用telnet进入dubbo的console界面<pre><code>telnet 192.168.1.131 32101后回车</code></pre><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247523.png" alt><br><code>status -l</code> 查看线程状态<br><img src="https://okeeper-blog-images.oss-cn-hangzhou.aliyuncs.com/images/getImage-20220825182247961.png" alt></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>护眼神器Dark Reader</title>
       <link href="/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/"/>
       <url>/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/</url>
@@ -554,11 +554,11 @@
     
     
     <entry>
-      <title>磁盘空间满处理</title>
-      <link href="/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/"/>
-      <url>/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/</url>
+      <title>靠谱的maven仓库地址</title>
+      <link href="/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/"/>
+      <url>/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/</url>
       
-        <content type="html"><![CDATA[<h1 id="查看当前目录磁盘使用情况"><a href="#查看当前目录磁盘使用情况" class="headerlink" title="查看当前目录磁盘使用情况"></a>查看当前目录磁盘使用情况</h1><pre><code>df -lh</code></pre><h1 id="统计当前目录下的目录及文件磁盘使用从大到小排序"><a href="#统计当前目录下的目录及文件磁盘使用从大到小排序" class="headerlink" title="统计当前目录下的目录及文件磁盘使用从大到小排序"></a>统计当前目录下的目录及文件磁盘使用从大到小排序</h1><pre><code>du -h --max-depth=1</code></pre>]]></content>
+        <content type="html"><![CDATA[<pre><code>#阿里云maven&lt;mirror&gt;    &lt;id&gt;alimaven&lt;/id&gt;    &lt;name&gt;aliyun maven&lt;/name&gt;    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;/mirror&gt;#开源中国maven&lt;mirror&gt;      &lt;id&gt;nexus-osc&lt;/id&gt;      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;      &lt;name&gt;Nexus osc&lt;/name&gt;      &lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;  &lt;/mirror&gt;</code></pre><blockquote><p>简单点来说，repository就是个仓库。maven里有两种仓库，本地仓库和远程仓库。远程仓库相当于公共的仓库，大家都能看到。本地仓库是你本地的一个山寨版，只有你看的到，主要起缓存作用。当你向仓库请求插件或依赖的时候，会先检查本地仓库里是否有。如果有则直接返回，否则会向远程仓库请求，并做缓存。你也可以把你做的东西上传到本地仓库给你本地自己用，或上传到远程仓库，供大家使用。<br>远程仓库可以在工程的pom.xml文件里指定，楼上两位已经列的很清楚了。如果没指定，默认就会把下面这地方做远程仓库，即默认会到<a href="http://repo1.maven.org/maven2这个地方去请求插件和依赖包。" target="_blank" rel="noopener">http://repo1.maven.org/maven2这个地方去请求插件和依赖包。</a> </p></blockquote><p>Xml代码 </p><pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>repository</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>snapshots</span><span class="token punctuation">></span></span>          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>enabled</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>enabled</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>snapshots</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>Maven Repository Switchboard<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>http://repo1.maven.org/maven2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>repository</span><span class="token punctuation">></span></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>本地仓库默认在你本地的用户目录下的.m2/repository目录下。 </p><p>mirror就是镜像，主要提供一个方便地切换远程仓库地址的途径。比如，上班的时候在公司，用电信的网络，连的是电信的仓库。回到家后，是网通的网络，我想连网通的仓库，就可以通过mirror配置，统一把我工程里的仓库地址都改成联通的，而不用到具体工程配置文件里一个一个地改地址。<br>mirror的配置在.m2/settings.xml里。如： </p><pre><code>&lt;mirrors&gt;    &lt;mirror&gt;      &lt;id&gt;UK&lt;/id&gt;      &lt;name&gt;UK Central&lt;/name&gt;      &lt;url&gt;http://uk.maven.org/maven2&lt;/url&gt;      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;    &lt;/mirror&gt;  &lt;/mirrors&gt;  </code></pre><p>这样的话，就会给上面id为central的远程仓库做了个镜像。以后向<code>central</code>这个仓库发的请求都会发到<code>http://uk.maven.org/maven2</code>而不是<code>http://repo1.maven.org/maven2</code>了。<br><code>&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</code>里是要替代的仓库的id。如果填*，就会替代所有仓库。 </p><p>参考资料：<br><a href="http://maven.apache.org/guides/introduction/introduction-to-repositories.html" target="_blank" rel="noopener">http://maven.apache.org/guides/introduction/introduction-to-repositories.html</a><br><a href="http://maven.apache.org/guides/mini/guide-mirror-settings.html" target="_blank" rel="noopener">http://maven.apache.org/guides/mini/guide-mirror-settings.html</a></p>]]></content>
       
       
       <categories>
@@ -629,31 +629,6 @@
     
     
     <entry>
-      <title>靠谱的maven仓库地址</title>
-      <link href="/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/"/>
-      <url>/ruan-jian-bi-ji/kao-pu-de-maven-cang-ku-di-zhi/</url>
-      
-        <content type="html"><![CDATA[<pre><code>#阿里云maven&lt;mirror&gt;    &lt;id&gt;alimaven&lt;/id&gt;    &lt;name&gt;aliyun maven&lt;/name&gt;    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;/mirror&gt;#开源中国maven&lt;mirror&gt;      &lt;id&gt;nexus-osc&lt;/id&gt;      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;      &lt;name&gt;Nexus osc&lt;/name&gt;      &lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;  &lt;/mirror&gt;</code></pre><blockquote><p>简单点来说，repository就是个仓库。maven里有两种仓库，本地仓库和远程仓库。远程仓库相当于公共的仓库，大家都能看到。本地仓库是你本地的一个山寨版，只有你看的到，主要起缓存作用。当你向仓库请求插件或依赖的时候，会先检查本地仓库里是否有。如果有则直接返回，否则会向远程仓库请求，并做缓存。你也可以把你做的东西上传到本地仓库给你本地自己用，或上传到远程仓库，供大家使用。<br>远程仓库可以在工程的pom.xml文件里指定，楼上两位已经列的很清楚了。如果没指定，默认就会把下面这地方做远程仓库，即默认会到<a href="http://repo1.maven.org/maven2这个地方去请求插件和依赖包。" target="_blank" rel="noopener">http://repo1.maven.org/maven2这个地方去请求插件和依赖包。</a> </p></blockquote><p>Xml代码 </p><pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>repository</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>snapshots</span><span class="token punctuation">></span></span>          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>enabled</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>enabled</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>snapshots</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">></span></span>central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>Maven Repository Switchboard<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">></span></span>http://repo1.maven.org/maven2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">></span></span>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>repository</span><span class="token punctuation">></span></span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>本地仓库默认在你本地的用户目录下的.m2/repository目录下。 </p><p>mirror就是镜像，主要提供一个方便地切换远程仓库地址的途径。比如，上班的时候在公司，用电信的网络，连的是电信的仓库。回到家后，是网通的网络，我想连网通的仓库，就可以通过mirror配置，统一把我工程里的仓库地址都改成联通的，而不用到具体工程配置文件里一个一个地改地址。<br>mirror的配置在.m2/settings.xml里。如： </p><pre><code>&lt;mirrors&gt;    &lt;mirror&gt;      &lt;id&gt;UK&lt;/id&gt;      &lt;name&gt;UK Central&lt;/name&gt;      &lt;url&gt;http://uk.maven.org/maven2&lt;/url&gt;      &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;    &lt;/mirror&gt;  &lt;/mirrors&gt;  </code></pre><p>这样的话，就会给上面id为central的远程仓库做了个镜像。以后向<code>central</code>这个仓库发的请求都会发到<code>http://uk.maven.org/maven2</code>而不是<code>http://repo1.maven.org/maven2</code>了。<br><code>&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</code>里是要替代的仓库的id。如果填*，就会替代所有仓库。 </p><p>参考资料：<br><a href="http://maven.apache.org/guides/introduction/introduction-to-repositories.html" target="_blank" rel="noopener">http://maven.apache.org/guides/introduction/introduction-to-repositories.html</a><br><a href="http://maven.apache.org/guides/mini/guide-mirror-settings.html" target="_blank" rel="noopener">http://maven.apache.org/guides/mini/guide-mirror-settings.html</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 软件笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 软件笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>软件开发方法</title>
       <link href="/ruan-kao/ruan-jian-kai-fa-fang-fa/"/>
       <url>/ruan-kao/ruan-jian-kai-fa-fang-fa/</url>
@@ -671,6 +646,31 @@
         <tags>
             
             <tag> 软考 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>磁盘空间满处理</title>
+      <link href="/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/"/>
+      <url>/ruan-jian-bi-ji/ci-pan-kong-jian-man-chu-li/</url>
+      
+        <content type="html"><![CDATA[<h1 id="查看当前目录磁盘使用情况"><a href="#查看当前目录磁盘使用情况" class="headerlink" title="查看当前目录磁盘使用情况"></a>查看当前目录磁盘使用情况</h1><pre><code>df -lh</code></pre><h1 id="统计当前目录下的目录及文件磁盘使用从大到小排序"><a href="#统计当前目录下的目录及文件磁盘使用从大到小排序" class="headerlink" title="统计当前目录下的目录及文件磁盘使用从大到小排序"></a>统计当前目录下的目录及文件磁盘使用从大到小排序</h1><pre><code>du -h --max-depth=1</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软件笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件笔记 </tag>
             
         </tags>
       
@@ -831,33 +831,6 @@
     
     
     <entry>
-      <title>Dubbo源码学习</title>
-      <link href="/xue-xi/dubbo-yuan-ma-xue-xi/"/>
-      <url>/xue-xi/dubbo-yuan-ma-xue-xi/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Dubbo-Provider暴露源码分析"><a href="#Dubbo-Provider暴露源码分析" class="headerlink" title="Dubbo Provider暴露源码分析"></a>Dubbo Provider暴露源码分析</h1><p>Dubbo服务端的服务暴露及初始化</p><ol><li><code>org.apache.dubbo.config.spring.ServiceBean#afterPropertiesSet</code> 开始spring 容器初始化好属性后，回调这个方法开始初始化Provider</li><li>前面一堆是初始化<code>ApplicationConfig</code>、<code>Module</code>、<code>Registry</code>(注册中心)、<code>ConfigCenter</code>(配置中心)、<code>Monitor</code>（监控中心）、<code>Metrics</code>(监控项)、<code>Service</code>(服务bean)</li><li>接着找到<code>org.apache.dubbo.config.ServiceConfig#doExportUrls;</code><ol><li>主要看 <code>org.apache.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></li><li>这个方法主要是构建Invoker代理，然后用<code>Exporter&lt;?&gt; exporter = protocol.export(wrapperInvoker);</code> 通过SPI加载默认<code>DubboProtocol</code>.</li><li>进入<code>org.apache.dubbo.rpc.DubboProtocol#export</code>之后我们看到一个<code>openServer</code>调用,初始化一个Server</li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#openServer</code>，主要调用<code>createServer</code></li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#createServer</code>,调用了一个静态方法<code>Exchangers#bind()</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.Exchangers#bind</code>,入参是当前要暴露服务的URL和一个<code>requestHandler</code>, requestHandler实现在 <code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>里<ol><li>进入<code>Exchangers#bind</code>,调用了 <code>org.apache.dubbo.remoting.exchange.Exchangers#getExchanger(org.apache.dubbo.common.URL)</code>获取当前暴露服务URL的个性化<code>Exchanger</code>配置，默认加载<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger</code></li><li>进入<code>HeaderExchanger</code>,有两个方法实现分别为<code>bind</code>和 <code>connect</code>,看样子一个事用于Server端暴露服务，一个事用于Client来请求服务</li><li>主要看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger#bind</code>,调用了<code>Transporters#bind()</code>，这里吧requestHandler进行包装成了一个<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.Transporters#bind()</code>，看到默认加载的是nett4的<code>org.apache.dubbo.remoting.transport.netty4.NettyTransporter#bind()</code>,而这个实现主要是new了一个<code>org.apache.dubbo.remoting.transport.netty4.NettyServer#NettyServer</code>,到此一个Provider的Invoker代理就绑定到NettyServer里可以对外提供服务了</li><li>在<code>NettyServer</code>的构造方法中，调用了<code>org.apache.dubbo.remoting.transport.dispatcher.ChannelHandlers#wrap</code>,将HeaderExchangeHandler进行一个<code>Dispatcher</code>的分发，默认实现是<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllDispatcher</code>,除此之外还有<code>ConnectionOrderedDispatcher</code>、<code>DirectDispatcher</code>、<code>ExecutionDispatcher</code>、<code>MessageOnlyDispatcher</code>，这里不做展开</li><li>在AllDispatcher中的dispatch实现是<code>AllChannelHandler</code>,所有类型的请求都可以接受处理</li><li>进入<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllChannelHandler#received</code>,我们看到它将接收到的请求丢到一个<code>ExecutorService</code>线程池中异步处理，这里就是Dubbo线程处理的核心了</li></ol></li><li>我们回到第6步，这里说到默认的handler是<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>, 这个requestHandler被6.3包装成了<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code>,这是NIO请求的处理handler,我们了解NIO的Channel是双向通信的，所以当接收到请求时和响应时都会进入到<code>received</code>,当出现异常时进入<code>caught</code><ol><li>我们先来看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#received</code>,主要判断是请求还是响应，如果是请求判断是否是否有响应，如果是<code>towWay</code>通信，即有响应结果的请求，进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#handleRequest</code></li><li>在这里调用了一开始传入的requestHandler#reply,实在在<code>org.apache.dubbo.remoting.exchange.support.ExchangeHandlerAdapter</code>，这里就是具体调用找到具体要请求的Provider的Invoker，异步请求并返回一个Feature，然后在当前received方法中进行异步等待，等待响应结果完成send进channel进行响应</li></ol></li></ol></li><li>发布到注册中心</li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> 学习 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Dubbo </tag>
-            
-            <tag> 学习 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>HTTP及HTTPS的理解</title>
       <link href="/xue-xi/http-ji-https-de-li-jie/"/>
       <url>/xue-xi/http-ji-https-de-li-jie/</url>
@@ -874,11 +847,38 @@
       
         <tags>
             
-            <tag> 学习 </tag>
-            
             <tag> HTTP </tag>
             
             <tag> HTTPS </tag>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Dubbo源码学习</title>
+      <link href="/xue-xi/dubbo-yuan-ma-xue-xi/"/>
+      <url>/xue-xi/dubbo-yuan-ma-xue-xi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Dubbo-Provider暴露源码分析"><a href="#Dubbo-Provider暴露源码分析" class="headerlink" title="Dubbo Provider暴露源码分析"></a>Dubbo Provider暴露源码分析</h1><p>Dubbo服务端的服务暴露及初始化</p><ol><li><code>org.apache.dubbo.config.spring.ServiceBean#afterPropertiesSet</code> 开始spring 容器初始化好属性后，回调这个方法开始初始化Provider</li><li>前面一堆是初始化<code>ApplicationConfig</code>、<code>Module</code>、<code>Registry</code>(注册中心)、<code>ConfigCenter</code>(配置中心)、<code>Monitor</code>（监控中心）、<code>Metrics</code>(监控项)、<code>Service</code>(服务bean)</li><li>接着找到<code>org.apache.dubbo.config.ServiceConfig#doExportUrls;</code><ol><li>主要看 <code>org.apache.dubbo.config.ServiceConfig#doExportUrlsFor1Protocol</code></li><li>这个方法主要是构建Invoker代理，然后用<code>Exporter&lt;?&gt; exporter = protocol.export(wrapperInvoker);</code> 通过SPI加载默认<code>DubboProtocol</code>.</li><li>进入<code>org.apache.dubbo.rpc.DubboProtocol#export</code>之后我们看到一个<code>openServer</code>调用,初始化一个Server</li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#openServer</code>，主要调用<code>createServer</code></li><li>进入<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#createServer</code>,调用了一个静态方法<code>Exchangers#bind()</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.Exchangers#bind</code>,入参是当前要暴露服务的URL和一个<code>requestHandler</code>, requestHandler实现在 <code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>里<ol><li>进入<code>Exchangers#bind</code>,调用了 <code>org.apache.dubbo.remoting.exchange.Exchangers#getExchanger(org.apache.dubbo.common.URL)</code>获取当前暴露服务URL的个性化<code>Exchanger</code>配置，默认加载<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger</code></li><li>进入<code>HeaderExchanger</code>,有两个方法实现分别为<code>bind</code>和 <code>connect</code>,看样子一个事用于Server端暴露服务，一个事用于Client来请求服务</li><li>主要看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchanger#bind</code>,调用了<code>Transporters#bind()</code>，这里吧requestHandler进行包装成了一个<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.Transporters#bind()</code>，看到默认加载的是nett4的<code>org.apache.dubbo.remoting.transport.netty4.NettyTransporter#bind()</code>,而这个实现主要是new了一个<code>org.apache.dubbo.remoting.transport.netty4.NettyServer#NettyServer</code>,到此一个Provider的Invoker代理就绑定到NettyServer里可以对外提供服务了</li><li>在<code>NettyServer</code>的构造方法中，调用了<code>org.apache.dubbo.remoting.transport.dispatcher.ChannelHandlers#wrap</code>,将HeaderExchangeHandler进行一个<code>Dispatcher</code>的分发，默认实现是<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllDispatcher</code>,除此之外还有<code>ConnectionOrderedDispatcher</code>、<code>DirectDispatcher</code>、<code>ExecutionDispatcher</code>、<code>MessageOnlyDispatcher</code>，这里不做展开</li><li>在AllDispatcher中的dispatch实现是<code>AllChannelHandler</code>,所有类型的请求都可以接受处理</li><li>进入<code>org.apache.dubbo.remoting.transport.dispatcher.all.AllChannelHandler#received</code>,我们看到它将接收到的请求丢到一个<code>ExecutorService</code>线程池中异步处理，这里就是Dubbo线程处理的核心了</li></ol></li><li>我们回到第6步，这里说到默认的handler是<code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol#requestHandler</code>, 这个requestHandler被6.3包装成了<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code></li><li>进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#HeaderExchangeHandler</code>,这是NIO请求的处理handler,我们了解NIO的Channel是双向通信的，所以当接收到请求时和响应时都会进入到<code>received</code>,当出现异常时进入<code>caught</code><ol><li>我们先来看<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#received</code>,主要判断是请求还是响应，如果是请求判断是否是否有响应，如果是<code>towWay</code>通信，即有响应结果的请求，进入<code>org.apache.dubbo.remoting.exchange.support.header.HeaderExchangeHandler#handleRequest</code></li><li>在这里调用了一开始传入的requestHandler#reply,实在在<code>org.apache.dubbo.remoting.exchange.support.ExchangeHandlerAdapter</code>，这里就是具体调用找到具体要请求的Provider的Invoker，异步请求并返回一个Feature，然后在当前received方法中进行异步等待，等待响应结果完成send进channel进行响应</li></ol></li></ol></li><li>发布到注册中心</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> Dubbo </tag>
             
         </tags>
       
