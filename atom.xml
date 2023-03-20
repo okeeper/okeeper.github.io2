@@ -69,33 +69,6 @@
   </entry>
   
   <entry>
-    <title>限流相关</title>
-    <link href="https://okeeper.com/hou-duan-jia-gou/xian-liu-xiang-guan/"/>
-    <id>https://okeeper.com/hou-duan-jia-gou/xian-liu-xiang-guan/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.553Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;在大流量场景，秒杀、抢购场景，一般会对网站做一些流量控制，牺牲一部分流量而保护系统而不至于系统直接down机。&lt;/p&gt;
-&lt;h1
-        
-      
-    
-    </summary>
-    
-      <category term="后端&amp;架构" scheme="https://okeeper.com/categories/%E5%90%8E%E7%AB%AF-%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="后端&amp;架构" scheme="https://okeeper.com/tags/%E5%90%8E%E7%AB%AF-%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Java学习大纲</title>
     <link href="https://okeeper.com/hou-duan-jia-gou/java-xue-xi-da-gang/"/>
     <id>https://okeeper.com/hou-duan-jia-gou/java-xue-xi-da-gang/</id>
@@ -110,6 +83,59 @@
         
           &lt;p&gt;任何学习都要有目标有规划，这是整个Java知识体系大纲，根据自己的知识体系认知画出来的，有很多还没有细化，也还有很多没有涉猎，比如大数据，列出这些好让自己学的有目标一些吧，也算是一个总结。&lt;/p&gt;
 &lt;p&gt;在线预览地址：&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="后端&amp;架构" scheme="https://okeeper.com/categories/%E5%90%8E%E7%AB%AF-%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="后端&amp;架构" scheme="https://okeeper.com/tags/%E5%90%8E%E7%AB%AF-%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分库分表的分页查询</title>
+    <link href="https://okeeper.com/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/"/>
+    <id>https://okeeper.com/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2023-02-13T14:36:53.957Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;问题的提出&quot;&gt;&lt;a href=&quot;#问题的提出&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="后端&amp;架构" scheme="https://okeeper.com/categories/%E5%90%8E%E7%AB%AF-%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="后端&amp;架构" scheme="https://okeeper.com/tags/%E5%90%8E%E7%AB%AF-%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>限流相关</title>
+    <link href="https://okeeper.com/hou-duan-jia-gou/xian-liu-xiang-guan/"/>
+    <id>https://okeeper.com/hou-duan-jia-gou/xian-liu-xiang-guan/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2022-08-26T11:58:13.553Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;在大流量场景，秒杀、抢购场景，一般会对网站做一些流量控制，牺牲一部分流量而保护系统而不至于系统直接down机。&lt;/p&gt;
+&lt;h1
         
       
     
@@ -152,11 +178,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>分库分表的分页查询</title>
-    <link href="https://okeeper.com/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/"/>
-    <id>https://okeeper.com/hou-duan-jia-gou/fen-ku-fen-biao-de-fen-ye-cha-xun/</id>
+    <title>Java 8常用转换</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2023-02-13T14:36:53.957Z</updated>
+    <updated>2023-02-13T14:53:01.290Z</updated>
     
     <summary type="html">
     
@@ -164,59 +190,9 @@ tar -zxvf
       
         
         
-          &lt;h1 id=&quot;问题的提出&quot;&gt;&lt;a href=&quot;#问题的提出&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="后端&amp;架构" scheme="https://okeeper.com/categories/%E5%90%8E%E7%AB%AF-%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="后端&amp;架构" scheme="https://okeeper.com/tags/%E5%90%8E%E7%AB%AF-%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java bean的Getter Setter 自动编译生成工具Lombok</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2022-08-26T11:58:13.574Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Idea maven 插件安装</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/idea-maven-cha-jian-an-zhuang/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2023-02-13T14:28:14.918Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;默认idea 是已经安装好了maven插件的，在File&amp;gt;settings&amp;gt;能搜索到maven的相关配置&lt;br&gt;但是有时候它会莫名其妙的不见了或消失&lt;br&gt;检查Plugins是否启用了maven&lt;br&gt;&lt;img
+          &lt;h1 id=&quot;1-List转Map&quot;&gt;&lt;a href=&quot;#1-List转Map&quot; class=&quot;headerlink&quot; title=&quot;1. List转Map&quot;&gt;&lt;/a&gt;1. List转Map&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;/**
+ * List -&amp;gt; Map
+ *
         
       
     
@@ -256,6 +232,35 @@ tar -zxvf
   </entry>
   
   <entry>
+    <title>软件开发方法</title>
+    <link href="https://okeeper.com/ruan-kao/ruan-jian-kai-fa-fang-fa/"/>
+    <id>https://okeeper.com/ruan-kao/ruan-jian-kai-fa-fang-fa/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2023-02-13T14:52:59.988Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;前言：软件开发方法是软件开发的方法学，旨在提供软件的质量，降低开发成本&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;1-软件生命周期&quot;&gt;&lt;a href=&quot;#1-软件生命周期&quot; class=&quot;headerlink&quot; title=&quot;1
+        
+      
+    
+    </summary>
+    
+      <category term="软考" scheme="https://okeeper.com/categories/%E8%BD%AF%E8%80%83/"/>
+    
+    
+      <category term="软考" scheme="https://okeeper.com/tags/%E8%BD%AF%E8%80%83/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Redis批量删除命令</title>
     <link href="https://okeeper.com/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/"/>
     <id>https://okeeper.com/ruan-jian-bi-ji/redis-pi-liang-shan-chu-ming-ling/</id>
@@ -286,11 +291,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>Java 8常用转换</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/java-8-chang-yong-zhuan-huan/</id>
+    <title>Java bean的Getter Setter 自动编译生成工具Lombok</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/java-bean-de-getter-setter-zi-dong-bian-yi-sheng-cheng-gong-ju-lombok/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2023-02-13T14:53:01.290Z</updated>
+    <updated>2022-08-26T11:58:13.574Z</updated>
     
     <summary type="html">
     
@@ -298,9 +303,7 @@ tar -zxvf
       
         
         
-          &lt;h1 id=&quot;1-List转Map&quot;&gt;&lt;a href=&quot;#1-List转Map&quot; class=&quot;headerlink&quot; title=&quot;1. List转Map&quot;&gt;&lt;/a&gt;1. List转Map&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;/**
- * List -&amp;gt; Map
- *
+          &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;
         
       
     
@@ -327,6 +330,32 @@ tar -zxvf
         
         
           &lt;h1 id=&quot;Selenium安装环境搭建&quot;&gt;&lt;a href=&quot;#Selenium安装环境搭建&quot; class=&quot;headerlink&quot; title=&quot;Selenium安装环境搭建&quot;&gt;&lt;/a&gt;Selenium安装环境搭建&lt;/h1&gt;&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker ES安装</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/</id>
+    <published>2022-08-26T07:54:13.000Z</published>
+    <updated>2023-02-13T14:27:57.408Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;参考docker安装Elasticsearch官方文档&lt;br&gt;&lt;a href=&quot;https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html&quot; target=&quot;_blank&quot;
         
       
     
@@ -379,32 +408,6 @@ tar -zxvf
         
         
           &lt;p&gt;解决办法：到安装路径C:\Program Files (x86)\JetBrains\IntelliJ IDEA 15.0.4\bin&lt;br&gt;找到idea.exe.vmoptions配置修改Xmx
-        
-      
-    
-    </summary>
-    
-      <category term="软件笔记" scheme="https://okeeper.com/categories/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="软件笔记" scheme="https://okeeper.com/tags/%E8%BD%AF%E4%BB%B6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker ES安装</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/docker-es-an-zhuang/</id>
-    <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2023-02-13T14:27:57.408Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;参考docker安装Elasticsearch官方文档&lt;br&gt;&lt;a href=&quot;https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html&quot; target=&quot;_blank&quot;
         
       
     
@@ -497,11 +500,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>抓包工具Charles安装、破解及使用</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/zhua-bao-gong-ju-charles-an-zhuang-po-jie-ji-shi-yong/</id>
+    <title>使用Jmeter进行Dubbo接口压测</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/shi-yong-jmeter-jin-xing-dubbo-jie-kou-ya-ce/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2023-02-13T14:20:54.380Z</updated>
+    <updated>2023-02-13T14:25:17.780Z</updated>
     
     <summary type="html">
     
@@ -509,8 +512,7 @@ tar -zxvf
       
         
         
-          &lt;p&gt;Charles是一款抓包必备的工具，支持Windows、Mac、手机的抓包测试，还能对https的SLL加密内容进行解密。&lt;/p&gt;
-&lt;h1 id=&quot;下载安装&quot;&gt;&lt;a href=&quot;#下载安装&quot; class=&quot;headerlink&quot;
+          &lt;h1 id=&quot;软件准备&quot;&gt;&lt;a href=&quot;#软件准备&quot; class=&quot;headerlink&quot; title=&quot;软件准备&quot;&gt;&lt;/a&gt;软件准备&lt;/h1&gt;&lt;h2 id=&quot;一、下载Jmeter3-1&quot;&gt;&lt;a href=&quot;#一、下载Jmeter3-1&quot;
         
       
     
@@ -524,11 +526,11 @@ tar -zxvf
   </entry>
   
   <entry>
-    <title>使用Maven命令指定上传打包到私库</title>
-    <link href="https://okeeper.com/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/"/>
-    <id>https://okeeper.com/ruan-jian-bi-ji/shi-yong-maven-ming-ling-zhi-ding-shang-chuan-da-bao-dao-si-ku/</id>
+    <title>护眼神器Dark Reader</title>
+    <link href="https://okeeper.com/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/"/>
+    <id>https://okeeper.com/ruan-jian-bi-ji/hu-yan-shen-qi-dark-reader/</id>
     <published>2022-08-26T07:54:13.000Z</published>
-    <updated>2023-02-13T07:05:32.526Z</updated>
+    <updated>2023-02-13T14:23:38.833Z</updated>
     
     <summary type="html">
     
@@ -536,10 +538,7 @@ tar -zxvf
       
         
         
-          &lt;p&gt;我们一般在pom.xml中加入&lt;code&gt;distributionManagement&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;distributionManagement&amp;gt;
-    &amp;lt;repository&amp;gt;
-     
+          &lt;p&gt;在google应用市场中搜索Dark Reader，可以在网页中进行反色护眼&lt;br&gt;&lt;img
         
       
     

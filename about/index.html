@@ -492,7 +492,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
         },
         xAxis: {
             type: 'category',
-            data: ["2022-02","2022-03","2022-04","2022-05","2022-06","2022-07","2022-08","2022-09","2022-10","2022-11","2022-12","2023-01","2023-02"]
+            data: ["2022-03","2022-04","2022-05","2022-06","2022-07","2022-08","2022-09","2022-10","2022-11","2022-12","2023-01","2023-02","2023-03"]
         },
         yAxis: {
             type: 'value',
@@ -502,7 +502,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,26,0,0,0,0,0,1],
+                data: [0,0,0,0,0,26,0,0,0,0,0,1,0],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -544,7 +544,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"分享","value":2},{"name":"RocketMQ","value":1},{"name":"架构","value":1},{"name":"学习","value":4},{"name":"区块链","value":2},{"name":"操作系统原理","value":4},{"name":"后端&架构","value":3},{"name":"软件笔记","value":22},{"name":"软考","value":2}],
+                data: [{"name":"分享","value":2},{"name":"RocketMQ","value":1},{"name":"架构","value":1},{"name":"操作系统原理","value":4},{"name":"区块链","value":2},{"name":"学习","value":4},{"name":"后端&架构","value":3},{"name":"软考","value":2},{"name":"软件笔记","value":22}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -568,7 +568,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
         xAxis: [
             {
                 type: 'category',
-                data: ["软件笔记","学习","操作系统原理","后端&架构","区块链","软考","分享","Blog","typora-vue-theme","hexo"]
+                data: ["软件笔记","操作系统原理","学习","后端&架构","区块链","软考","分享","RocketMQ","Kafka","MQ"]
             }
         ],
         yAxis: [
@@ -726,24 +726,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             
             
-            <a href="/tags/Blog/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">Blog</span>
-            </a>
-            
-            
-            
-            <a href="/tags/typora-vue-theme/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">typora-vue-theme</span>
-            </a>
-            
-            
-            
-            <a href="/tags/hexo/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">hexo</span>
-            </a>
-            
-            
-            
             <a href="/tags/RocketMQ/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">RocketMQ</span>
             </a>
@@ -762,22 +744,34 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             
             
-            
-            
-            <a href="/tags/HTTP/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">HTTP</span>
+            <a href="/tags/Blog/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">Blog</span>
             </a>
             
             
             
-            <a href="/tags/HTTPS/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">HTTPS</span>
+            <a href="/tags/typora-vue-theme/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">typora-vue-theme</span>
             </a>
             
             
             
-            <a href="/tags/学习/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">学习</span>
+            <a href="/tags/hexo/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">hexo</span>
+            </a>
+            
+            
+            
+            
+            
+            <a href="/tags/操作系统原理/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">操作系统原理</span>
+            </a>
+            
+            
+            
+            <a href="/tags/区块链/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">区块链</span>
             </a>
             
             
@@ -788,8 +782,14 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             
             
-            <a href="/tags/区块链/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">区块链</span>
+            <a href="/tags/学习/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">学习</span>
+            </a>
+            
+            
+            
+            <a href="/tags/后端-架构/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">后端&架构</span>
             </a>
             
             
@@ -806,32 +806,32 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
             
             
             
-            <a href="/tags/Disruptor/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">Disruptor</span>
+            <a href="/tags/HTTP/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">HTTP</span>
             </a>
             
             
             
-            <a href="/tags/操作系统原理/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">操作系统原理</span>
-            </a>
-            
-            
-            
-            <a href="/tags/后端-架构/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">后端&架构</span>
-            </a>
-            
-            
-            
-            <a href="/tags/软件笔记/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">软件笔记</span>
+            <a href="/tags/HTTPS/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">HTTPS</span>
             </a>
             
             
             
             <a href="/tags/软考/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">软考</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Disruptor/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">Disruptor</span>
+            </a>
+            
+            
+            
+            <a href="/tags/软件笔记/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">软件笔记</span>
             </a>
             
             
@@ -877,8 +877,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + parseInt(Math.ran
     <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
-            &copy; 2019 Okeeper. All Rights Reserved.
-
+            &copy; 2019 Okeeper. All Rights Reserved. &nbsp; 赣ICP备2023001719号
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
             <span class="white-color">56.3k</span>
